@@ -10,6 +10,18 @@
 // +----------------------------------------------------------------------
 // $Id$
 
-require_once 'master/inter_bootstrap.inc';
+/**
+ * To init the config data
+ * @var unknown_type
+ */
+define('INTER_BOOT_ENV', 0);
 
-inter_bootstrap();
+
+function inter_bootstrap( $type = 1 ) {
+    static $types = array(INTER_BOOT_ENV);
+    foreach( $types as $key => $value ) {
+
+    _inter_bootstrap();
+    }
+}
+
