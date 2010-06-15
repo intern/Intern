@@ -13,7 +13,7 @@
 /**
  * Mysql 数据结构操作CD [table|index|primarykey|feild|]
  */
-class mysqlTable extends {
-    
+class mysqlTable extends r{
+
 }
 ?>

@@ -77,6 +77,8 @@
             }else{
                 return false;
             }
+            global $mysqls;
+            $mysqls = $mysqls.'==xxxxxxxxxxxxxxx';
         }
         /**
          +------------------------------------------------------------------------------

@@ -19,7 +19,7 @@ require_once MASTER.'db.interface.php';
  * @version   $Id$
  +------------------------------------------------------------------------------
  */
-class db {
+class interCoreDatabase {
     public function __construct() {
     }
     /**
@@ -38,7 +38,7 @@ class db {
         }else{
             require_once MASTER.'db.'.$_db_config['scheme'].'.php';
         }
-        $_db_instance = & new Mysql( $_db_config );
+        $_db_instance = new Mysql( $_db_config );
         return $_db_instance;
     }
 }

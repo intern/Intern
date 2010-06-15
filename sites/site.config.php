@@ -25,7 +25,7 @@
  *       'prefix' => inter
  *   );
  */
-$db_config = 'mysql://root:123456@localhost/inter/inter';
+$db_config = 'mysql://root:123456@localhost/inter/inter_';
 
 /**
  * PHP settings:

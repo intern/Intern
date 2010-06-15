@@ -91,7 +91,7 @@ class interBootstrap {
      * @param unknown_type $type
      */
     private function _bootstrap( $type ) {
-        global $db_config, $db_prefix;
+        global $db_config;
         switch( $type ) {
             case INTER_GLOBAL_FILTER:
                 require_once MASTER . 'global.php';
@@ -103,11 +103,23 @@ class interBootstrap {
                 break;
             case INTER_INITIALIZE_DATABASE:
                 require_once MASTER . 'db.factory.php';
-                db::getInstance();
+                interCoreDatabase::getInstance();
                 break;
             case INTER_INITIALIZE_SESSION:
                 require_once MASTER . 'session.php';
-
+                $session_handle = interSessionData::getInstance();
+                session_set_save_handler(array($session_handle, 'session_open'),
+                                         array($session_handle, 'session_close'),
+                                         array($session_handle, 'session_read'),
+                                         array($session_handle, 'session_write'),
+                                         array($session_handle, 'session_destroy'),
+                                         array($session_handle, 'session_gc')
+                                         );
+                session_start();
+                echo session_name(),"\n";
+                echo session_id();
+                import_sql();
+                print_r($GLOBALS);
                 break;
             default :
                 echo 'error';
