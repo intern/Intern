@@ -9,6 +9,19 @@
 // | Author: lan_chi <lan_chi@163.com>
 // +----------------------------------------------------------------------
 // $Id$
+/**
+ * Developer setting
+ */
+
+// deubug
+define('DEBUG', true);
+
+/**
+ * Developer setting end
+ */
+
+
+
 
 /**
  * global Group define
@@ -25,12 +38,10 @@ define('MASTER', ROOT . 'master' . DS );
 // Define SITES as this files master directory
 define('SITES', ROOT . 'sites' . DS );
 
-//
-
-
 /**
  * global Group define end
  */
+
 
 /**
  * To filter the global data, so unset unused global variable

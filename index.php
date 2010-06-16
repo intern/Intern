@@ -12,6 +12,7 @@
 ini_set('display_errors',1);
 //error_reporting(1);
 $start = memory_get_usage();
+
 require_once 'master/bootstrap.php';
 
 $new = interBootstrap::getInstance( INTER_INITIALIZE_SESSION );
