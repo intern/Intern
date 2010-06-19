@@ -12,20 +12,22 @@
 
 /**
  * Database URL format:
- *   $db_config = 'mysql://username:password@localhost/databasename/prefix';
- *   $db_config = 'mysqli://username:password@localhost/databasename/prefix';
- *   $db_config = 'pgsql://username:password@localhost/databasename/prefix';
+ *   $db_config = 'mysql://username:password@localhost/databasename/prefix/encoding';
+ *   $db_config = 'mysqli://username:password@localhost/databasename/prefix/encoding';
+ *   $db_config = 'pgsql://username:password@localhost/databasename/prefix/encoding';
  * Else
  *   array(
- *       'scheme' => mysql,
- *       'host'   => localhost,
- *       'user'   => root,
- *       'pass'   => 123456,
- *       'path'   => inter,
- *       'prefix' => inter
+ *       'scheme'   => mysql,
+ *       'host'     => localhost,
+ *       'user'     => root,
+ *       'pass'     => 123456,
+ *       'path'     => inter,
+ *       'prefix'   => inter,
+ *       'encoding' => utf-8
  *   );
  */
-$db_config = 'mysql://root:123456@localhost/inter/inter_';
+$db_config = 'mysql://root:123456@localhost/inter/inter_/utf8';
+
 
 /**
  * PHP settings:

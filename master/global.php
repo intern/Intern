@@ -34,7 +34,7 @@ function inter_join_path( $args ) {
     if ( !is_array( $args ) ) {
         $args = func_get_args();
     }
-    return implode(DS, $args);
+    return str_replace( DS.DS, DS, implode(DS, $args) );
 }
 
 /**
@@ -47,7 +47,7 @@ function inter_parse_db_config( $db_config = NULL ) {
     $_db_config = array();
     if ( !is_array( $db_config ) ) {
         $_db_config = parse_url( $db_config );
-        list(, $_db_config['database'], $_db_config['prefix']) = explode( '/', $_db_config['path'] );
+        list(, $_db_config['database'], $_db_config['prefix'], $_db_config['encoding']) = explode( '/', $_db_config['path'] );
     } else {
         $_db_config = $db_config;
     }
