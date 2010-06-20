@@ -20,8 +20,18 @@ require_once inter_join_path(MASTER, 'database' , 'db.abstract.php');
  +------------------------------------------------------------------------------
  */
 class interCoreDatabase {
-    public function __construct() {
+
+    /**
+     * Private db instance
+     * @var array with object
+     */
+    private static $instance = array();
+
+    // TODO
+    public function __construct($link_name = 'default', $config = NULl ) {
+
     }
+
     /**
      +------------------------------------------------------------------------------
      * Factory for database
@@ -31,6 +41,7 @@ class interCoreDatabase {
      */
     public static function getInstance( $conf = NULL ) {
         static $_db_instance;
+
         if( is_object( $_db_instance ) ) return $_db_instance;
 
         $_db_config = inter_parse_db_config( $conf );
@@ -42,10 +53,10 @@ class interCoreDatabase {
         }else{
             require_once $_require;
         }
+
+        $_db_instance = new $_db_config['scheme']( $_db_config );
         // unset unused variable
         unset($_db_config['path'], $_db_config['scheme']);
-
-        $_db_instance = new Mysql( $_db_config );
 
         return $_db_instance;
     }

@@ -12,19 +12,21 @@
 
 /**
  +------------------------------------------------------------------------------
- * MYSQL 数据库驱动类实现
+ * Database abstract layout Implement,See Usage with the core db.mysql.php
  +------------------------------------------------------------------------------
+ * @package   inter.database
  * @version   $Id$
+ * @abstract  database
  +------------------------------------------------------------------------------
  */
-class Mysql extends databaseAbstract{
+class mysql extends databaseAbstract{
     /**
      +------------------------------------------------------------------------------
      * blob data conversion
      +------------------------------------------------------------------------------
      * @version   $Id$
      +------------------------------------------------------------------------------
-     * @access abstract protected
+     * @access protected
      * @param array() $db_config the class param, only array
      * @return NULL
      */

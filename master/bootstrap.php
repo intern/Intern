@@ -127,10 +127,6 @@ class interBootstrap {
                                          array($session_handle, 'session_gc')
                                          );
                 session_start();
-                echo session_name(),"\n";
-                echo session_id();
-                import_sql();
-                print_r($GLOBALS);
                 break;
             default :
                 echo 'error';

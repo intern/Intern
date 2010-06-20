@@ -12,9 +12,9 @@
 
 /**
  +------------------------------------------------------------------------------
- * Database abstract layout Implement
+ * Database abstract layout Implement,See Usage with the core db.mysql.php
  +------------------------------------------------------------------------------
- * @package   database
+ * @package   inter.database
  * @version   $Id$
  * @abstract  database
  +------------------------------------------------------------------------------
@@ -410,12 +410,26 @@ abstract class databaseAbstract {
     abstract public function getError();
 
     /**
-     * Close up the $_link
+     +------------------------------------------------------------------------------
+     * To clear up the $_link
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+     * @access abstract public
+     * @param  NULL
+     * @return NULL
      */
     abstract public function close();
 
     /**
+     +------------------------------------------------------------------------------
      * Free a query result
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+     * @access abstract public
+     * @param  NULL
+     * @return NULL
      */
     abstract public function free();
 }
