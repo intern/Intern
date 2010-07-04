@@ -127,6 +127,9 @@ class interBootstrap {
                                          array($session_handle, 'session_gc')
                                          );
                 session_start();
+                options_init();
+                options_set('namedDD',array(1,2211133,33.0,4));
+                print_r($GLOBALS);
                 break;
             default :
                 echo 'error';

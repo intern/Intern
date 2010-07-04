@@ -10,7 +10,7 @@
 // +----------------------------------------------------------------------
 // $Id$
 
-require_once inter_join_path(MASTER, 'database' , 'db.abstract.php');
+require_once inter_join_path(MASTER, 'database', 'db.abstract.php');
 
 /**
  +------------------------------------------------------------------------------
@@ -40,9 +40,10 @@ class interCoreDatabase {
      +------------------------------------------------------------------------------
      */
     public static function getInstance( $conf = NULL ) {
-        static $_db_instance;
+        //static $_db_instance;
+        global $db_handle;
 
-        if( is_object( $_db_instance ) ) return $_db_instance;
+        if( is_object( $db_handle ) ) return $db_handle;
 
         $_db_config = inter_parse_db_config( $conf );
 
@@ -54,10 +55,10 @@ class interCoreDatabase {
             require_once $_require;
         }
 
-        $_db_instance = new $_db_config['scheme']( $_db_config );
+        $db_handle = new $_db_config['scheme']( $_db_config );
         // unset unused variable
         unset($_db_config['path'], $_db_config['scheme']);
 
-        return $_db_instance;
+        return $db_handle;
     }
 }

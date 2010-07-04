@@ -10,6 +10,9 @@
 // +----------------------------------------------------------------------
 // $Id$
 
+// config
+define('SALT', $salt);
+
 /**
  +------------------------------------------------------------------------------
  * session for database and init
@@ -39,7 +42,9 @@ class interSessionData{
     /**
      *
      */
-    public function __construct() {}
+    public function __construct() {
+        session_name( SALT . md5(SALT) );
+    }
 
     /**
      *
@@ -52,8 +57,6 @@ class interSessionData{
      *
      */
     public function session_open($save_path, $session_name) {
-        global $a;
-        $a = $save_path." || ".$session_name;
         return true;
     }
 
@@ -67,12 +70,31 @@ class interSessionData{
     /**
      *
      */
-    public function session_read() {}
+    public function session_read($key) {
+        global $user,$db_handle;
+
+        if ( !isset($_COOKIE[session_name()]) ) {
+            $user = inter_init_anonymous_user();
+            return '';
+        }
+        $handle = $db_handle->query("SELECT u.*,s.* FROM {users} u INNER JOIN {sessions} s ON u.uid = s.uid WHERE s.sid = '%s'", $key);
+        $user = $db_handle->fetchObject();
+        if ($user && $user->uid > 0 && $user->status ==  1 ) {
+            print($res);
+        } else {
+            $user = inter_init_anonymous_user();
+        }
+        return $user->data; // data is session table data, not is users table data
+    }
 
     /**
-     *
+     * @param $key the session_id()
      */
-    public function session_write() {}
+    public function session_write($key, $value) {
+        global $db_handle;
+
+
+    }
 
     /**
      *

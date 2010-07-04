@@ -128,9 +128,10 @@ class mysql extends databaseAbstract{
      *         executed correctly.
      */
     protected function _query( $query ) {
-        $db_result = mysql_query($query, $this->_link);
+        $db_result = @mysql_query($query, $this->_link);
         if( !mysql_errno( $this->_link ) ) {
-            return $this->_query_handle = $db_result;
+            $this->_query_handle = $db_result;
+            return $db_result;
         }
         exit($this->getError());
     }
@@ -278,6 +279,13 @@ class mysql extends databaseAbstract{
             return $info;
         }
         return false;
+    }
+
+    /**
+     * To fetch the affected Rows
+     */
+    public function affectedRows() {
+        return mysql_affected_rows( $this->_link );
     }
 
     /**
