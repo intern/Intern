@@ -40,7 +40,6 @@ class interCoreDatabase {
      +------------------------------------------------------------------------------
      */
     public static function getInstance( $conf = NULL ) {
-        //static $_db_instance;
         global $db_handle;
 
         if( is_object( $db_handle ) ) return $db_handle;

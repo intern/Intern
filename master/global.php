@@ -105,23 +105,29 @@ function options_get( $name, $default ) {
 /**
  * To Operate {options}
  * set the $name value
+ * @param
+ *      $name string name primary key
+ *      $value mix   will to serialize
+ *      $status int Whether the automatic loading,default 1
  */
-function options_set( $name, $value, $status = 1 ) {
+function options_set( $name, $value ) {
     global $config, $db_handle;
-    $value = serialize( $value );
-    $_handle = $db_handle->query("UPDATE {options} SET value = '%s' WHERE name = '%s'" , $value, $name );
-    if ( !$db_handle->affectedRows() ) {
-       $db_handle->query("INSERT INTO {options} (name, value, autoload) VALUES('%s', '%s', %d)", $name, $value, $status );
+    $_value = serialize( $value );
+    if ( isset($config[$name] ) ) {
+        $db_handle->query("UPDATE {options} SET value = '%s' WHERE name = '%s'", $_value, $name );
+    } //TODO fix mysql update sql. not affectedRows! $db_handle->affectedRows()
+    else {
+       $db_handle->query("INSERT INTO {options} (name, value) VALUES('%s', '%s')", $name, $_value );
     }
     $config[$name] = $value;
 }
 
 /**
- * Delete the named variabl
+ * Delete the named variable
  */
 function options_del( $name ) {
     global $config, $db_handle;
-    $_handle = $db_handle->query("DELETE {options} FROM WHERE name = '%s'" , $name );
+    $db_handle->query("DELETE {options} FROM WHERE name = '%s'" , $name );
     unset($config[$name]);
 }
 
@@ -130,11 +136,12 @@ function options_del( $name ) {
  */
 function options_init() {
     global $config, $db_handle;
-    $_handle = $db_handle->query("SELECT * FROM {options} WHERE autoload = %d" , 1 );
+    $_handle = $db_handle->query("SELECT * FROM {options}");
     while( $obj = $db_handle->fetchObject( $_handle ) ) {
         $config[$obj->name] = unserialize( $obj->value );
     }
 }
+
 /**
  * dev test
  */

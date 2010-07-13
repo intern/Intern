@@ -28,14 +28,6 @@
  */
 $db_config = 'mysql://root:123456@localhost/inter/inter_/utf8';
 
-
-/**
- * config the site Salt, global this.
- *  session_name();
- */
-$salt = 'INTER';
-
-
 /**
  * PHP settings:
  *

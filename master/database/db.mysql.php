@@ -68,7 +68,10 @@ class mysql extends databaseAbstract{
     protected function connect() {
         $link = @mysql_connect( $this->_config['host'],
                                 $this->_config['user'],
-                                $this->_config['pass'] );
+                                $this->_config['pass'],
+                                false,
+                                2 // CLIENT_FOUND_ROWS, fix update same res not return 1
+                                 );
         if( $link ) {
             $this->_link = $link;
         }

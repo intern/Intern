@@ -10,9 +10,11 @@
 // +----------------------------------------------------------------------
 // $Id$
 
-// config
-define('SALT', $salt);
-
+/**
+ * config the site Salt, global this.
+ *  session_name();
+ */
+define('SALT', 'INTER');
 /**
  +------------------------------------------------------------------------------
  * session for database and init
@@ -22,16 +24,10 @@ define('SALT', $salt);
  */
 class interSessionData{
     /**
-     *
-     * @var unknown_type
+     * @var db handle
      */
-    private $_time;
+    private $_db;
 
-    /**
-     *
-     * @var unknown_type
-     */
-    private $_ip;
     /**
      *
      */
@@ -40,12 +36,24 @@ class interSessionData{
     }
 
     /**
-     *
+     * session to init
      */
     public function __construct() {
-        session_name( SALT . md5(SALT) );
+        $this->_init();
     }
 
+    /**
+     *
+     */
+    private function _init() {
+        $this->_db = interCoreDatabase::getInstance();
+        $this->_setSessionName();
+
+    }
+
+    public function _setSessionName() {
+        session_name( SALT . md5(SALT) );
+    }
     /**
      *
      */
@@ -72,6 +80,9 @@ class interSessionData{
      */
     public function session_read($key) {
         global $user,$db_handle;
+        //当php自身调用session_write_close()时,对象已经不存在, fix $this->session_write();
+        // error: Call to a member function query() on a non-object
+        register_shutdown_function('session_write_close');
 
         if ( !isset($_COOKIE[session_name()]) ) {
             $user = inter_init_anonymous_user();
@@ -79,8 +90,9 @@ class interSessionData{
         }
         $handle = $db_handle->query("SELECT u.*,s.* FROM {users} u INNER JOIN {sessions} s ON u.uid = s.uid WHERE s.sid = '%s'", $key);
         $user = $db_handle->fetchObject();
+        //print_r($user);
         if ($user && $user->uid > 0 && $user->status ==  1 ) {
-            print($res);
+            //print($res);
         } else {
             $user = inter_init_anonymous_user();
         }
@@ -91,18 +103,33 @@ class interSessionData{
      * @param $key the session_id()
      */
     public function session_write($key, $value) {
-        global $db_handle;
+        global $db_handle, $user;
+        if ( $user->uid == 0 && isset($_COOKIE[session_name()]) && empty($value) ) {
+            return true;
+        }
+        $db_handle->query("UPDATE {sessions} SET hostname = '%s', timestamp = %d, data = '%s' WHERE sid = '%s'", inter_get_ip(), time(), $value, $key);
 
-
+        if ( !$db_handle->affectedRows() ) {
+            $db_handle->query("INSERT INTO {sessions}(uid, sid, hostname, timestamp, data) VALUES( %d, '%s', '%s', %d, '%s')", $user->uid, $key, inter_get_ip(), time(), $value);
+        }
+        return true;
     }
 
     /**
      *
      */
-    public function session_destroy() {}
+    public function session_destroy( $key ) {
+        global $db_handle;
+        $db_handle->query("DELETE FROM {sessions} WHERE sid = '%s'", $key);
+        return true;
+    }
 
     /**
      *
      */
-    public function session_gc() {}
+    public function session_gc($lifetime) {
+        global $db_handle;
+        $db_handle->query("DELETE FROM {sessions} WHERE timestamp < %d", time() - $lifetime);
+        return true;
+    }
 }

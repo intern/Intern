@@ -80,7 +80,8 @@ abstract class databaseAbstract {
         $this->selectDatabase();
         $this->setDatabaseEncode();
         if( method_exists(&$this,'__destruct') ) {
-            register_shutdown_function( array(&$this,'__destruct') );
+            // TODO remove this, becase session_write
+            //register_shutdown_function( array(&$this,'__destruct') );
         }
     }
 

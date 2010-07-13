@@ -67,6 +67,12 @@ define('INTER_INITIALIZE_DATABASE', 3);
  */
 define('INTER_INITIALIZE_SESSION', 4);
 
+/**
+ * Initialize get url for router;
+ * @author lan-chi
+ */
+define('INTER_INIT_PATH', 5);
+
 
 class interBootstrap {
     /**
@@ -89,7 +95,7 @@ class interBootstrap {
      * @param unknown_type $type
      */
     private function bootstrap( $type ) {
-        $types = array(INTER_GLOBAL_FILTER, INTER_INITIALIZE_CONFIG, INTER_INITIALIZE_DATABASE, INTER_INITIALIZE_SESSION);
+        $types = array(INTER_GLOBAL_FILTER, INTER_INITIALIZE_CONFIG, INTER_INITIALIZE_DATABASE, INTER_INITIALIZE_SESSION, INTER_INIT_PATH);
         foreach( $types as $key => $value ) {
             if( $value > $type ) {
                 return ;
@@ -126,10 +132,15 @@ class interBootstrap {
                                          array($session_handle, 'session_destroy'),
                                          array($session_handle, 'session_gc')
                                          );
+                // session start
                 session_start();
+                //session_destroy();
+                //init the global $config options
                 options_init();
-                options_set('namedDD',array(1,2211133,33.0,4));
+                break;
+            case INTER_INIT_PATH:
                 print_r($GLOBALS);
+                // test
                 break;
             default :
                 echo 'error';

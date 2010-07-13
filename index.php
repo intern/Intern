@@ -15,7 +15,7 @@ $start = memory_get_usage();
 
 require_once 'master/bootstrap.php';
 
-$new = interBootstrap::getInstance( INTER_INITIALIZE_SESSION );
+$new = interBootstrap::getInstance( INTER_INIT_PATH );
 
 $end = memory_get_usage();
 echo "\n",$end - $start,"\n";
