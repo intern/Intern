@@ -79,7 +79,7 @@ class interSessionData{
      *
      */
     public function session_read($key) {
-        global $user,$db_handle;
+        global $user;
         //当php自身调用session_write_close()时,对象已经不存在, fix $this->session_write();
         // error: Call to a member function query() on a non-object
         register_shutdown_function('session_write_close');
@@ -88,8 +88,8 @@ class interSessionData{
             $user = inter_init_anonymous_user();
             return '';
         }
-        $handle = $db_handle->query("SELECT u.*,s.* FROM {users} u INNER JOIN {sessions} s ON u.uid = s.uid WHERE s.sid = '%s'", $key);
-        $user = $db_handle->fetchObject();
+        $handle = $this->_db->query("SELECT u.*,s.* FROM {users} u INNER JOIN {sessions} s ON u.uid = s.uid WHERE s.sid = '%s'", $key);
+        $user = $this->_db->fetchObject();
         //print_r($user);
         if ($user && $user->uid > 0 && $user->status ==  1 ) {
             //print($res);
@@ -103,33 +103,31 @@ class interSessionData{
      * @param $key the session_id()
      */
     public function session_write($key, $value) {
-        global $db_handle, $user;
+        global $user;
         if ( $user->uid == 0 && isset($_COOKIE[session_name()]) && empty($value) ) {
             return true;
         }
-        $db_handle->query("UPDATE {sessions} SET hostname = '%s', timestamp = %d, data = '%s' WHERE sid = '%s'", inter_get_ip(), time(), $value, $key);
+        $this->_db->query("UPDATE {sessions} SET hostname = '%s', timestamp = %d, data = '%s' WHERE sid = '%s'", inter_get_ip(), time(), $value, $key);
 
-        if ( !$db_handle->affectedRows() ) {
-            $db_handle->query("INSERT INTO {sessions}(uid, sid, hostname, timestamp, data) VALUES( %d, '%s', '%s', %d, '%s')", $user->uid, $key, inter_get_ip(), time(), $value);
+        if ( !$this->_db->affectedRows() ) {
+            $this->_db->query("INSERT INTO {sessions}(uid, sid, hostname, timestamp, data) VALUES( %d, '%s', '%s', %d, '%s')", $user->uid, $key, inter_get_ip(), time(), $value);
         }
         return true;
     }
 
     /**
-     *
+     * Delete current user session
      */
     public function session_destroy( $key ) {
-        global $db_handle;
-        $db_handle->query("DELETE FROM {sessions} WHERE sid = '%s'", $key);
+        $this->_db->query("DELETE FROM {sessions} WHERE sid = '%s'", $key);
         return true;
     }
 
     /**
-     *
+     * Given time to delete the timeout task
      */
     public function session_gc($lifetime) {
-        global $db_handle;
-        $db_handle->query("DELETE FROM {sessions} WHERE timestamp < %d", time() - $lifetime);
+        $this->_db->query("DELETE FROM {sessions} WHERE timestamp < %d", time() - $lifetime);
         return true;
     }
 }

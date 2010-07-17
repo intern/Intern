@@ -10,7 +10,7 @@
 // +----------------------------------------------------------------------
 // $Id$
 /**
- * Developer setting
+ * Developer settings
  */
 
 // deubug
@@ -90,6 +90,7 @@ class interBootstrap {
         interBootstrap::$_boot_type = $boot_type;
         return new self;
     }
+    
     /**
      *
      * @param unknown_type $type
@@ -104,14 +105,14 @@ class interBootstrap {
         }
     }
     /**
-     *
-     * @param unknown_type $type
+     * helper for function bootstrap to boot
+     * @param const $type @see the header
      */
     private function _bootstrap( $type ) {
-        global $db_config;
+        global $db_config, $base_url;
         switch( $type ) {
             case INTER_GLOBAL_FILTER:
-                require_once MASTER . 'global.php';
+                require_once MASTER . 'global.func.php';
                 // To unset unused var
                 unset_global_variable();
                 break;
@@ -128,7 +129,7 @@ class interBootstrap {
                 session_set_save_handler(array($session_handle, 'session_open'),
                                          array($session_handle, 'session_close'),
                                          array($session_handle, 'session_read'),
-                                         array($session_handle, 'session_write'),
+										 array($session_handle, 'session_write'),
                                          array($session_handle, 'session_destroy'),
                                          array($session_handle, 'session_gc')
                                          );
@@ -139,6 +140,8 @@ class interBootstrap {
                 options_init();
                 break;
             case INTER_INIT_PATH:
+                init_user(); //To dev
+                require_once MASTER . 'path.func.php';
                 print_r($GLOBALS);
                 // test
                 break;
@@ -146,13 +149,14 @@ class interBootstrap {
                 echo 'error';
         }
     }
-
+    
     /**
      * init the web start
      */
     public function __construct() {
         $this->bootstrap( interBootstrap::$_boot_type );
     }
+    
     /**
      * Compatible
      * @TODO remove this if less !(VERSION < php5)

@@ -28,6 +28,17 @@
  */
 $db_config = 'mysql://root:123456@localhost/inter/inter_/utf8';
 
+
+/**
+ * Inter web setting:
+ *
+ *  To setting the web base url.
+ *  will create by defaule if not defined
+ *    eg: http://www.example.com/
+ *        http://www.example.com/folder/
+ */
+$base_url = '';
+
 /**
  * PHP settings:
  *
