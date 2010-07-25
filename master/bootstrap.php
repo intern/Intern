@@ -6,7 +6,7 @@
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
-// | Author: lan_chi <lan_chi@163.com>
+// | Author: lan_chi <lan_chi@qq.com>
 // +----------------------------------------------------------------------
 // $Id$
 /**
@@ -125,7 +125,7 @@ class interBootstrap {
                 break;
             case INTER_INITIALIZE_SESSION:
                 require_once MASTER . 'session.php';
-                $session_handle = interSessionData::getInstance();
+                $session_handle = interSessionDataHandle::getInstance();
                 session_set_save_handler(array($session_handle, 'session_open'),
                                          array($session_handle, 'session_close'),
                                          array($session_handle, 'session_read'),
@@ -141,8 +141,9 @@ class interBootstrap {
                 break;
             case INTER_INIT_PATH:
                 init_user(); //To dev
+                require_once MASTER . 'module.class.php';
                 require_once MASTER . 'path.func.php';
-                print_r($GLOBALS);
+                //print_r($GLOBALS);
                 // test
                 break;
             default :

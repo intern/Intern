@@ -6,7 +6,7 @@
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
-// | Author: lan_chi <lan_chi@163.com>
+// | Author: lan_chi <lan_chi@qq.com>
 // +----------------------------------------------------------------------
 // $Id$
 
@@ -15,6 +15,7 @@
  *  session_name();
  */
 define('SALT', 'INTER');
+
 /**
  +------------------------------------------------------------------------------
  * session for database and init
@@ -22,7 +23,7 @@ define('SALT', 'INTER');
  * @version   $Id$
  +------------------------------------------------------------------------------
  */
-class interSessionData{
+class interSessionDataHandle{
     /**
      * @var db handle
      */

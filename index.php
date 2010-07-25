@@ -6,11 +6,13 @@
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
-// | Author: lan_chi <lan_chi@163.com>
+// | Author: lan_chi <lan_chi@qq.com>
 // +----------------------------------------------------------------------
 // $Id$
+echo "\n",$_GET['p'],"\n";
+
 ini_set('display_errors',1);
-//error_reporting(1);
+error_reporting(1);
 $start = memory_get_usage();
 
 require_once 'master/bootstrap.php';
@@ -18,4 +20,5 @@ require_once 'master/bootstrap.php';
 $new = interBootstrap::getInstance( INTER_INIT_PATH );
 
 $end = memory_get_usage();
+
 echo "\n",$end - $start,"\n";

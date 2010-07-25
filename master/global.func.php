@@ -6,7 +6,7 @@
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
-// | Author: lan_chi <lan_chi@163.com>
+// | Author: lan_chi <lan_chi@qq.com>
 // +----------------------------------------------------------------------
 // $Id$
 
@@ -26,6 +26,7 @@ function unset_global_variable() {
         }
     }
 }
+
 /**
  * @params string
  * @return string
@@ -82,6 +83,7 @@ function inter_get_ip() {
         $ip = $_SERVER['REMOTE_ADDR'];
     return $ip;
 }
+
 /**
  * Create a Anonymous user data here.
  */
@@ -94,6 +96,7 @@ function inter_init_anonymous_user( $session = '' ) {
     $user->cache = 0;
     return $user;
 }
+
 /**
  * To Operate {options}
  * get the $name with {options}
@@ -102,6 +105,7 @@ function options_get( $name, $default ) {
     global $config;
     return isset($config[$name]) ? $config[$name] : $default;
 }
+
 /**
  * To Operate {options}
  * set the $name value
@@ -203,6 +207,10 @@ function inter_timer_clear() {
 }
 
 
+/**
+ *  dev test group begin
+ *  will remove these
+ */
 
 /**
  * dev test
