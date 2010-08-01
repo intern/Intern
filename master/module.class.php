@@ -10,10 +10,13 @@
 // +--------------------------------------------------------------------------------
 // $Id$
 
+// include the core hook system
+require_once inter_join_path( MASTER, 'hook.class.php' );
+
 /**
  +----------------------------------------------------------------------------------
  * This class is important for the inter. Module handle and invok hook.
- * enable and disabled them.
+ * enable and disabled them. This module is a static class.
  +----------------------------------------------------------------------------------
  * @package   inter.module
  * @version   $Id$
@@ -22,105 +25,38 @@
  */
 
 class Module {
-    /**
-     * @private array
-     *      collect all enabled module instance.
-     */
-    private $_enabled_modules = array();
-
-    /**
-     * @_db resource the system database layout handler
-     */
-    private $_db;
-    
-    /**
-     * @_core inter core module the list need enable
-     */
-    private $_core_module = array();
+	/**
+	 * @var the hook class handle
+	 */
+	public static $hook;
 
     /**
      +------------------------------------------------------------------------------
-     * get the current instance.
+     * init the module class
      +------------------------------------------------------------------------------
      * @version   $Id$
      +------------------------------------------------------------------------------
      * @param null
      * @access public
      */
-    public static function getInstance( ) {
-        static $_flag = null;
-        if ( !isset( $_flag ) ) {
-            $_flag = new self();
-        }
-        return $_flag;
-    }
+    public static function init () {
+		self::$hook = hook::getInstance();
+	}
 
     /**
      +------------------------------------------------------------------------------
-     * the construct with phpVERsion < 5.0.0
-     +------------------------------------------------------------------------------
-     * @version   $Id$
-     +------------------------------------------------------------------------------
-     * @param null
-     * @access public
-     */
-    public function interModuleHandle() {
-        $this->__construct();
-    }
-    
-    /**
-     +------------------------------------------------------------------------------
-     * 
-     +------------------------------------------------------------------------------
-     * @version   $Id$
-     +------------------------------------------------------------------------------
-     * @param null
-     * @access public
-     */
-    public function __construct() {
-        global $db_handle;
-        $this->_db = $db_handle;
-        $this->_enabled_modules = $this->getAllModules();
-    }
-    
-    /**
-     +------------------------------------------------------------------------------
-     * the construct with phpVERsion < 5.0.0
-     +------------------------------------------------------------------------------
-     * @version   $Id$
-     +------------------------------------------------------------------------------
-     * @param null
-     * @access public
-     */
-    public function getAllModules( $enabled = true ) {
-        $this->_db->query("SELECT * FROM {core} WHERE status = %d", $enabled );
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /**
-     +------------------------------------------------------------------------------
-     * Enable the named module
+     * Enable the named module, befor need install
      +------------------------------------------------------------------------------
      * @version   $Id$
      +------------------------------------------------------------------------------
      * @param $modules string or modules list as array()
      * @access public
      */
-    public function enable( $modules ) {
+    public static function enable( $modules ) {
         if( is_string( $modulers ) ) {
             $modules = func_get_args();
         }
-        $this->_moduleManage('enable', $modules );
+        self::_moduleManage('enable', $modules );
     }
 
     /**
@@ -132,35 +68,141 @@ class Module {
      * @param $modules string or modules list as array()
      * @access public
      */
-    public function disable( $modulers ) {
+    public static function disable( $modulers ) {
         if( is_string( $modulers ) ) {
             $modules = func_get_args();
         }
-        $this->_moduleManage('disable', $modules );
+        self::_moduleManage('disable', $modules );
     }
-    
-    
+
     /**
      +------------------------------------------------------------------------------
-     * Helper enable and disable function
+     * install the named module
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+     * @param $modules string or modules list as array()
+     * @access public
+     */
+    public static function install( $modulers ) {
+        if( is_string( $modulers ) ) {
+            $modules = func_get_args();
+        }
+        self::_moduleManage('disable', $modules );
+    }
+
+    /**
+     +------------------------------------------------------------------------------
+     * uninstall the named module
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+     * @param $modules string or modules list as array()
+     * @access public
+     */
+    public static function uninstall( $modulers ) {
+        if( is_string( $modulers ) ) {
+            $modules = func_get_args();
+        }
+        self::_moduleManage('disable', $modules );
+    }
+
+    /**
+     +------------------------------------------------------------------------------
+     * Invoke a hook in all enabled modules that implement it.
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+     * @param $hook The name of the hook to invoke.
+     *              ... Arguments to pass to the hook.
+     * @access public
+     */
+    public static function invoke( $module , $hook ) {
+        return self::_moduleManage('invoke', $module, $hook );
+    }
+
+    /**
+     +------------------------------------------------------------------------------
+     * Invoke a hook with a enabled modules that implement it.
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+     * @param $hook The name of the hook to invoke.
+     *              ... Arguments to pass to the hook.
+     * @access public
+     */
+    public static function invokeAll( $hook ) {
+        $args = func_get_args();
+        return ;
+    }
+
+    /**
+     +------------------------------------------------------------------------------
+     * get enable modules name as array
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+     * @param  null
+     * @access public
+	 * @return array
+     */
+	public static function listModule( $reload = false ) {
+		return self::_moduleManage('listModule', $reload);
+	}
+
+	/**
+     +------------------------------------------------------------------------------
+     * get enable modules name as array
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+     * @param  null
+     * @access public
+	 * @return array
+     */
+	public static function implementer( $hook, $reload = false ) {
+		return self::$hook->implementer( $hook, $reload = false );
+	}
+
+    /**
+     +------------------------------------------------------------------------------
+     * Helper module class action
      +------------------------------------------------------------------------------
      * @version   $Id$
      +------------------------------------------------------------------------------
      * @param $module string or modules list as array()
      * @access private
      */
-    private function _moduleManage( $action ) {
+    private static function _moduleManage( $action, $args = NULL ) {
+		//self::$hook
+		$args = func_get_args();
+		array_shift( $args );
         switch ( $action ) {
             case 'enable':
-            
-            break;
+				//
+                break;
             case 'disable':
-            
-            break;
+				//
+                break;
+			case 'install':
+				//
+                break;
+			case 'uninstall':
+				//
+                break;
+			case 'invoke':
+				$module = array_shift( $args );
+				$hook   = array_shift( $args );
+				return self::$hook->invoke($module, $hook);
+			case 'invokeAll':
+				$hook   = array_shift( $args );
+				//return array
+				return self::$hook->invokeAll( $hook, $args );
+			case 'listModule':
+				return self::$hook->listModule( array_shift( $args ) );
+                break;
             default :
-            
+				return false;
         }
     }
-    
-    
 }

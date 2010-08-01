@@ -68,10 +68,16 @@ define('INTER_INITIALIZE_DATABASE', 3);
 define('INTER_INITIALIZE_SESSION', 4);
 
 /**
+ * Initialize module hooks layout.
+ * 
+ */
+define('INTER_INIT_HOOK_LAYOUT', 5);
+ 
+/**
  * Initialize get url for router;
  * @author lan-chi
  */
-define('INTER_INIT_PATH', 5);
+define('INTER_INIT_PATH', 6);
 
 
 class interBootstrap {
@@ -96,7 +102,7 @@ class interBootstrap {
      * @param unknown_type $type
      */
     private function bootstrap( $type ) {
-        $types = array(INTER_GLOBAL_FILTER, INTER_INITIALIZE_CONFIG, INTER_INITIALIZE_DATABASE, INTER_INITIALIZE_SESSION, INTER_INIT_PATH);
+        $types = array(INTER_GLOBAL_FILTER, INTER_INITIALIZE_CONFIG, INTER_INITIALIZE_DATABASE, INTER_INITIALIZE_SESSION, INTER_INIT_HOOK_LAYOUT, INTER_INIT_PATH);
         foreach( $types as $key => $value ) {
             if( $value > $type ) {
                 return ;
@@ -139,12 +145,13 @@ class interBootstrap {
                 //init the global $config options
                 options_init();
                 break;
-            case INTER_INIT_PATH:
+            case INTER_INIT_HOOK_LAYOUT:
                 init_user(); //To dev
                 require_once MASTER . 'module.class.php';
-                require_once MASTER . 'path.func.php';
-                //print_r($GLOBALS);
-                // test
+                Module::init();
+                break;
+            case INTER_INIT_PATH:
+                //require_once MASTER . 'path.func.php';
                 break;
             default :
                 echo 'error';
