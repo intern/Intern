@@ -25,10 +25,10 @@ require_once inter_join_path( MASTER, 'hook.class.php' );
  */
 
 class Module {
-	/**
-	 * @var the hook class handle
-	 */
-	public static $hook;
+    /**
+     * @var the hook class handle
+     */
+    public static $hook;
 
     /**
      +------------------------------------------------------------------------------
@@ -40,8 +40,8 @@ class Module {
      * @access public
      */
     public static function init () {
-		self::$hook = hook::getInstance();
-	}
+        self::$hook = hook::getInstance();
+    }
 
     /**
      +------------------------------------------------------------------------------
@@ -144,13 +144,13 @@ class Module {
      +------------------------------------------------------------------------------
      * @param  null
      * @access public
-	 * @return array
+     * @return array
      */
-	public static function listModule( $reload = false ) {
-		return self::_moduleManage('listModule', $reload);
-	}
+    public static function listModule( $reload = false ) {
+        return self::_moduleManage('listModule', $reload);
+    }
 
-	/**
+    /**
      +------------------------------------------------------------------------------
      * get enable modules name as array
      +------------------------------------------------------------------------------
@@ -158,11 +158,11 @@ class Module {
      +------------------------------------------------------------------------------
      * @param  null
      * @access public
-	 * @return array
+     * @return array
      */
-	public static function implementer( $hook, $reload = false ) {
-		return self::$hook->implementer( $hook, $reload = false );
-	}
+    public static function implementer( $hook, $reload = false ) {
+        return self::$hook->implementer( $hook, $reload = false );
+    }
 
     /**
      +------------------------------------------------------------------------------
@@ -174,35 +174,35 @@ class Module {
      * @access private
      */
     private static function _moduleManage( $action, $args = NULL ) {
-		//self::$hook
-		$args = func_get_args();
-		array_shift( $args );
+        //self::$hook
+        $args = func_get_args();
+        array_shift( $args );
         switch ( $action ) {
             case 'enable':
-				//
+                //
                 break;
             case 'disable':
-				//
+                //
                 break;
-			case 'install':
-				//
+            case 'install':
+                //
                 break;
-			case 'uninstall':
-				//
+            case 'uninstall':
+                //
                 break;
-			case 'invoke':
-				$module = array_shift( $args );
-				$hook   = array_shift( $args );
-				return self::$hook->invoke($module, $hook);
-			case 'invokeAll':
-				$hook   = array_shift( $args );
-				//return array
-				return self::$hook->invokeAll( $hook, $args );
-			case 'listModule':
-				return self::$hook->listModule( array_shift( $args ) );
+            case 'invoke':
+                $module = array_shift( $args );
+                $hook   = array_shift( $args );
+                return self::$hook->invoke($module, $hook);
+            case 'invokeAll':
+                $hook   = array_shift( $args );
+                //return array
+                return self::$hook->invokeAll( $hook, $args );
+            case 'listModule':
+                return self::$hook->listModule( array_shift( $args ) );
                 break;
             default :
-				return false;
+                return false;
         }
     }
 }
