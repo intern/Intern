@@ -12,7 +12,9 @@
 echo "\n",$_GET['p'],"\n";
 
 ini_set('display_errors','on');
+
 error_reporting(1);
+
 $start = memory_get_usage();
 
 require_once 'master/bootstrap.php';

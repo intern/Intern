@@ -118,7 +118,8 @@ class Module {
      * @access public
      */
     public static function invoke( $module , $hook ) {
-        return self::_moduleManage('invoke', $module, $hook );
+        $args = func_get_args();
+        return self::_moduleManage('invoke', $args);
     }
 
     /**
@@ -133,7 +134,7 @@ class Module {
      */
     public static function invokeAll( $hook ) {
         $args = func_get_args();
-        return ;
+        return self::_moduleManage('invokeAll', $args );
     }
 
     /**
@@ -173,7 +174,7 @@ class Module {
      * @param $module string or modules list as array()
      * @access private
      */
-    private static function _moduleManage( $action, $args = NULL ) {
+    private static function _moduleManage( $action, $_args = NULL ) {
         //self::$hook
         $args = func_get_args();
         array_shift( $args );
@@ -191,13 +192,10 @@ class Module {
                 //
                 break;
             case 'invoke':
-                $module = array_shift( $args );
-                $hook   = array_shift( $args );
-                return self::$hook->invoke($module, $hook);
+                return call_user_func_array(array(self::$hook, 'invoke'), $_args );
             case 'invokeAll':
-                $hook   = array_shift( $args );
                 //return array
-                return self::$hook->invokeAll( $hook, $args );
+                return call_user_func_array(array(self::$hook, 'invokeAll'), $_args );
             case 'listModule':
                 return self::$hook->listModule( array_shift( $args ) );
                 break;

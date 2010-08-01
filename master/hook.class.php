@@ -47,6 +47,11 @@ class hook {
     private $_load_modules = array();
 
     /**
+     * @var $_load_module_files the loaded file list
+     */
+    private $_load_files = array();
+
+    /**
      * The db layout handle
      * @var $_db
      */
@@ -166,18 +171,22 @@ class hook {
      * @access public
      */
     public function invokeAll( $hook ) {
+        $_collect = array();
         $args = func_get_args();
         array_shift($args); //remove $hook variable with the $args
         foreach( $this->implementer( $hook ) as $module ) {
-            $hook = $this->_getModuleInstance( $module )->getMethod( $hook );
-            if ( $hook->isStatic() ) {
-                return $hook->invokeArgs(null, $args);
+            $_hook = $this->_getModuleInstance( $module )->getMethod( $hook );
+            if ( $_hook->isStatic() ) {
+                $_collect[] = $_hook->invokeArgs(null, $args);
             } else {
                 // generation a class instance
                 $hook_instance = $this->_getModuleInstance( $module )->newInstance();
-                return $hook->invokeArgs($hook_instance, $args);
+                $_collect[] = $_hook->invokeArgs($hook_instance, $args);
+                //return ;
             }
+            
         }
+        return $_collect;
     }
 
     /**
@@ -197,14 +206,18 @@ class hook {
         array_shift($args); //remove $module variable
         array_shift($args); //remove $hook variable
         //ReflectionMethod
-        $hook = $this->_getModuleInstance( $module )->getMethod( $hook );
-        if ( $hook->isStatic() ) {
-            return $hook->invokeArgs(null, $args);
-        } else {
-            // generation a class instance
-            $hook_instance = $this->_getModuleInstance( $module )->newInstance();
-            return $hook->invokeArgs($hook_instance, $args);
+        
+        if ( $this->moduleHookExists( $module , $hook ) ) {
+            $_hook = $this->_getModuleInstance( $module )->getMethod( $hook );
+            if ( $_hook->isStatic() ) {
+                return $_hook->invokeArgs(null, $args);
+            } else {
+                // generation a class instance
+                $hook_instance = $this->_getModuleInstance( $module )->newInstance();
+                return $_hook->invokeArgs($hook_instance, $args);
+            }
         }
+        return false;
     }
 
     /**
@@ -226,12 +239,14 @@ class hook {
      * @access public
      */
     public function loadModule( $type, $module ) {
-        if ( !isset( $this->_load_modules[$type][$module] ) ) {
-            foreach( array(CORE_NODULE_PATH, EXPAND_NODULE_PATH) as $path) {
-                $file = $path . $module . '.' . $type;
-                if( file_exists( $file  ) ) {
+        if ( !isset( $this->_load_files[$type][$module] ) ) {
+            foreach( array( CORE_NODULE_PATH, EXPAND_NODULE_PATH ) as $path) {
+                //print_r(array(CORE_NODULE_PATH, EXPAND_NODULE_PATH));
+                //$file = $path . $module . DS . $module . '.' . $type;
+                $file = inter_join_path($path, $module, $module . '.' . $type);
+                if( file_exists( $file ) ) {
                     @include_once $file;
-                    $this->_load_modules[$type][$module] = true;
+                    $this->_load_files[$type][$type] = true;
                     return true;
                 }
             }
@@ -252,7 +267,13 @@ class hook {
      */
     public function listModule( $reload = false ) {
         $this->_db->query("SELECT * FROM {core} WHERE status = 1 ORDER BY weight ASC");
-        // to setting the self var $_load_modules
+        while( $module = $this->_db->fetchObject() ) {
+            // to setting the self var $_load_modules
+            //print_r($module);
+            $this->loadModule( 'module', $module->module );
+            // load the module instance
+            $this->_setModuleInstance( $module->module );
+        }
     }
 
     /**
@@ -269,11 +290,13 @@ class hook {
      * @return the all implement hook's modules
      */
     public function implementer( $hook , $reload = false ) {
+        echo 'aaa';
         if ( !isset( $this->_module_implementer[$hook] ) || $reload == true ) {
             foreach( $this->_load_modules as $module => $value ) {
                 if ( $this->_load_modules[$module]['instance'] != false ) {
                     if ( $this->moduleHookExists($module, $hook) ) {
-                        array_push($this->_module_implementer[$hook], $module);
+                        $this->_module_implementer[$hook][] =  $module;
+                        //array_push($this->_module_implementer[$hook], $module);
                     }
                 }
             }
