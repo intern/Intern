@@ -3,3 +3,9 @@
 It's preliminary work.This take will Realize!
 
 Like drupal, wordpress, bo-blog, sablog.
+
+TODO:
+    1,Path class implement.
+    2,Menu system build.
+    3,Image factory instance implement.(jpg,gif,png,bmp)
+    4,Template mechanism and theme system build.
