@@ -6,12 +6,12 @@ It's preliminary work.This take will Realize!
 Like drupal, wordpress, bo-blog, sablog.
 
 Task TODO:
-    - Datanase layout build.
-    - Bootstrap class implement.
-    - Hooks system build.
-    - Menu system build.
+    - Datanase layout build.                  https://gist.github.com/8eda5113c1ef502d71a4
+    - Bootstrap class implement.              https://gist.github.com/cce1399afcef101b781e
+    - Hooks system build.                     https://gist.github.com/fae2cc062c8ac06c3be2
+    - Menu system build.                      https://gist.github.com/ac91bdafe83d3cdf99b1
     - Image factory instance implement.(support: jpeg, gif, png, bmp)
-    - Form framework build.
-    - Theme system build.
+                                              https://gist.github.com/12cf13eda24e197389ee
+    - Form framework build.                   https://gist.github.com/c5e5229c3e6ac320506c
+    - Theme system build.                     https://gist.github.com/8628b46545e860bf3260
         - Template mechanism.
-  (https://gist.github.com/cce1399afcef101b781e)
