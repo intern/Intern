@@ -1,12 +1,11 @@
-﻿##Project is introduced
+﻿## Project is introduced ##
 This is a CMS or Blog frame? I do't know. I know me will do php! wowwwwwwwwwwwwww....
 
 It's preliminary work.This take will Realize!
 
 Like drupal, wordpress, bo-blog, sablog.
 
-##Will done!
-TODO:
+Task TODO:
     - Datanase layout build.
     - Bootstrap class implement.
     - Hooks system build.
@@ -15,3 +14,4 @@ TODO:
     - Form framework build.
     - Theme system build.
         - Template mechanism.
+  (https://gist.github.com/cce1399afcef101b781e)
