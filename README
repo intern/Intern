@@ -1,11 +1,17 @@
-﻿This is a CMS or Blog frame? I do't know. I know me will do php! wowwwwwwwwwwwwww....
+﻿##Project is introduced
+This is a CMS or Blog frame? I do't know. I know me will do php! wowwwwwwwwwwwwww....
 
 It's preliminary work.This take will Realize!
 
 Like drupal, wordpress, bo-blog, sablog.
 
+##Will done!
 TODO:
-    1,Path class implement.
-    2,Menu system build.
-    3,Image factory instance implement.(jpg,gif,png,bmp)
-    4,Template mechanism and theme system build.
+    - Datanase layout build.
+    - Bootstrap class implement.
+    - Hooks system build.
+    - Menu system build.
+    - Image factory instance implement.(support: jpeg, gif, png, bmp)
+    - Form framework build.
+    - Theme system build.
+        - Template mechanism.
