@@ -10,6 +10,7 @@
 // +--------------------------------------------------------------------------------
 // $Id$
 
+echo 'load menu:';
 class inter_menu {
 
     public static function menu(){

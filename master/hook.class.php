@@ -246,14 +246,13 @@ class hook {
                 $file = inter_join_path($path, $module, $module . '.' . $type);
                 if( file_exists( $file ) ) {
                     @include_once $file;
-                    $this->_load_files[$type][$module] = true;
+                    $this->_load_files[$type][$type] = true;
                     return true;
                 }
             }
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 
     /**
@@ -265,24 +264,16 @@ class hook {
      * @param $reload boole
      *                reload the module list if the value is true
      * @access public
-     * 
-     * @return array() 
-     *                the loaded and exists the module class list
      */
     public function listModule( $reload = false ) {
-        static $loaded = false;
-        if ( false == $loaded || true == $reload ) {
-            $this->_db->query("SELECT * FROM {core} WHERE status = 1 ORDER BY weight ASC");
-            while( $module = $this->_db->fetchObject() ) {
-                // to setting the self var $_load_modules
-                //print_r($module);
-                $this->loadModule( 'module', $module->module );
-                // load the module instance
-                $this->_setModuleInstance( $module->module );
-            }
-            $loaded = true;
+        $this->_db->query("SELECT * FROM {core} WHERE status = 1 ORDER BY weight ASC");
+        while( $module = $this->_db->fetchObject() ) {
+            // to setting the self var $_load_modules
+            //print_r($module);
+            $this->loadModule( 'module', $module->module );
+            // load the module instance
+            $this->_setModuleInstance( $module->module );
         }
-        return array_keys($this->_load_modules);
     }
 
     /**
@@ -299,6 +290,7 @@ class hook {
      * @return the all implement hook's modules
      */
     public function implementer( $hook , $reload = false ) {
+        echo 'aaa';
         if ( !isset( $this->_module_implementer[$hook] ) || $reload == true ) {
             foreach( $this->_load_modules as $module => $value ) {
                 if ( $this->_load_modules[$module]['instance'] != false ) {
