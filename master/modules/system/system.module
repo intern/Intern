@@ -9,9 +9,9 @@
 // | Author: lan_chi <lan_chi@qq.com>
 // +--------------------------------------------------------------------------------
 // $Id$
-echo 'load system:';
+
 class inter_system {
-    public function menu() {
+    private function menu() {
         echo '++++++++', "\n";
         print_r(func_get_args());
         echo '++++++++', "\n";

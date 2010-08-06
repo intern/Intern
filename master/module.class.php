@@ -177,7 +177,7 @@ class Module {
     private static function _moduleManage( $action, $_args = NULL ) {
         //self::$hook
         $args = func_get_args();
-        array_shift( $args );
+        //array_shift( $args );
         switch ( $action ) {
             case 'enable':
                 //
@@ -197,7 +197,7 @@ class Module {
                 //return array
                 return call_user_func_array(array(self::$hook, 'invokeAll'), $_args );
             case 'listModule':
-                return self::$hook->listModule( array_shift( $args ) );
+                return self::$hook->listModule( $_args );
                 break;
             default :
                 return false;
