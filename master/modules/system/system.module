@@ -9,7 +9,7 @@
 // | Author: lan_chi <lan_chi@qq.com>
 // +--------------------------------------------------------------------------------
 // $Id$
-echo 'load system:';
+
 class inter_system {
     public function menu() {
         echo '++++++++', "\n";

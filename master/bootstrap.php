@@ -149,9 +149,10 @@ class interBootstrap {
                 init_user(); //To dev
                 require_once MASTER . 'module.class.php';
                 Module::init();
+                Module::invokeAll('boot');
                 break;
             case INTER_INIT_PATH:
-                //require_once MASTER . 'path.func.php';
+                require_once MASTER . 'path.class.php';
                 break;
             default :
                 echo 'error';

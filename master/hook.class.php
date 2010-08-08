@@ -290,7 +290,6 @@ class hook {
      * @return the all implement hook's modules
      */
     public function implementer( $hook , $reload = false ) {
-        echo 'aaa';
         if ( !isset( $this->_module_implementer[$hook] ) || $reload == true ) {
             foreach( $this->_load_modules as $module => $value ) {
                 if ( $this->_load_modules[$module]['instance'] != false ) {
