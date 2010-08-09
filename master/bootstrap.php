@@ -153,6 +153,8 @@ class interBootstrap {
                 break;
             case INTER_INIT_PATH:
                 require_once MASTER . 'path.class.php';
+                $path = path::getInstance();
+                $path->init();
                 break;
             default :
                 echo 'error';

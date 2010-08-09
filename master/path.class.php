@@ -12,31 +12,23 @@
 
 /**
  * To ruter the web def group start.
- * init with inter_path_init()
+ * init with Singleton for path
  */
-function path() {
-    $a = 'path1';
-    $b = 'path2';
-    $c = 'path3';
-    $d = 'path4';
-    $e = 'path5';
-    $f = 'path6';
-    $g = 'path7';
-    $h = 'path8';
-    include_once MASTER.'routes'.DS.'path.routes.8.inc';
-    print_r($routes);
-}
-path();
 class path {
     /**
      * @var private the path variable, can't update the value.
      */
-    private $_path = '';
+    private $_standard_path = '';
     
     /**
      * @var public the inter system(module routes) internal path url
      */
-    public $internal_path = '';
+    public $_internal_path = '';
+    
+    /**
+     * @var private To save the path instance
+     */
+    private static $_instance = null;
     
     /**
      +------------------------------------------------------------------------------
@@ -46,7 +38,9 @@ class path {
      +------------------------------------------------------------------------------
      * @access private
      */
-    private function __construct() {}
+    private function __construct() {
+        $this->_standard_path = $_GET['q'];
+    }
 
     /**
      +------------------------------------------------------------------------------
@@ -62,12 +56,30 @@ class path {
     
     /**
      +------------------------------------------------------------------------------
+     * get the path instance to the static,
+     *  Singleton for the path
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+     * @param NULL
+     */
+    public static function getInstance() {
+        if( !path::$_instance ) {
+            path::$_instance = new self;
+        }
+        return path::$_instance;
+    }
+    
+    /**
+     +------------------------------------------------------------------------------
      * init the url parse
      +------------------------------------------------------------------------------
      * @version   $Id$
      +------------------------------------------------------------------------------
+     * @param null
      */
-    public static function getInstance() {
-        
+    public function init() {
+        print_r($this->_standard_path);
     }
+    
 }
