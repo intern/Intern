@@ -12,9 +12,10 @@
 
 class inter_system {
     public function menu() {
-        echo '++++++++', "\n";
-        print_r(func_get_args());
-        echo '++++++++', "\n";
+		$items['admin/system'] = array('admin');
+		$items['admin/b'] = array('eeee');
+		$items['admin/c'] = array('adfffffmin');
+		return $items;
     }
     
     public static function api() {

@@ -13,9 +13,13 @@
 class inter_menu {
 
     public static function menu(){
-        echo '++++++++', "\n";
-        print_r(func_get_args());
-        echo '++++++++', "\n";
+		$items['admin/menu'] = array(
+			'type' => MASTER,
+			'call_back' => 'get by foem'
+		);
+		$items['admin/bmenu'] = array('eeeemenu');
+		$items['admin/cmenu'] = array('adfffffmmenuin');
+		return $items;
     }
     
     public function api() {

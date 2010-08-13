@@ -19,7 +19,9 @@ $start = memory_get_usage();
 
 require_once 'master/bootstrap.php';
 
-$new = interBootstrap::getInstance( INTER_INIT_PATH );
+interBootstrap::getInstance( INTER_INIT_PATH );
+
+print_r(path::getInstance()->getMenuArray());
 
 $end = memory_get_usage();
 
