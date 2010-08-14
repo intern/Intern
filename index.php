@@ -9,17 +9,22 @@
 // | Author: lan_chi <lan_chi@qq.com>
 // +----------------------------------------------------------------------
 // $Id$
-echo "\n",$_GET['p'],"\n";
+//echo '$_GET[\'q\']: ', $_GET['q'], "\n";
 
 ini_set('display_errors','on');
 
-error_reporting(1);
+error_reporting( E_ALL );
 
 $start = memory_get_usage();
 
 require_once 'master/bootstrap.php';
 
-interBootstrap::getInstance( INTER_INIT_PATH );
+interBootstrap::getInstance( INTER_INIT_PATH_AND_CACHE );
+
+
+Cache::set('test', Array('a',2,3,4,5,56), 800, CACHE_D);
+
+print_r(Cache::get('test', CACHE_D));
 
 print_r(path::getInstance()->getMenuArray());
 

@@ -40,6 +40,13 @@ $db_config = 'mysql://root:123456@localhost/inter/inter_/utf8';
 $base_url = '';
 
 /**
+ * the default cache type
+ *   options:
+ *              file | database | memory (default)
+ */
+$cache_type = 'memory';
+
+/**
  * PHP settings:
  *
  * To see what PHP settings are possible, including whether they can

@@ -10,6 +10,9 @@
 // +----------------------------------------------------------------------
 // $Id$
 
+// include the core cache class
+require_once inter_join_path( MASTER, 'cache.class.php' );
+
 /**
  * To ruter the web def group start.
  * init with Singleton for path
@@ -41,6 +44,11 @@ class path {
     private static $_instance = null;
 
     /**
+     * @var private To save the db handle instance
+     */
+    private  $_db;
+    
+    /**
      +------------------------------------------------------------------------------
      * init the url parse
      +------------------------------------------------------------------------------
@@ -50,6 +58,7 @@ class path {
      */
     private function __construct() {
         $this->_standard_path = $_GET['q'];
+        $this->_db = interCoreDatabase::getInstance();
     }
 
     /**
@@ -92,7 +101,6 @@ class path {
         $this->_iPath();
         $this->_iPathRoutes();
         $this->_iPathHandle();
-        print_r(module::listModule());
     }
 
     /**
@@ -129,7 +137,7 @@ class path {
      * @param null
      */
     public function getPathByAlias() {
-        //
+        
     }
 
     /**
@@ -163,7 +171,7 @@ class path {
         $routes_vars = array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h');
         $parts = explode('/', $this->_internal_path );
         $parts_count = count( $parts );
-        if( $parts_count  < 2 || $parts_count  > 8 ) {
+        if( !$parts_count || $parts_count  > 8 ) {
             $routes =  array();
         } else {
             $routes = array_combine( array_slice($routes_vars,0, $parts_count), $parts);
@@ -173,3 +181,26 @@ class path {
         $this->_internal_path_routes = $routes;
     }
 }
+//menu
+
+//define
+define( 'ADMIN_MAIN_MENU', 1);
+define( 'ADMIN_SUB_MENU', 2);
+define( 'ADMIN_TAB_MENU', 4);
+define( 'CALLBACK', 16);
+
+class html {
+    
+}
+
+//print_r(get_defined_vars());
+
+
+
+
+
+
+
+
+
+

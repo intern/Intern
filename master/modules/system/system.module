@@ -11,15 +11,34 @@
 // $Id$
 
 class inter_system {
+    // menu hook
     public function menu() {
-		$items['admin/system'] = array('admin');
-		$items['admin/b'] = array('eeee');
-		$items['admin/c'] = array('adfffffmin');
+		$items['admin/system'] = array(
+            'type'        => ADMIN_MAIN_MENU,
+            'title'       => 'Adminstrter plan',
+            'description' => 'Description here now!',
+            'callback'    => array(
+                    'template' => 'inter.inc'
+                    //'function' => array(this, 'callback_function')
+            )
+        );
+		$items['admin/b'] = array(
+            'eeee'
+        );
+		$items['admin/c'] = array(
+            'adfffffmin'
+        );
 		return $items;
     }
-    
+
     public static function api() {
         echo "system api: \n";
         print_r(func_get_args());
+    }
+    
+    public function boot() {
+        //
+        
+        //echo '123456';
     }
 }

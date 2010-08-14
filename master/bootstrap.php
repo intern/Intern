@@ -77,7 +77,7 @@ define('INTER_INIT_HOOK_LAYOUT', 5);
  * Initialize get url for router;
  * @author lan-chi
  */
-define('INTER_INIT_PATH', 6);
+define('INTER_INIT_PATH_AND_CACHE', 6);
 
 
 class interBootstrap {
@@ -86,14 +86,14 @@ class interBootstrap {
      * @static true
      * @var string
      */
-    public static $_boot_type;
+    private static $_boot_type;
 
     /**
      * To bootstarp the inter
      * @param contant $boot_type see the top CONTANT
      */
     public static function getInstance( $boot_type ) {
-        interBootstrap::$_boot_type = $boot_type;
+        self::$_boot_type = $boot_type;
         return new self;
     }
     
@@ -102,7 +102,7 @@ class interBootstrap {
      * @param unknown_type $type
      */
     private function bootstrap( $type ) {
-        $types = array(INTER_GLOBAL_FILTER, INTER_INITIALIZE_CONFIG, INTER_INITIALIZE_DATABASE, INTER_INITIALIZE_SESSION, INTER_INIT_HOOK_LAYOUT, INTER_INIT_PATH);
+        $types = array(INTER_GLOBAL_FILTER, INTER_INITIALIZE_CONFIG, INTER_INITIALIZE_DATABASE, INTER_INITIALIZE_SESSION, INTER_INIT_HOOK_LAYOUT, INTER_INIT_PATH_AND_CACHE);
         foreach( $types as $key => $value ) {
             if( $value > $type ) {
                 return ;
@@ -115,7 +115,7 @@ class interBootstrap {
      * @param const $type @see the header
      */
     private function _bootstrap( $type ) {
-        global $db_config, $base_url;
+        global $db_config, $base_url, $cache_type;
         switch( $type ) {
             case INTER_GLOBAL_FILTER:
                 require_once MASTER . 'global.func.php';
@@ -151,28 +151,28 @@ class interBootstrap {
                 Module::init();
                 Module::invokeAll('boot');
                 break;
-            case INTER_INIT_PATH:
+            case INTER_INIT_PATH_AND_CACHE:
                 require_once MASTER . 'path.class.php';
-                $path = path::getInstance();
-                $path->init();
+                path::getInstance()->init();
+                Cache::runClear(); // cron cache
                 break;
             default :
-                echo 'error';
+                exit( 'ERROR:' );
         }
     }
     
     /**
      * init the web start
      */
-    public function __construct() {
-        $this->bootstrap( interBootstrap::$_boot_type );
+    private function __construct() {
+        $this->bootstrap( self::$_boot_type );
     }
     
     /**
      * Compatible
      * @TODO remove this if less !(VERSION < php5)
      */
-    public function interBootstrap() {
+    private function interBootstrap() {
         $this->__construct();
     }
 }

@@ -31,7 +31,7 @@ class mysql extends databaseAbstract{
      * @return NULL
      */
     protected function  _encodeBlob( $data ) {
-        return "'". mysql_real_escape_string($data, $this->link ) ."'";
+        return "'". mysql_real_escape_string($data, $this->_link ) ."'";
     }
 
     /**
