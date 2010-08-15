@@ -13,6 +13,9 @@
 // include the core cache class
 require_once inter_join_path( MASTER, 'cache.class.php' );
 
+// include the parse routes class
+require_once inter_join_path( MASTER, 'routes.class.php' );
+
 /**
  * To ruter the web def group start.
  * init with Singleton for path

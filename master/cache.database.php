@@ -47,8 +47,6 @@ class databaseCache {
                         return unserialize($obj->data); 
                     }
                     return $obj->data;
-                } else {
-                    $this->_db->query("DELETE FROM {cache} WHERE id='%s'", md5($key));
                 }
             }
         }

@@ -13,7 +13,16 @@
 class inter_system {
     // menu hook
     public function menu() {
-		$items['admin/system'] = array(
+		$items['admin'] = array(
+            'type'        => ADMIN_MAIN_MENU,
+            'title'       => 'Adminstrter plan',
+            'description' => 'Description here now!',
+            'callback'    => array(
+                    'template' => 'admin.inc'
+                    //'function' => array(this, 'callback_function')
+            )
+        );
+		$items['admin/main'] = array(
             'type'        => ADMIN_MAIN_MENU,
             'title'       => 'Adminstrter plan',
             'description' => 'Description here now!',
@@ -22,11 +31,13 @@ class inter_system {
                     //'function' => array(this, 'callback_function')
             )
         );
-		$items['admin/b'] = array(
-            'eeee'
-        );
-		$items['admin/c'] = array(
-            'adfffffmin'
+		$items['admin/main/theme'] = array(
+            'type'        => ADMIN_MAIN_MENU,
+            'title'       => 'Site theme',
+            'description' => 'Mange theme description here now!',
+            'callback'    => array(
+                    'template' => 'theme.inc'
+            )
         );
 		return $items;
     }
@@ -37,8 +48,6 @@ class inter_system {
     }
     
     public function boot() {
-        //
-        
         //echo '123456';
     }
 }

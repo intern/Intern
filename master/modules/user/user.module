@@ -1,0 +1,52 @@
+<?php
+// +--------------------------------------------------------------------------------
+// |  [ WE CAN DO IT JUST programmer ]
+// +--------------------------------------------------------------------------------
+// | Copyright (c) 2010 http://www.hongrs.net All rights reserved.
+// +--------------------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +--------------------------------------------------------------------------------
+// | Author: lan_chi <lan_chi@qq.com>
+// +--------------------------------------------------------------------------------
+// $Id$
+
+class inter_user {
+    // menu hook
+    public function menu() {
+		$items['user/login'] = array(
+            'type'        => ADMIN_MAIN_MENU,
+            'title'       => 'Adminstrter plan',
+            'description' => 'Description here now!',
+            'callback'    => array(
+                    'template' => 'user.login.inc'
+                    //'function' => array(this, 'callback_function')
+            )
+        );
+		$items['logout'] = array(
+            'type'        => ADMIN_MAIN_MENU,
+            'title'       => 'Site theme',
+            'description' => 'Mange theme description here now!',
+            'callback'    => array(
+                    'function' => 'user_logout'
+            )
+        );
+		$items['user/register'] = array(
+            'type'        => ADMIN_MAIN_MENU,
+            'title'       => 'Site theme',
+            'description' => 'Mange theme description here now!',
+            'callback'    => array(
+                    'template' => 'user.register.inc'
+            )
+        );
+		return $items;
+    }
+
+    public static function api() {
+        echo "system api: \n";
+        print_r(func_get_args());
+    }
+    
+    public function boot() {
+        //echo '123456';
+    }
+}
