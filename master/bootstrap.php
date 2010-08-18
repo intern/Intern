@@ -152,8 +152,8 @@ class interBootstrap {
                 Module::invokeAll('boot');
                 break;
             case INTER_INIT_PATH_AND_CACHE:
-                require_once MASTER . 'path.class.php';
-                path::getInstance()->init();
+                require_once MASTER . 'router.class.php';
+                Router::getInstance()->init();
                 Cache::runClear(); // cron cache
                 break;
             default :
