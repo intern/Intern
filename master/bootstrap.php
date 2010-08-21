@@ -80,6 +80,29 @@ define('INTER_INIT_HOOK_LAYOUT', 5);
 define('INTER_INIT_PATH_AND_CACHE', 6);
 
 
+
+// helper for router class and module
+
+/**
+ * The maximum number of path elements for a menu callback
+ */
+define('MENU_MAX_PARTS', 8);
+
+//define menu type constants here
+define( 'ADMIN_MAIN_MENU', 1);
+
+define( 'ADMIN_SUB_MENU', 2);
+
+define( 'ADMIN_TAB_MENU', 4);
+
+define( 'PARENT_NORMAL_PAGE',16);
+
+define( 'PAGE', 256);
+
+define( 'CALLBACK', 256*16);
+
+
+
 class interBootstrap {
     /**
      * save the boot type.
@@ -119,6 +142,8 @@ class interBootstrap {
         switch( $type ) {
             case INTER_GLOBAL_FILTER:
                 require_once MASTER . 'global.func.php';
+                //dev
+                inter_timer('dev', 'set');
                 // To unset unused var
                 unset_global_variable();
                 break;
@@ -150,6 +175,8 @@ class interBootstrap {
                 require_once MASTER . 'module.class.php';
                 Module::init();
                 Module::invokeAll('boot');
+                //print_r(Module::instance('menu'));
+                //echo Module::hookExists('menu','apis');
                 break;
             case INTER_INIT_PATH_AND_CACHE:
                 require_once MASTER . 'router.class.php';

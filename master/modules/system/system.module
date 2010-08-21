@@ -14,26 +14,30 @@ class inter_system {
     // menu hook
     public function menu() {
 		$items['admin'] = array(
+            'type'           => ADMIN_MAIN_MENU,
+            'title'          => __('Administrator'),
+            'title callback' => '__',
+            'description'    => 'Administrator Dashboard',
+            'callback'       => array(
+                 'template' => 'system.admin.inc'
+                 //'function' => array(this, 'callback_function')
+            ),
+            'widget'         => -1
+            
+        );
+		$items['admin/settings'] = array(
             'type'        => ADMIN_MAIN_MENU,
-            'title'       => 'Adminstrter plan',
+            'title'       => __('Adminstrter plan'),
             'description' => 'Description here now!',
             'callback'    => array(
-                    'template' => 'admin.inc'
+                    'function' => 'get_form'
+                    //''
                     //'function' => array(this, 'callback_function')
             )
         );
-		$items['admin/main'] = array(
+		$items['admin/settings/theme'] = array(
             'type'        => ADMIN_MAIN_MENU,
-            'title'       => 'Adminstrter plan',
-            'description' => 'Description here now!',
-            'callback'    => array(
-                    'template' => 'inter.inc'
-                    //'function' => array(this, 'callback_function')
-            )
-        );
-		$items['admin/main/theme'] = array(
-            'type'        => ADMIN_MAIN_MENU,
-            'title'       => 'Site theme',
+            'title'       => __('The site theme'),
             'description' => 'Mange theme description here now!',
             'callback'    => array(
                     'template' => 'theme.inc'

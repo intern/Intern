@@ -11,22 +11,11 @@
 // $Id$
 /*
  *  table struct
- *  feild: routes | parent_router | count_part | callback_func | func_args | callback_title | title_args | description | weight | template_path
+ *  feild: router | parent_router | count_part | callback_func | func_args | callback_title | title_args | description | weight | template_path
  */
 
 // include the core cache class
 require_once inter_join_path( MASTER, 'cache.class.php' );
-
-/**
- * The maximum number of path elements for a menu callback
- */
-define('MENU_MAX_PARTS', 8);
-
-//define menu type constants here
-define( 'ADMIN_MAIN_MENU', 1);
-define( 'ADMIN_SUB_MENU', 2);
-define( 'ADMIN_TAB_MENU', 4);
-define( 'CALLBACK', 16);
 
 /**
  * To router the web def group start.
@@ -83,12 +72,19 @@ class Router {
      +------------------------------------------------------------------------------
      * @access public
      */
-    public function menuRouterBuild() {
+    public function menuRoutersBuild() {
         $routes = array();
         foreach(module::implementer('menu') as $module) {
-            $routes[$module] = module::invoke($module, 'menu');
+            $_router = module::invoke($module, 'menu');
+            if ( isset($_router) && is_array($_router) ) {
+                foreach( array_keys($_router) as $path ) {
+                    $_router[$path]['module'] = $module;
+                }
+                $routes = array_merge($routes, $_router);
+            }
         }
-        $this->_menuRouterBuild($routes);
+        //$this->_menuRoutersFormat($routes);
+        $this->_menuRoutersBuild($routes);
     }
 
     /**
@@ -100,10 +96,54 @@ class Router {
 	 * @param $routes array the router path
      * @access private
      */
-    private function _menuRouterBuild( $routes ) {
-        $hook_menu = array();
-        foreach($routes as $module => $item) {
-            $count_part = explode('/', $path, MENU_MAX_PARTS);
+    private function _menuRoutersBuild( $routes ) {
+        $menu_router = array();
+        foreach( $routes as $router => $item ) {
+            //implode explode
+            $router_parts = explode('/', $router);
+            $item['count_parts'] = $count_part = count( $router_parts );
+            for($i = $count_part-1; $i > 0; $i--) {
+                $current_parts = array_slice($router_parts, 0, $i);
+                if( isset($routes[implode('/', $current_parts)]) ) {
+                    $item['parent_router'] = implode('/', $current_parts);
+                    break;
+                }
+            }
+            $this->_menuRouterVerify($item);
+            $routes[$router] = $item;
+            //exit;
+        }
+        print_r($routes);
+    }
+
+    /**
+     +------------------------------------------------------------------------------
+     * helper for #_menuRouterBuild to verify router
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+	 * @param $routes array the router path
+     * @access private
+     */
+    private function _menuRouterVerify( &$item ) {
+        // title callback check
+        if ( isset($item['title callback']) ) {
+            $item ['title_callback'] = $item['title callback'];
+            unset($item['title callback']);
+        }
+
+        //callback
+        if ( isset( $item['callback'] ) ) {
+            if ( isset( $item['callback']['template'] ) ) {
+                $item['template'] = module::getPath($item['module']);
+            } else if( isset( $item['callback']['function'] ) ) {
+                if( isset( $item['callback']['function args'] ) 
+                        && is_array($item['callback']['function args'] ) ) {
+                    $item['function_args'] = serialize($item['callback']['function args']);
+                }
+                $item['function'] = serialize($item['callback']['function']);
+            }
+            unset($item['callback']);
         }
     }
 
@@ -206,6 +246,7 @@ class Router {
      * @param null
      */
 	public function runByRouterHandle() {
-		print_r($this->_router_handle);
+		$this->menuRoutersBuild();
+        //print_r($this->_menuRouterBuild);
 	}
 }//routes

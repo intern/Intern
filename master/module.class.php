@@ -167,6 +167,49 @@ class Module {
 
     /**
      +------------------------------------------------------------------------------
+     * get enable modules name as array
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+     * @param  null
+     * @access public
+     * @return array
+     */
+    public static function getPath( $module ) {
+        return self::$hook->getPathBy( $module );
+    }
+
+    /**
+     +------------------------------------------------------------------------------
+     * check named module exists
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+     * @param  $mosule module name
+     * @param  $hook   
+     * @access public
+     * @return boole true if $hook is exists
+     */
+    public static function hookExists( $module, $hook ) {
+        return self::$hook->moduleHookExists( $module, $hook );
+    }
+
+    /**
+     +------------------------------------------------------------------------------
+     * get the named module Reflection instance 
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+     * @param  $module the named module
+     * @access public
+     * @return object the instance
+     */
+    public static function instance( $module ) {
+        return self::$hook->getModuleInstance( $module );
+    }
+
+    /**
+     +------------------------------------------------------------------------------
      * Helper module class action
      +------------------------------------------------------------------------------
      * @version   $Id$

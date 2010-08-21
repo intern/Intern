@@ -22,12 +22,17 @@ interBootstrap::getInstance( INTER_INIT_PATH_AND_CACHE );
 
 $handle = Router::getInstance()->runByRouterHandle();
 
+//print_r($GLOBALS);
+
 //Cache::set('test', Array('a',2,3,4,5,56), 800, CACHE_D);
 
 //print_r(Cache::get('a555', CACHE_D));
 
 //print_r(path::getInstance()->getMenuArray());
 
+
+
 $end = memory_get_usage();
 
-echo "\n",$end - $start,"\n";
+echo "\nmem:",$end - $start,"\n";
+echo "\ntime:",inter_timer('dev'),"\n";

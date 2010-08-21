@@ -206,7 +206,42 @@ function inter_timer_clear() {
     inter_timer( null, 'clear' );
 }
 
+/**
+ * Check the request is ajax request
+ * @return true if ajax
+ */
+function is_ajax() {
+    return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
+}
 
+/**
+ * Check the request is post
+ */
+function is_post() {
+    return !empty($_POST);
+}
+
+/**
+ * Check the request is a xml request
+ */
+function is_xml() {
+    return isset($_REQUEST['__FORMAT__']) && strtolower($_REQUEST['__FORMAT__']) == 'XML';
+}
+
+/**
+ * Check current request need a json response
+ */
+function is_json() {
+    return isset($_REQUEST['__FORMAT__']) && strtolower($_REQUEST['__FORMAT__']) == 'JSON';
+}
+
+
+/**
+ * translate
+ */
+function __($t) {
+    return $t;
+}
 /**
  *  dev test group begin
  *  will remove these

@@ -257,6 +257,26 @@ class hook {
 
     /**
      +------------------------------------------------------------------------------
+     *  get the named module path
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+     * @param  $module string
+     *              the load module path
+     * @access public
+     */
+    public function getPathBy( $module ) {
+        foreach( array( CORE_NODULE_PATH, EXPAND_NODULE_PATH ) as $path) {
+            $module_dir = inter_join_path($path, $module);
+            if( is_dir( $module_dir ) ) {
+                return $module_dir;
+            }
+            return false;
+        }
+    }
+
+    /**
+     +------------------------------------------------------------------------------
      * list the enabled module.
      +------------------------------------------------------------------------------
      * @version   $Id$
@@ -403,5 +423,20 @@ class hook {
      */
     private function _getModuleInstance( $module ) {
         return $this->_setModuleInstance($module);
+    }
+
+    /**
+     +------------------------------------------------------------------------------
+     * get the named module instance.
+     * Reflection instance with the named module class
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+     * @param  $module string
+     *              module name
+     * @access public
+     */
+    public function getModuleInstance( $module ) {
+        return $this->_getModuleInstance( $module );
     }
 }// end hooks system
