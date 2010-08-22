@@ -166,7 +166,7 @@ class mysql extends databaseAbstract{
      */
     public function fetchArray( $result = NULL ) {
         $result = isset ( $result ) ? $result : $this->_query_handle;
-        return mysql_fetch_array( $result, MYSQL_BOTH/* MYSQL_ASSOC & MYSQL_NUM*/);
+        return mysql_fetch_array( $result, MYSQL_ASSOC/*MYSQL_BOTH & MYSQL_NUM*/);
     }
 
     /**

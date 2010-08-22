@@ -99,7 +99,7 @@ define( 'PARENT_NORMAL_PAGE',16);
 
 define( 'PAGE', 256);
 
-define( 'CALLBACK', 256*16);
+define( 'CALLBACK', 256*256);
 
 
 

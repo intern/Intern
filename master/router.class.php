@@ -72,7 +72,7 @@ class Router {
      +------------------------------------------------------------------------------
      * @access public
      */
-    public function menuRoutersBuild() {
+    public function rebuildMenuRouters() {
         $routes = array();
         foreach(module::implementer('menu') as $module) {
             $_router = module::invoke($module, 'menu');
@@ -84,7 +84,9 @@ class Router {
             }
         }
         //$this->_menuRoutersFormat($routes);
-        $this->_menuRoutersBuild($routes);
+        $this->_rebuildMenuRouters($routes);
+        $this->_rebuildMenuRoutersPermission($routes);
+        //$this->_rebuildMenuRoutersNavigation($routes);
     }
 
     /**
@@ -96,29 +98,42 @@ class Router {
 	 * @param $routes array the router path
      * @access private
      */
-    private function _menuRoutersBuild( $routes ) {
-        $menu_router = array();
+    private function _rebuildMenuRouters( $routes ) {
+        //$menu_router = array();
         foreach( $routes as $router => $item ) {
             //implode explode
             $router_parts = explode('/', $router);
-            $item['count_parts'] = $count_part = count( $router_parts );
-            for($i = $count_part-1; $i > 0; $i--) {
-                $current_parts = array_slice($router_parts, 0, $i);
-                if( isset($routes[implode('/', $current_parts)]) ) {
-                    $item['parent_router'] = implode('/', $current_parts);
-                    break;
-                }
-            }
+            $item['count_parts'] = count( $router_parts );
             $this->_menuRouterVerify($item);
+            $item['router'] = $router;
             $routes[$router] = $item;
-            //exit;
         }
-        print_r($routes);
+        $this->_db->query("DELETE FROM {routes}");
+        
+        foreach( $routes as $item ) {
+            $this->_db->query("INSERT INTO {routes} (router,module,parent_router,
+                          count_part,function,function_args,title,title_callback,
+                          description,weight,template,type) VALUES('%s', '%s',
+                          '%s', %d, '%s','%s','%s','%s','%s',%d,'%s',%d)",
+                          $item['router'], 
+                          $item['module'],
+                          $item['parent_router'],
+                          $item['count_parts'],
+                          $item['function'],
+                          $item['function_args'],
+                          $item['title'],
+                          $item['title_callback'],
+                          $item['description'],
+                          $item['widget'],
+                          $item['template'],
+                          $item['type']
+                          );
+        }
     }
 
     /**
      +------------------------------------------------------------------------------
-     * helper for #_menuRouterBuild to verify router
+     * helper for #_rebuildMenuRouters to verify router
      +------------------------------------------------------------------------------
      * @version   $Id$
      +------------------------------------------------------------------------------
@@ -135,7 +150,8 @@ class Router {
         //callback
         if ( isset( $item['callback'] ) ) {
             if ( isset( $item['callback']['template'] ) ) {
-                $item['template'] = module::getPath($item['module']);
+                $item['template'] = inter_join_path(module::getPath($item['module']),
+                                                      $item['callback']['template']);
             } else if( isset( $item['callback']['function'] ) ) {
                 if( isset( $item['callback']['function args'] ) 
                         && is_array($item['callback']['function args'] ) ) {
@@ -145,6 +161,118 @@ class Router {
             }
             unset($item['callback']);
         }
+        if($item['type'] == ADMIN_MAIN_MENU) {
+            $item['parent_router'] = '';
+        } else if( isset( $item['parent router'] ) ) {
+            $item['parent_router'] = $item['parent router'];
+            unset($item['parent router']);
+        }
+        $item += array(
+            'type'           => ADMIN_MAIN_MENU,
+            'title'          => '',
+            'title_callback' => '',
+            'widget'         => 0,
+            'function'       => '',
+            'function_args'  => '',
+            'template'       => '',
+            'description'    => '',
+            'parent_router'  => ''
+        );
+    }
+    
+    /**
+     +------------------------------------------------------------------------------
+     * helper for #rebuildMenuRouters to router rebuild Permission table
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+	 * @param $routes array the router path
+     * @access private
+     */
+    private function _rebuildMenuRoutersPermission( $routes ) {
+        //clear the routes_permission data
+        $this->_db->query("DELETE FROM {routes_permission}");
+        foreach( $routes as $router => $item ) {
+            if ( !isset($item['permission']) ) {
+                $item['permission'] = '';
+            }
+            $this->_db->query("INSERT INTO {routes_permission} ( router, description)
+                              VALUES('%s', '%s')", $router, $item['permission']);
+        }
+    }
+
+    /**
+     +------------------------------------------------------------------------------
+     * helper for #rebuildMenuRouters to router rebuild navigation links
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+	 * @param $routes array the router path
+     * @access private
+     */
+    private function _rebuildMenuRoutersNavigation( $routes ) {
+        //clear the routes_permission data
+        $this->_db->query("DELETE FROM {routes_permission}");
+        foreach( $routes as $router => $item ) {
+            if ( !isset($item['permission']) ) {
+                $item['permission'] = '';
+            }
+            $this->_db->query("INSERT INTO {routes_permission} ( router, description)
+                              VALUES('%s', '%s')", $router, $item['permission']);
+        }
+    }
+
+    /**
+     +------------------------------------------------------------------------------
+     * get all trail links menu for current path
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+	 * @param $routes array the router path
+     * @access public
+     */
+    public function getAdminMenu() {
+        //clear the routes_permission data
+        static $links = array();
+        $this->_db->query("SELECT * FROM {routes} WHERE router='%s'", $this->_normal_path);
+        $current_path = $this->_db->fetchObject();
+        if ( $current_path->type == ADMIN_MAIN_MENU ) {
+            $this->_db->query("SELECT * FROM {routes} WHERE type = %d ORDER BY weight ASC", ADMIN_MAIN_MENU);
+            $links['ADMIN_MAIN_MENU'] = array();
+            while( $item = $this->_db->fetchObject() ) {
+                if( $item->router == $current_path->router ) {
+                    $item->active = true;
+                }
+                array_push($links['ADMIN_MAIN_MENU'], $item);
+            }
+            $this->_db->query("SELECT * FROM {routes} WHERE parent_router = '%s' ORDER BY weight ASC", $current_path->router );
+            $links['ADMIN_MAIN_MENU'] = array();
+            while( $item = $this->_db->fetchObject() ) {
+                if( $item->router == $current_path->router ) {
+                    $item->current = true;
+                }
+                array_push($links['ADMIN_MAIN_MENU'], $item);
+            }
+        }
+        if ( $current_path->type == ADMIN_SUB_MENU ) {
+            $this->_db->query("SELECT * FROM {routes} WHERE type = %d ORDER BY weight ASC", ADMIN_SUB_MENU);
+            $links['ADMIN_MAIN_MENU'] = array();
+            while( $item = $this->_db->fetchObject() ) {
+                if( $item->router == $current_path->router ) {
+                    $item->current = true;
+                }
+                array_push($links['ADMIN_MAIN_MENU'], $item);
+            }
+        }
+        return $links;
+    }
+
+    private function menuGetActiveTrail( $trail_type = null ) {
+        static $links = array();
+        if ( !isset($links[$trail_type]) ) {
+            
+        }
+        return $links[$trail_type];
     }
 
     /**
@@ -246,7 +374,7 @@ class Router {
      * @param null
      */
 	public function runByRouterHandle() {
-		$this->menuRoutersBuild();
+		$this->rebuildMenuRouters();
         //print_r($this->_menuRouterBuild);
 	}
 }//routes

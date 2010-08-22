@@ -235,6 +235,12 @@ function is_json() {
     return isset($_REQUEST['__FORMAT__']) && strtolower($_REQUEST['__FORMAT__']) == 'JSON';
 }
 
+/**
+ * Check the request is home page
+ */
+function is_home() {
+    return ;
+}
 
 /**
  * translate

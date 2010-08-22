@@ -15,20 +15,21 @@ class inter_system {
     public function menu() {
 		$items['admin'] = array(
             'type'           => ADMIN_MAIN_MENU,
-            'title'          => __('Administrator'),
+            'title'          => 'Administrator',
             'title callback' => '__',
             'description'    => 'Administrator Dashboard',
             'callback'       => array(
-                 'template' => 'system.admin.inc'
+                 'template'  => 'system.admin.inc'
                  //'function' => array(this, 'callback_function')
             ),
-            'widget'         => -1
-            
+            'widget'         => -1,
+            'permission'     => 'Admin Dashboard View'
         );
 		$items['admin/settings'] = array(
             'type'        => ADMIN_MAIN_MENU,
-            'title'       => __('Adminstrter plan'),
+            'title'       => 'Adminstrter plan',
             'description' => 'Description here now!',
+            'permission'  => 'Site settings',
             'callback'    => array(
                     'function' => 'get_form'
                     //''
@@ -36,12 +37,13 @@ class inter_system {
             )
         );
 		$items['admin/settings/theme'] = array(
-            'type'        => ADMIN_MAIN_MENU,
-            'title'       => __('The site theme'),
-            'description' => 'Mange theme description here now!',
-            'callback'    => array(
+            'type'          => ADMIN_SUB_MENU,
+            'title'         => __('The site theme'),
+            'description'   => 'Mange theme description here now!',
+            'callback'      => array(
                     'template' => 'theme.inc'
-            )
+            ),
+            'parent router' => 'admin/settings'
         );
 		return $items;
     }

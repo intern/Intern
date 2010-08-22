@@ -22,6 +22,9 @@ interBootstrap::getInstance( INTER_INIT_PATH_AND_CACHE );
 
 $handle = Router::getInstance()->runByRouterHandle();
 
+print_r(Router::getInstance()->getAdminMenu());
+
+//print_r(Router::getInstance()->getAdminSubMenu());
 //print_r($GLOBALS);
 
 //Cache::set('test', Array('a',2,3,4,5,56), 800, CACHE_D);

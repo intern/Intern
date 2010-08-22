@@ -13,15 +13,15 @@
 class inter_menu {
 
     public static function menu(){
-		$items['admin/menu'] = array(
-			'type' => MASTER,
-			'call_back' => 'get by foem'
+		$items['admin/router'] = array(
+			'type' => ADMIN_MAIN_MENU,
+			'call_back' => array( 
+                'function' => 'get_by_form'
+            )
 		);
-		$items['admin/bmenu'] = array('eeeemenu');
-		$items['admin/cmenu'] = array('adfffffmmenuin');
-		return $items;
+        return $items;
     }
-    
+
     public function api() {
         echo '888888888888888888888';
     }

@@ -38,6 +38,14 @@ class inter_user {
                     'template' => 'user.register.inc'
             )
         );
+        $items['user'] = array(
+            'type'        => ADMIN_MAIN_MENU,
+            'title'       => 'Site theme',
+            'description' => 'Mange theme description here now!',
+            'callback'    => array(
+                    'template' => 'user.register.inc'
+            )
+        );
 		return $items;
     }
 
