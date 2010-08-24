@@ -9,10 +9,10 @@
 // | Author: lan_chi <lan_chi@qq.com>
 // +----------------------------------------------------------------------
 // $Id$
-/*
- *  table struct
- *  feild: router | parent_router | count_part | callback_func | func_args | callback_title | title_args | description | weight | template_path
- */
+/**
+  *  table struct
+  *  feild: router | parent_router | count_part | callback_func | func_args | callback_title | title_args | description | weight | template_path
+  */
 
 // include the core cache class
 require_once inter_join_path( MASTER, 'cache.class.php' );
@@ -26,7 +26,7 @@ class Router {
     /**
      * @var private handle self Singleton
      */
-	private static $_instance;
+    private static $_instance;
 
     /**
      * @var private To save the db handle instance
@@ -34,24 +34,34 @@ class Router {
     private $_db;
 
     /**
-     * @var private To save the path standard request path, Do't change this value
+     * @var private To save the path standard request path, Can't change this value
      */
     private $_alias_path;
 
-	/**
+    /**
      * @var private To save the internal path with current request the alias path
-	 */
-	private $_normal_path;
+     */
+    private $_normal_path;
 
-	/**
-	 * @var private current internal path all routes. array
-	 */
-	private $_iPathRoutes = array();
+    /**
+     * @var private current internal path all routes.
+     *  is array
+     * @see path a/b/c/d/e/f/g
+     *    array(
+     *          'a/b/c/d/e/f/g',
+     *          'a/b/c/d/e/f/%',
+     *          'a/b/c/d/e/%/g',
+     *          .....
+     *          'a/%/%/%/%/%/%'
+     *    );
+     */
+    private $_iPathRoutes = array();
 
-	/**
-	 * @var private the first router handle
-	 */
-	private $_router_handle = null;
+    /**
+     * @var private the first router handle
+     *      Matching the best route, like the menu hook format
+     */
+    private $_router_handle = null;
 
     /**
      +------------------------------------------------------------------------------
@@ -62,11 +72,12 @@ class Router {
      * @access private
      */
     private function __construct() {}
-	private function Router() {}
+    private function Router() {}
 
     /**
      +------------------------------------------------------------------------------
-     * menu routes create to routes table
+     * Build menu router create to router table, Will delete all router if it exists
+     *      create routers, Update router permission and the Navigation links
      +------------------------------------------------------------------------------
      * @version   $Id$
      +------------------------------------------------------------------------------
@@ -83,19 +94,23 @@ class Router {
                 $routes = array_merge($routes, $_router);
             }
         }
-        //$this->_menuRoutersFormat($routes);
+        // format the hook menu data to Standard
+        $this->_menuRoutersFormat($routes);
+        // routers
         $this->_rebuildMenuRouters($routes);
+        // permission
         $this->_rebuildMenuRoutersPermission($routes);
-        //$this->_rebuildMenuRoutersNavigation($routes);
+        // Navigation
+        $this->_rebuildMenuRoutersNavigation($routes);
     }
 
     /**
      +------------------------------------------------------------------------------
-     * helper for #menuRouterBuild
+     * helper for #menuRouterBuild to create router by hook menu
      +------------------------------------------------------------------------------
      * @version   $Id$
      +------------------------------------------------------------------------------
-	 * @param $routes array the router path
+     * @param $routes array the router path
      * @access private
      */
     private function _rebuildMenuRouters( $routes ) {
@@ -137,7 +152,7 @@ class Router {
      +------------------------------------------------------------------------------
      * @version   $Id$
      +------------------------------------------------------------------------------
-	 * @param $routes array the router path
+     * @param $routes array the router path
      * @access private
      */
     private function _menuRouterVerify( &$item ) {
@@ -153,7 +168,7 @@ class Router {
                 $item['template'] = inter_join_path(module::getPath($item['module']),
                                                       $item['callback']['template']);
             } else if( isset( $item['callback']['function'] ) ) {
-                if( isset( $item['callback']['function args'] ) 
+                if( isset( $item['callback']['function args'] )
                         && is_array($item['callback']['function args'] ) ) {
                     $item['function_args'] = serialize($item['callback']['function args']);
                 }
@@ -186,7 +201,7 @@ class Router {
      +------------------------------------------------------------------------------
      * @version   $Id$
      +------------------------------------------------------------------------------
-	 * @param $routes array the router path
+     * @param $routes array the router path
      * @access private
      */
     private function _rebuildMenuRoutersPermission( $routes ) {
@@ -207,7 +222,7 @@ class Router {
      +------------------------------------------------------------------------------
      * @version   $Id$
      +------------------------------------------------------------------------------
-	 * @param $routes array the router path
+     * @param $routes array the router path
      * @access private
      */
     private function _rebuildMenuRoutersNavigation( $routes ) {
@@ -228,7 +243,7 @@ class Router {
      +------------------------------------------------------------------------------
      * @version   $Id$
      +------------------------------------------------------------------------------
-	 * @param $routes array the router path
+     * @param $routes array the router path
      * @access public
      */
     public function getAdminMenu() {
@@ -284,13 +299,13 @@ class Router {
      * @access private
      */
     public function init() {
-		//this handle db
-		$this->_db = interCoreDatabase::getInstance();
-		//set path
-		$this->_alias_path = $_GET['q'];
-		$this->_setiPath();
-		$this->_setiPathRoutes();
-		$this->_setiPathHandle();
+        //this handle db
+        $this->_db = interCoreDatabase::getInstance();
+        //set path
+        $this->_alias_path = $_GET['q'];
+        $this->_setiPath();
+        $this->_setiPathRoutes();
+        $this->_setiPathHandle();
     }
 
     /**
@@ -301,7 +316,7 @@ class Router {
      * @version   $Id$
      +------------------------------------------------------------------------------
      * @param NULL
-	* @access public static
+    * @access public static
      */
     public static function getInstance() {
         if( !self::$_instance ) {
@@ -317,10 +332,10 @@ class Router {
      * @version   $Id$
      +------------------------------------------------------------------------------
      * @param NULL
-	* @access private
+    * @access private
      */
     private function _setiPath() {
-		// TODO check the alias table if exists
+        // TODO check the alias table if exists
         $this->_normal_path = trim($this->_alias_path, '/');
     }
 
@@ -373,8 +388,8 @@ class Router {
      +------------------------------------------------------------------------------
      * @param null
      */
-	public function runByRouterHandle() {
-		$this->rebuildMenuRouters();
+    public function runByRouterHandle() {
+        $this->rebuildMenuRouters();
         //print_r($this->_menuRouterBuild);
-	}
+    }
 }//routes
