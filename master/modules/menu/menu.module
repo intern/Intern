@@ -15,9 +15,7 @@ class inter_menu {
     public static function menu(){
 		$items['admin/router'] = array(
 			'type' => ADMIN_MAIN_MENU,
-			'call_back' => array( 
-                'function' => 'get_by_form'
-            )
+            'permission' => 'aaaaaaaaaaaaaaaaaaaaaa'
 		);
         return $items;
     }

@@ -148,13 +148,13 @@ function options_init() {
 
 /**
  * Develop tool, collect time begin ,stop, end time statistics
- *   @param string $name 
+ *   @param string $name
  *      the timer named.
  *   @param string $action options:
  *       'set'   start set a time record.
  *       'get'   get the record of named by default.
  *       'stop'  sotp the record. clear the named.
- *       'all'   get all data with $timer. 
+ *       'all'   get all data with $timer.
  *       'clear' clear all timer if not named.
  */
 function inter_timer( $name, $action = 'get' ) {
@@ -242,12 +242,232 @@ function is_home() {
     return ;
 }
 
+function is_admin_page() {
+    return Router::arg(0) == 'admin';
+}
 /**
  * translate
  */
 function __($t) {
     return $t;
 }
+
+/**
+ * get the actived theme path
+ */
+function theme_path() {
+    static $theme;
+    if ( !isset($theme) ) {
+        $theme = inter_join_path(ADMIN_THEME_PATH, options_get((is_admin_page() ? 'actived_admin_theme' : 'actived_theme'), 'default'));
+    }
+    return $theme;
+}
+
+/**
+ * $head variable set
+ * @parems
+ *   $type 'inline'|'script'|'stylesheet'
+ *   $where 'module' | 'theme'
+ */
+function inter_set_head( $type = null, $where= null, $data = null ) {
+    static $head = array();
+    if( !isset($head['script']) ) {
+        $head['script'] = array(
+            'core' => array(
+                inter_join_path( MISC, 'jquery.js') => ''
+            ),
+            'module' => array(),
+            'theme'  => array(),
+            'inline' => array()
+        );
+        $head['stylesheet'] = array(
+            'module' => array(),
+            'theme'  => array(
+                inter_join_path( theme_path(), 'style.css') => ''
+            ),
+            'inline' => array()
+        );
+    }
+    if ( isset($type) && isset($where) && isset($data) && isset($head[$type][$where]) ) {
+        if ( $where == 'inline' ) {
+            $head[$type][$where][] = $data;
+        } else {
+            $head[$type][$where][$data] = '';
+        }
+    }
+    return $head;
+}
+
+/**
+ * $head variable get
+ */
+function inter_get_head() {
+    return inter_set_head();
+}
+
+/**
+ * $head variable get
+ */
+function inter_html_get_head() {
+    $output = inter_html_get_stylesheet();
+    $output .= inter_html_get_javascript();
+    return $output;
+}
+
+/**
+ * get the base url with the web
+ */
+function base_path() {
+    return $GLOBALS['base_url'];
+}
+
+/**
+ * $head variable get
+ */
+function inter_html_get_javascript() {
+    $script = "\n";
+    $inline = "";
+    $head = inter_get_head();
+    foreach( $head['script'] as $type => $values ) {
+        switch( $type ) {
+            case 'core'  :
+            case 'module':
+            case 'theme' :
+                foreach( array_keys($values) as $value ) {
+                    if( file_exists( $value ) ) {
+                        $script .= '<script type="text/javascript" src="'. base_path() . $value . '"></script>' . "\n";
+                    }
+                }
+                break;
+            case 'inline':
+                foreach( $values as $value ) {
+                      $inline .= "<script type=\"text/javascript\">\n<!--//--><![CDATA[//><!--\n".$value."\n//--><!]]>\n</script>\n";
+                }
+                break;
+        }
+    }
+    return $script . $inline;
+}
+
+/**
+ * $head variable get
+ */
+function inter_html_get_stylesheet() {
+    $stylesheet = $inline = "";
+    $head = inter_get_head();
+    foreach( $head['stylesheet'] as $type => $values ) {
+        switch( $type ) {
+            case 'module':
+            case 'theme' :
+                foreach( array_keys($values) as $value ) {
+                    if( file_exists( $value ) ) {
+                        $stylesheet .= '<link type="text/css" rel="stylesheet" href="'. base_path() . $value ."\" />\n";
+                    }
+                }
+                break;
+            case 'inline':
+                break;
+        }
+    }
+    return $stylesheet . $inline;
+}
+
+/**
+ * Set the page title
+ */
+function inter_set_title( $title = null ) {
+    static $_title;
+    if( isset($title) ) {
+        $_title = $title;
+    }
+    return $_title;
+}
+/**
+ * Get the page title
+ */
+function inter_get_title() {
+    return inter_set_title();
+}
+
+/**
+ * inter_html_charset
+ */
+function inter_html_set_charset( $charset = null ) {
+    static $_charset;
+    if( isset($charset) ) {
+        $_charset = $charset;
+    }
+    return isset($_charset) ? $_charset : 'utf-8';
+}
+
+/**
+ * inter_html_charset
+ */
+function inter_html_get_charset() {
+    return inter_html_set_charset();
+}
+/**
+ * To send page header
+ */
+function inter_send_page_header() {
+    header("Expires: Sun, 19 Nov 1978 05:00:00 GMT");
+    header("Last-Modified: ". gmdate("D, d M Y H:i:s") ." GMT");
+    header("Cache-Control: store, no-cache, must-revalidate");
+    header("Cache-Control: post-check=0, pre-check=0", FALSE);
+}
+
+/**
+ * Load the theme helper file
+ */
+function inter_template_helper_load() {
+    $helper = inter_join_path(theme_path() , '_helper.php');
+    if ( file_exists( $helper ) ) {
+        include_once( $helper );
+    }
+}
+
+/**
+ * set li breadcrumb
+ */
+function inter_set_breadcrumb( $breadcrumb = null ) {
+    static $_breadcrumb;
+    if(is_null($_breadcrumb)) {
+        $_breadcrumb = $breadcrumb;
+    }
+    return $_breadcrumb;
+}
+
+/**
+ * get li breadcrumb
+ */
+function inter_get_breadcrumb() {
+    return inter_set_breadcrumb();
+}
+
+/**
+ * inter
+ */
+function inter_attributes( $attributes = array() ) {
+    if (is_array($attributes)) {
+        $string = '';
+        foreach ($attributes as $key => $value) {
+          $string .= " $key=".'"'.$value .'"';
+        }
+        return $string;
+     }
+}
+
+function inter_navigation_build( $items ,$options = array()) {
+    if( is_array($items) ) {
+        $output = '<ul'.inter_attributes($options).">\n";
+        foreach($items as $value) {
+            $output .= "<li><a".inter_attributes($value['options']).">".$value['title']."</a></li>\n";
+        }
+        $output .= "</ul>\n";
+        return $output;
+    }
+}
+
 /**
  *  dev test group begin
  *  will remove these

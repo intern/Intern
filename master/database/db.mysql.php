@@ -219,10 +219,8 @@ class mysql extends databaseAbstract{
         // The mysql_fetch_row function has an optional second parameter $row
         // but that can't be used for compatibility with Oracle, DB2, etc.
            $array = $this->fetchArray($_result);
-           print_R($array);
            return current($array);
         }
-        echo 'asd';
         return FALSE;
     }
     /**

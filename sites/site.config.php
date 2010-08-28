@@ -28,7 +28,6 @@
  */
 $db_config = 'mysql://root:123456@localhost/inter/inter_/utf8';
 
-
 /**
  * Inter web setting:
  *
@@ -37,7 +36,7 @@ $db_config = 'mysql://root:123456@localhost/inter/inter_/utf8';
  *    eg: http://www.example.com/
  *        http://www.example.com/folder/
  */
-$base_url = '';
+$base_url = 'http://localhost/intern/';
 
 /**
  * the default cache type

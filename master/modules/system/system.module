@@ -11,21 +11,73 @@
 // $Id$
 
 class inter_system {
+    public function init() {
+        inter_set_head('script','module',module::getPath('system').DS.'system.js');
+    }
+    public function pageDescription($path) {
+        $output = '';
+        switch($path) {
+            case 'admin/subadmin':
+                $output = '<p>Description the subadmin menu</p>';
+                break;
+        }
+        return $output;
+    }
+
     // menu hook
     public function menu() {
-		$items['admin'] = array(
+        $items['admin'] = array(
             'type'           => ADMIN_MAIN_MENU,
-            'title'          => 'Administrator',
+            'title'          => 'aaaaaaaaaaaaaaaaa',
             'title callback' => '__',
+            'description'    => 'Administrator Dashboard',
+            'callback'       => array(
+                 'template'  => 'system.admin.php'
+                 //'function' => array(this, 'callback_function')
+            ),
+            'weight'         => -1,
+            'permission'     => 'Admin Dashboard View'
+        );
+        $items['admin/subadmin'] = array(
+            'type'           => ADMIN_SUB_MENU,
+            'title'          => 'bbbbbbbbbbbbbbb',
+            'title callback' => '__',
+            'parent router'  => 'admin',
+            'description'    => 'Administrator Dashboard',
+            'callback'       => array(
+                 'template'  => 'system.admin.php'
+                 //'function' => array(this, 'callback_function')
+            ),
+            'weight'         => -1,
+            'permission'     => 'Admin Dashboard View'
+        );
+        $items['admin/subadmin/task'] = array(
+            'type'           => ADMIN_TAB_MENU,
+            'title'          => 'ccccccccccccc',
+            'title callback' => '__',
+            'parent router'  => 'admin/subadmin',
             'description'    => 'Administrator Dashboard',
             'callback'       => array(
                  'template'  => 'system.admin.inc'
                  //'function' => array(this, 'callback_function')
             ),
-            'widget'         => -1,
+            'weight'         => -1,
             'permission'     => 'Admin Dashboard View'
         );
-		$items['admin/settings'] = array(
+        $items['admin/subadmin/%'] = array(
+            'type'           => ADMIN_TAB_MENU,
+            'title'          => '%%%%%%%%%%%%%%',
+            'title callback' => '__',
+            'parent router'  => 'admin/subadmin',
+            'description'    => 'Administrator Dashboard',
+            'callback'       => array(
+                 'template'  => 'system.admin.php'
+                 //'function' => array(this, 'callback_function')
+            ),
+            'weight'         => -1,
+            'permission'     => 'Admin Dashboard View'
+        );
+        $items['admin/settings'] = array(
             'type'        => ADMIN_MAIN_MENU,
             'title'       => 'Adminstrter plan',
             'description' => 'Description here now!',
@@ -36,7 +88,7 @@ class inter_system {
                     //'function' => array(this, 'callback_function')
             )
         );
-		$items['admin/settings/theme'] = array(
+        $items['admin/settings/theme'] = array(
             'type'          => ADMIN_SUB_MENU,
             'title'         => __('The site theme'),
             'description'   => 'Mange theme description here now!',
@@ -45,14 +97,22 @@ class inter_system {
             ),
             'parent router' => 'admin/settings'
         );
-		return $items;
+        $items['admin/settings/theme/home'] = array(
+            'type'          => ADMIN_TAB_MENU,
+            'title'         => __('The site home theme'),
+            'description'   => 'Mccccccccccccccccccc',
+            'callback'      => array(
+                    'template' => '8888.inc'
+            ),
+            'parent router' => 'admin/settings/theme'
+        );
+        return $items;
     }
 
     public static function api() {
         echo "system api: \n";
         print_r(func_get_args());
     }
-    
     public function boot() {
         //echo '123456';
     }

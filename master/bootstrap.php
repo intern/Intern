@@ -30,10 +30,13 @@ define('DEBUG', true);
 define('DS', DIRECTORY_SEPARATOR);
 
 // Define ROOT as this files root directory
-define('ROOT', dirname(dirname(__FILE__)) . DS );
+define('ROOT', '');//dirname(dirname(__FILE__)) . DS );
 
 // Define MASTER as this files master directory
 define('MASTER', ROOT . 'master' . DS );
+
+// Define MISC as misc directory
+define('MISC', ROOT . 'misc' . DS );
 
 // Define SITES as this files master directory
 define('SITES', ROOT . 'sites' . DS );
@@ -41,7 +44,6 @@ define('SITES', ROOT . 'sites' . DS );
 /**
  * global Group define end
  */
-
 
 /**
  * To filter the global data, so unset unused global variable
@@ -69,10 +71,10 @@ define('INTER_INITIALIZE_SESSION', 4);
 
 /**
  * Initialize module hooks layout.
- * 
+ *
  */
 define('INTER_INIT_HOOK_LAYOUT', 5);
- 
+
 /**
  * Initialize get url for router;
  * @author lan-chi
@@ -119,7 +121,7 @@ class interBootstrap {
         self::$_boot_type = $boot_type;
         return new self;
     }
-    
+
     /**
      *
      * @param unknown_type $type
@@ -160,12 +162,13 @@ class interBootstrap {
                 session_set_save_handler(array($session_handle, 'session_open'),
                                          array($session_handle, 'session_close'),
                                          array($session_handle, 'session_read'),
-										 array($session_handle, 'session_write'),
+                                         array($session_handle, 'session_write'),
                                          array($session_handle, 'session_destroy'),
                                          array($session_handle, 'session_gc')
                                          );
                 // session start
                 session_start();
+                inter_send_page_header();
                 //session_destroy();
                 //init the global $config options
                 options_init();
@@ -182,19 +185,20 @@ class interBootstrap {
                 require_once MASTER . 'router.class.php';
                 Router::getInstance()->init();
                 Cache::runClear(); // cron cache
+                inter_template_helper_load();
                 break;
             default :
                 exit( 'ERROR:' );
         }
     }
-    
+
     /**
      * init the web start
      */
     private function __construct() {
         $this->bootstrap( self::$_boot_type );
     }
-    
+
     /**
      * Compatible
      * @TODO remove this if less !(VERSION < php5)

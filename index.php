@@ -20,9 +20,10 @@ require_once 'master/bootstrap.php';
 
 interBootstrap::getInstance( INTER_INIT_PATH_AND_CACHE );
 
-$handle = Router::getInstance()->runByRouterHandle();
+$handle = Router::getInstance()->execute()->render();
 
-print_r(Router::getInstance()->getAdminMenu());
+echo Router::arg(2);
+//print_r(Router::getInstance()->getAdminMenu());
 
 //print_r(Router::getInstance()->getAdminSubMenu());
 //print_r($GLOBALS);
@@ -32,8 +33,6 @@ print_r(Router::getInstance()->getAdminMenu());
 //print_r(Cache::get('a555', CACHE_D));
 
 //print_r(path::getInstance()->getMenuArray());
-
-
 
 $end = memory_get_usage();
 
