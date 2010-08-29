@@ -461,7 +461,7 @@ function inter_navigation_build( $items ,$options = array()) {
     if( is_array($items) ) {
         $output = '<ul'.inter_attributes($options).">\n";
         foreach($items as $value) {
-            $output .= "<li><a".inter_attributes($value['options']).">".$value['title']."</a></li>\n";
+            $output .= "<li><em><a".inter_attributes($value['options']).">".$value['title']."</a></em></li>\n";
         }
         $output .= "</ul>\n";
         return $output;

@@ -13,48 +13,55 @@
 class inter_user {
     // menu hook
     public function menu() {
-		$items['user/login'] = array(
-            'type'        => ADMIN_MAIN_MENU,
-            'title'       => 'Adminstrter plan',
+        $items['admin/user/login'] = array(
+            'type'        => ADMIN_SUB_MENU,
+            'title'       => 'Logout',
             'description' => 'Description here now!',
             'callback'    => array(
-                    'template' => 'user.login.inc'
-                    //'function' => array(this, 'callback_function')
-            )
+                    //'template' => 'user.login.inc'
+                    'function' => 'callback_function'
+            ),
+            'parent router' => 'admin/user'
         );
-		$items['logout'] = array(
-            'type'        => ADMIN_MAIN_MENU,
+        $items['logout'] = array(
+            'type'        => CALLBACK,
             'title'       => 'Site theme',
             'description' => 'Mange theme description here now!',
             'callback'    => array(
                     'function' => 'user_logout'
             )
         );
-		$items['user/register'] = array(
-            'type'        => ADMIN_MAIN_MENU,
+        $items['admin/user/register'] = array(
+            'type'        => ADMIN_SUB_MENU,
             'title'       => 'Site theme',
             'description' => 'Mange theme description here now!',
             'callback'    => array(
-                    'template' => 'user.register.inc'
-            )
+                    //'template' => 'user.register.inc'
+                    'function' => 'callback_function'
+            ),
+            'parent router' => 'admin/user'
         );
-        $items['user'] = array(
+        $items['admin/user'] = array(
             'type'        => ADMIN_MAIN_MENU,
-            'title'       => 'Site theme',
+            'title'       => 'Users',
             'description' => 'Mange theme description here now!',
             'callback'    => array(
-                    'template' => 'user.register.inc'
+                    //'function' => 'user.register.inc'
+                    'function' => 'callback_function'
             )
         );
-		return $items;
+        return $items;
     }
 
     public static function api() {
         echo "system api: \n";
         print_r(func_get_args());
     }
-    
+
     public function boot() {
         //echo '123456';
     }
+}
+function callback_function() {
+    return 'single function ';
 }

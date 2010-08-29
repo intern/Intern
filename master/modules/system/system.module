@@ -18,7 +18,7 @@ class inter_system {
         $output = '';
         switch($path) {
             case 'admin/subadmin':
-                $output = '<p>Description the subadmin menu</p>';
+                $output = '<p>这里是描述content的 pageDescription hook</p>';
                 break;
         }
         return $output;
@@ -28,7 +28,7 @@ class inter_system {
     public function menu() {
         $items['admin'] = array(
             'type'           => ADMIN_MAIN_MENU,
-            'title'          => 'aaaaaaaaaaaaaaaaa',
+            'title'          => 'Main',
             'title callback' => '__',
             'description'    => 'Administrator Dashboard',
             'callback'       => array(
@@ -40,7 +40,7 @@ class inter_system {
         );
         $items['admin/subadmin'] = array(
             'type'           => ADMIN_SUB_MENU,
-            'title'          => 'bbbbbbbbbbbbbbb',
+            'title'          => 'sub main',
             'title callback' => '__',
             'parent router'  => 'admin',
             'description'    => 'Administrator Dashboard',
@@ -53,12 +53,12 @@ class inter_system {
         );
         $items['admin/subadmin/task'] = array(
             'type'           => ADMIN_TAB_MENU,
-            'title'          => 'ccccccccccccc',
+            'title'          => 'a tab menu',
             'title callback' => '__',
             'parent router'  => 'admin/subadmin',
             'description'    => 'Administrator Dashboard',
             'callback'       => array(
-                 'template'  => 'system.admin.inc'
+                 'function'  => 'function_task'
                  //'function' => array(this, 'callback_function')
             ),
             'weight'         => -1,
@@ -66,7 +66,7 @@ class inter_system {
         );
         $items['admin/subadmin/%'] = array(
             'type'           => ADMIN_TAB_MENU,
-            'title'          => '%%%%%%%%%%%%%%',
+            'title'          => 'router test',
             'title callback' => '__',
             'parent router'  => 'admin/subadmin',
             'description'    => 'Administrator Dashboard',
@@ -79,11 +79,11 @@ class inter_system {
         );
         $items['admin/settings'] = array(
             'type'        => ADMIN_MAIN_MENU,
-            'title'       => 'Adminstrter plan',
+            'title'       => 'Settings',
             'description' => 'Description here now!',
             'permission'  => 'Site settings',
             'callback'    => array(
-                    'function' => 'get_form'
+                    'template' => 'system.admin.php'
                     //''
                     //'function' => array(this, 'callback_function')
             )
@@ -93,7 +93,7 @@ class inter_system {
             'title'         => __('The site theme'),
             'description'   => 'Mange theme description here now!',
             'callback'      => array(
-                    'template' => 'theme.inc'
+                    'template' => 'system.admin.php'
             ),
             'parent router' => 'admin/settings'
         );
@@ -102,13 +102,28 @@ class inter_system {
             'title'         => __('The site home theme'),
             'description'   => 'Mccccccccccccccccccc',
             'callback'      => array(
-                    'template' => '8888.inc'
+                    'template' => 'system.admin.php'
             ),
             'parent router' => 'admin/settings/theme'
         );
         return $items;
     }
-
+    public function function_task() {
+$value =<<<EOF
+<div class="admin-panel">
+    <h3>
+      Content management
+    </h3>
+    <div class="body">
+      <p class="description">
+        Manage your site's content.
+      </p>
+      <dl class="admin-list"><dt><a href="/drupal-6.16/admin/content/book" title="Manage your site's book outlines.">Books</a></dt><dd>Manage your site's book outlines.</dd><dt><a href="/drupal-6.16/admin/content/comment" title="List and edit site comments and the comment moderation queue.">Comments</a></dt><dd>List and edit site comments and the comment moderation queue.</dd><dt><a href="/drupal-6.16/admin/content/node" title="View, edit, and delete your site's content.">Content</a></dt><dd>View, edit, and delete your site's content.</dd><dt><a href="/drupal-6.16/admin/content/types" title="Manage posts by content type, including default status, front page promotion, etc.">Content types</a></dt><dd>Manage posts by content type, including default status, front page promotion, etc.</dd><dt><a href="/drupal-6.16/admin/content/aggregator" title="Configure which content your site aggregates from other sites, how often it polls them, and how they're categorized.">Feed aggregator</a></dt><dd>Configure which content your site aggregates from other sites, how often it polls them, and how they're categorized.</dd><dt><a href="/drupal-6.16/admin/content/forum" title="Control forums and their hierarchy and change forum settings.">Forums</a></dt><dd>Control forums and their hierarchy and change forum settings.</dd><dt><a href="/drupal-6.16/admin/content/node-settings" title="Control posting behavior, such as teaser length, requiring previews before posting, and the number of posts on the front page.">Post settings</a></dt><dd>Control posting behavior, such as teaser length, requiring previews before posting, and the number of posts on the front page.</dd><dt><a href="/drupal-6.16/admin/content/rss-publishing" title="Configure the number of items per feed and whether feeds should be titles/teasers/full-text.">RSS publishing</a></dt><dd>Configure the number of items per feed and whether feeds should be titles/teasers/full-text.</dd><dt><a href="/drupal-6.16/admin/content/taxonomy" title="Manage tagging, categorization, and classification of your content.">Taxonomy</a></dt><dd>Manage tagging, categorization, and classification of your content.</dd></dl>
+    </div>
+  </div>
+EOF;
+    return $value;
+    }
     public static function api() {
         echo "system api: \n";
         print_r(func_get_args());

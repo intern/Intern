@@ -11,16 +11,19 @@
 // $Id$
 
 class inter_menu {
-
     public static function menu(){
-		$items['admin/router'] = array(
-			'type' => ADMIN_MAIN_MENU,
-            'permission' => 'aaaaaaaaaaaaaaaaaaaaaa'
-		);
+        $items['admin/router'] = array(
+            'title' => 'Router',
+            'type' => ADMIN_MAIN_MENU,
+            'permission' => 'permission',
+            'callback' => array(
+                'function' => 'api'
+             )
+        );
         return $items;
     }
 
     public function api() {
-        echo '888888888888888888888';
+        return 'inter_menu api test';
     }
 }
