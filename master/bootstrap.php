@@ -157,7 +157,7 @@ class interBootstrap {
                 interCoreDatabase::getInstance();
                 break;
             case INTER_INITIALIZE_SESSION:
-                require_once MASTER . 'session.php';
+                require_once MASTER . 'session.class.php';
                 $session_handle = interSessionDataHandle::getInstance();
                 session_set_save_handler(array($session_handle, 'session_open'),
                                          array($session_handle, 'session_close'),
