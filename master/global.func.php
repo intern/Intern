@@ -11,6 +11,10 @@
 // $Id$
 
 /**
+ * Def Group boot Type for INTER_GLOBAL_FILTER
+ */
+
+/**
  * @param null
  */
 function unset_global_variable() {
@@ -96,6 +100,12 @@ function inter_init_anonymous_user( $session = '' ) {
     $user->cache = 0;
     return $user;
 }
+
+/**
+ * Def Group boot Type for INTER_GLOBAL_FILTER end//
+ */
+
+
 
 /**
  * To Operate {options}
