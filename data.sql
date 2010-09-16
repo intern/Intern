@@ -6,7 +6,7 @@
 -- Generation Time: Aug 29, 2010 at 07:02 PM
 -- Server version: 5.1.37
 -- PHP Version: 5.2.10-2ubuntu6.4
-
+-- lan_chi@foxmail.com
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 --
