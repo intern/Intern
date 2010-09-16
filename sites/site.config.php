@@ -36,7 +36,7 @@ $db_config = 'mysql://root:123456@localhost/inter/inter_/utf8';
  *    eg: http://www.example.com/
  *        http://www.example.com/folder/
  */
-$base_url = 'http://192.168.1.9/intern/';
+$base_url = 'http://192.168.1.7/intercms/';
 
 /**
  * the default cache type
