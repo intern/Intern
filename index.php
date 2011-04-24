@@ -10,31 +10,14 @@
 // +----------------------------------------------------------------------
 // $Id$
 
-ini_set('display_errors','on');
-
-error_reporting( E_ALL );
-
-$start = memory_get_usage();
+// Open debug info falg
+define('DEBUG', true);
 
 require_once 'master/bootstrap.php';
 
-internBootstrap::getInstance( INTER_INIT_PATH_AND_CACHE );
-
-$handle = Router::getInstance()->execute()->render();
-
-echo Router::arg(2);
-//print_r(Router::getInstance()->getAdminMenu());
-
-//print_r(Router::getInstance()->getAdminSubMenu());
-//print_r($GLOBALS);
-
-//Cache::set('test', Array('a',2,3,4,5,56), 800, CACHE_D);
-
-//print_r(Cache::get('a555', CACHE_D));
-
-//print_r(path::getInstance()->getMenuArray());
-
-$end = memory_get_usage();
-
-echo "\nmem:",$end - $start,"\n";
-echo "\ntime:",intern_timer('dev'),"\n";
+/**
+ * Init the intern Environment
+ *	@param constants list: INTERN_GLOBAL_FILTER || INTERN_INITIALIZE_CONFIG ||
+ *	INTERN_INITIALIZE_DATABASE || INTERN_INITIALIZE_SESSION || INTERN_INIT_HOOK_LAYOUT
+ */
+internBootstrap::getInstance( INTERN_INIT_PATH_AND_CACHE );

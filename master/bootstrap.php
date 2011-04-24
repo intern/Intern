@@ -10,9 +10,6 @@
 // +----------------------------------------------------------------------
 // $Id$
 
-
-
-
 /**
  * global Group define
  */
@@ -97,11 +94,18 @@ define( 'CALLBACK', 256*256);
 
 class internBootstrap {
     /**
-     * save the boot type.
+     * Storage the boot type.
      * @static true
      * @var string
      */
     private static $_boot_type;
+
+    /**
+     * The public access boot type
+     *  @static true
+     *  @var string
+     */
+    public static $boot_type;
 
     /**
      * To bootstarp the inter
@@ -109,12 +113,12 @@ class internBootstrap {
      */
     public static function getInstance( $boot_type ) {
         self::$_boot_type = $boot_type;
+        self::$boot_type = $boot_type;
         return new self;
     }
 
     /**
-     *
-     * @param unknown_type $type
+     * @param the boot $type
      */
     private function bootstrap( $type ) {
         $types = array(INTERN_GLOBAL_FILTER, INTERN_INITIALIZE_CONFIG, INTERN_INITIALIZE_DATABASE, INTERN_INITIALIZE_SESSION, INTERN_INIT_HOOK_LAYOUT, INTERN_INIT_PATH_AND_CACHE);
@@ -125,6 +129,7 @@ class internBootstrap {
            $this->_bootstrap( $value );
         }
     }
+
     /**
      * helper for function bootstrap to boot
      * @param const $type @see the header
@@ -134,8 +139,6 @@ class internBootstrap {
         switch( $type ) {
             case INTERN_GLOBAL_FILTER:
                 require_once MASTER . 'global.func.php';
-                //dev
-                intern_timer('dev', 'set');
                 // To unset unused var
                 unset_global_variable();
                 break;
