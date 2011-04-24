@@ -10,12 +10,9 @@
 // +----------------------------------------------------------------------
 // $Id$
 
+// loading debug class if DEBUG is true
 if ( DEBUG ) {
-    open_debug_info();
-}
-function open_debug_info() {
-    ini_set('display_errors','on');
-    error_reporting( E_ALL );
+    require_once MASTER . 'logger.class.php';
 }
 
 /**
@@ -148,22 +145,22 @@ endif;
  */
 if (internBootstrap::$boot_type >= INTERN_INITIALIZE_CONFIG):
 
-/**
- * to parse the databases config, use array to define new db link
- */
-function intern_parse_db_config( $db_config = NULL ) {
-    if ( !isset( $db_config ) ) {
-        global $db_config;
+    /**
+     * to parse the databases config, use array to define new db link
+     */
+    function intern_parse_db_config( $db_config = NULL ) {
+        if ( !isset( $db_config ) ) {
+            global $db_config;
+        }
+        $_db_config = array();
+        if ( !is_array( $db_config ) ) {
+            $_db_config = parse_url( $db_config );
+            list(, $_db_config['database'], $_db_config['prefix'], $_db_config['encoding']) = explode( '/', $_db_config['path'] );
+        } else {
+            $_db_config = $db_config;
+        }
+        return $_db_config;
     }
-    $_db_config = array();
-    if ( !is_array( $db_config ) ) {
-        $_db_config = parse_url( $db_config );
-        list(, $_db_config['database'], $_db_config['prefix'], $_db_config['encoding']) = explode( '/', $_db_config['path'] );
-    } else {
-        $_db_config = $db_config;
-    }
-    return $_db_config;
-}
 
 endif;
 
