@@ -9,16 +9,6 @@
 // | Author: lan_chi <lan_chi@qq.com>
 // +----------------------------------------------------------------------
 // $Id$
-/**
- * Developer settings
- */
-
-// deubug
-define('DEBUG', true);
-
-/**
- * Developer setting end
- */
 
 
 
@@ -49,37 +39,37 @@ define('SITES', ROOT . 'sites' . DS );
  * To filter the global data, so unset unused global variable
  * @var CONSTANT int
  */
-define('INTER_GLOBAL_FILTER', 1);
+define('INTERN_GLOBAL_FILTER', 1);
 
 /**
  * Include the site config
  * @var CONSTANT int
  */
-define('INTER_INITIALIZE_CONFIG', 2);
+define('INTERN_INITIALIZE_CONFIG', 2);
 
 /**
  * Initialize database layout
  * @var CONSTANT int
  */
-define('INTER_INITIALIZE_DATABASE', 3);
+define('INTERN_INITIALIZE_DATABASE', 3);
 
 /**
  * Initialize session for database;
  * @author lan-chi
  */
-define('INTER_INITIALIZE_SESSION', 4);
+define('INTERN_INITIALIZE_SESSION', 4);
 
 /**
  * Initialize module hooks layout.
  *
  */
-define('INTER_INIT_HOOK_LAYOUT', 5);
+define('INTERN_INIT_HOOK_LAYOUT', 5);
 
 /**
  * Initialize get url for router;
  * @author lan-chi
  */
-define('INTER_INIT_PATH_AND_CACHE', 6);
+define('INTERN_INIT_PATH_AND_CACHE', 6);
 
 
 
@@ -105,7 +95,7 @@ define( 'CALLBACK', 256*256);
 
 
 
-class interBootstrap {
+class internBootstrap {
     /**
      * save the boot type.
      * @static true
@@ -127,7 +117,7 @@ class interBootstrap {
      * @param unknown_type $type
      */
     private function bootstrap( $type ) {
-        $types = array(INTER_GLOBAL_FILTER, INTER_INITIALIZE_CONFIG, INTER_INITIALIZE_DATABASE, INTER_INITIALIZE_SESSION, INTER_INIT_HOOK_LAYOUT, INTER_INIT_PATH_AND_CACHE);
+        $types = array(INTERN_GLOBAL_FILTER, INTERN_INITIALIZE_CONFIG, INTERN_INITIALIZE_DATABASE, INTERN_INITIALIZE_SESSION, INTERN_INIT_HOOK_LAYOUT, INTERN_INIT_PATH_AND_CACHE);
         foreach( $types as $key => $value ) {
             if( $value > $type ) {
                 return ;
@@ -142,23 +132,23 @@ class interBootstrap {
     private function _bootstrap( $type ) {
         global $db_config, $base_url, $cache_type;
         switch( $type ) {
-            case INTER_GLOBAL_FILTER:
+            case INTERN_GLOBAL_FILTER:
                 require_once MASTER . 'global.func.php';
                 //dev
-                inter_timer('dev', 'set');
+                intern_timer('dev', 'set');
                 // To unset unused var
                 unset_global_variable();
                 break;
-            case INTER_INITIALIZE_CONFIG:
+            case INTERN_INITIALIZE_CONFIG:
                 require_once SITES . 'site.config.php';
                 break;
-            case INTER_INITIALIZE_DATABASE:
+            case INTERN_INITIALIZE_DATABASE:
                 require_once MASTER . 'db.factory.php';
                 interCoreDatabase::getInstance();
                 break;
-            case INTER_INITIALIZE_SESSION:
+            case INTERN_INITIALIZE_SESSION:
                 require_once MASTER . 'session.class.php';
-                $session_handle = interSessionDataHandle::getInstance();
+                $session_handle = internSessionDataHandle::getInstance();
                 session_set_save_handler(array($session_handle, 'session_open'),
                                          array($session_handle, 'session_close'),
                                          array($session_handle, 'session_read'),
@@ -168,12 +158,12 @@ class interBootstrap {
                                          );
                 // session start
                 session_start();
-                inter_send_page_header();
+                intern_send_page_header();
                 //session_destroy();
                 //init the global $config options
                 options_init();
                 break;
-            case INTER_INIT_HOOK_LAYOUT:
+            case INTERN_INIT_HOOK_LAYOUT:
                 init_user(); //To dev
                 require_once MASTER . 'module.class.php';
                 Module::init();
@@ -181,11 +171,11 @@ class interBootstrap {
                 //print_r(Module::instance('menu'));
                 //echo Module::hookExists('menu','apis');
                 break;
-            case INTER_INIT_PATH_AND_CACHE:
+            case INTERN_INIT_PATH_AND_CACHE:
                 require_once MASTER . 'router.class.php';
                 Router::getInstance()->init();
                 Cache::runClear(); // cron cache
-                inter_template_helper_load();
+                intern_template_helper_load();
                 break;
             default :
                 exit( 'ERROR:' );
@@ -203,7 +193,7 @@ class interBootstrap {
      * Compatible
      * @TODO remove this if less !(VERSION < php5)
      */
-    private function interBootstrap() {
+    private function internBootstrap() {
         $this->__construct();
     }
 }

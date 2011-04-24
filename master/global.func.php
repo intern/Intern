@@ -35,7 +35,7 @@ function unset_global_variable() {
  * @params string
  * @return string
  */
-function inter_join_path( $args ) {
+function intern_join_path( $args ) {
     if ( !is_array( $args ) ) {
         $args = func_get_args();
     }
@@ -45,7 +45,7 @@ function inter_join_path( $args ) {
 /**
  * to parse the databases config, use array to define new db link
  */
-function inter_parse_db_config( $db_config = NULL ) {
+function intern_parse_db_config( $db_config = NULL ) {
     if ( !isset( $db_config ) ) {
         global $db_config;
     }
@@ -62,7 +62,7 @@ function inter_parse_db_config( $db_config = NULL ) {
 /**
  * @return request IP
  */
-function inter_get_ip() {
+function intern_get_ip() {
     static $ip;
     if ( isset($ip) ) return $ip;
     if ( !empty($_SERVER['HTTP_CLIENT_IP']) ) {
@@ -91,7 +91,7 @@ function inter_get_ip() {
 /**
  * Create a Anonymous user data here.
  */
-function inter_init_anonymous_user( $session = '' ) {
+function intern_init_anonymous_user( $session = '' ) {
     $user = new stdClass();
     $user->uid = 0;
     $user->hostname = inter_get_ip();
@@ -167,7 +167,7 @@ function options_init() {
  *       'all'   get all data with $timer.
  *       'clear' clear all timer if not named.
  */
-function inter_timer( $name, $action = 'get' ) {
+function intern_timer( $name, $action = 'get' ) {
     static $timer = array();
     if ( null == $name && $action == 'clear' ) {
         $timer = array(); // reset the timer
@@ -209,11 +209,11 @@ function inter_timer( $name, $action = 'get' ) {
 }
 
 /**
- * Clear all timer with static inter_timer()
+ * Clear all timer with static intern_timer()
  *  @params null
  */
-function inter_timer_clear() {
-    inter_timer( null, 'clear' );
+function intern_timer_clear() {
+    intern_timer( null, 'clear' );
 }
 
 /**
@@ -268,7 +268,7 @@ function __($t) {
 function theme_path() {
     static $theme;
     if ( !isset($theme) ) {
-        $theme = inter_join_path(ADMIN_THEME_PATH, options_get((is_admin_page() ? 'actived_admin_theme' : 'actived_theme'), 'default'));
+        $theme = intern_join_path(ADMIN_THEME_PATH, options_get((is_admin_page() ? 'actived_admin_theme' : 'actived_theme'), 'default'));
     }
     return $theme;
 }
@@ -279,12 +279,12 @@ function theme_path() {
  *   $type 'inline'|'script'|'stylesheet'
  *   $where 'module' | 'theme'
  */
-function inter_set_head( $type = null, $where= null, $data = null ) {
+function intern_set_head( $type = null, $where= null, $data = null ) {
     static $head = array();
     if( !isset($head['script']) ) {
         $head['script'] = array(
             'core' => array(
-                inter_join_path( MISC, 'jquery.js') => ''
+                intern_join_path( MISC, 'jquery.js') => ''
             ),
             'module' => array(),
             'theme'  => array(),
@@ -293,7 +293,7 @@ function inter_set_head( $type = null, $where= null, $data = null ) {
         $head['stylesheet'] = array(
             'module' => array(),
             'theme'  => array(
-                inter_join_path( theme_path(), 'style.css') => ''
+                intern_join_path( theme_path(), 'style.css') => ''
             ),
             'inline' => array()
         );
@@ -311,16 +311,16 @@ function inter_set_head( $type = null, $where= null, $data = null ) {
 /**
  * $head variable get
  */
-function inter_get_head() {
-    return inter_set_head();
+function intern_get_head() {
+    return intern_set_head();
 }
 
 /**
  * $head variable get
  */
-function inter_html_get_head() {
-    $output = inter_html_get_stylesheet();
-    $output .= inter_html_get_javascript();
+function intern_html_get_head() {
+    $output = intern_html_get_stylesheet();
+    $output .= intern_html_get_javascript();
     return $output;
 }
 
@@ -334,10 +334,10 @@ function base_path() {
 /**
  * $head variable get
  */
-function inter_html_get_javascript() {
+function intern_html_get_javascript() {
     $script = "\n";
     $inline = "";
-    $head = inter_get_head();
+    $head = intern_get_head();
     foreach( $head['script'] as $type => $values ) {
         switch( $type ) {
             case 'core'  :
@@ -362,9 +362,9 @@ function inter_html_get_javascript() {
 /**
  * $head variable get
  */
-function inter_html_get_stylesheet() {
+function intern_html_get_stylesheet() {
     $stylesheet = $inline = "";
-    $head = inter_get_head();
+    $head = intern_get_head();
     foreach( $head['stylesheet'] as $type => $values ) {
         switch( $type ) {
             case 'module':
@@ -385,7 +385,7 @@ function inter_html_get_stylesheet() {
 /**
  * Set the page title
  */
-function inter_set_title( $title = null ) {
+function intern_set_title( $title = null ) {
     static $_title;
     if( isset($title) ) {
         $_title = $title;
@@ -395,14 +395,14 @@ function inter_set_title( $title = null ) {
 /**
  * Get the page title
  */
-function inter_get_title() {
-    return inter_set_title();
+function intern_get_title() {
+    return intern_set_title();
 }
 
 /**
  * inter_html_charset
  */
-function inter_html_set_charset( $charset = null ) {
+function intern_html_set_charset( $charset = null ) {
     static $_charset;
     if( isset($charset) ) {
         $_charset = $charset;
@@ -413,13 +413,14 @@ function inter_html_set_charset( $charset = null ) {
 /**
  * inter_html_charset
  */
-function inter_html_get_charset() {
-    return inter_html_set_charset();
+function intern_html_get_charset() {
+    return intern_html_set_charset();
 }
+
 /**
  * To send page header
  */
-function inter_send_page_header() {
+function intern_send_page_header() {
     header("Expires: Sun, 19 Nov 1978 05:00:00 GMT");
     header("Last-Modified: ". gmdate("D, d M Y H:i:s") ." GMT");
     header("Cache-Control: store, no-cache, must-revalidate");
@@ -429,8 +430,8 @@ function inter_send_page_header() {
 /**
  * Load the theme helper file
  */
-function inter_template_helper_load() {
-    $helper = inter_join_path(theme_path() , '_helper.php');
+function intern_template_helper_load() {
+    $helper = intern_join_path(theme_path() , '_helper.php');
     if ( file_exists( $helper ) ) {
         include_once( $helper );
     }
@@ -439,7 +440,7 @@ function inter_template_helper_load() {
 /**
  * set li breadcrumb
  */
-function inter_set_breadcrumb( $breadcrumb = null ) {
+function intern_set_breadcrumb( $breadcrumb = null ) {
     static $_breadcrumb;
     if(is_null($_breadcrumb)) {
         $_breadcrumb = $breadcrumb;
@@ -450,14 +451,14 @@ function inter_set_breadcrumb( $breadcrumb = null ) {
 /**
  * get li breadcrumb
  */
-function inter_get_breadcrumb() {
-    return inter_set_breadcrumb();
+function intern_get_breadcrumb() {
+    return intern_set_breadcrumb();
 }
 
 /**
  * inter
  */
-function inter_attributes( $attributes = array() ) {
+function intern_attributes( $attributes = array() ) {
     if (is_array($attributes)) {
         $string = '';
         foreach ($attributes as $key => $value) {
@@ -467,11 +468,11 @@ function inter_attributes( $attributes = array() ) {
      }
 }
 
-function inter_navigation_build( $items ,$options = array()) {
+function intern_navigation_build( $items ,$options = array()) {
     if( is_array($items) ) {
-        $output = '<ul'.inter_attributes($options).">\n";
+        $output = '<ul'.intern_attributes($options).">\n";
         foreach($items as $value) {
-            $output .= "<li><em><a".inter_attributes($value['options']).">".$value['title']."</a></em></li>\n";
+            $output .= "<li><em><a".intern_attributes($value['options']).">".$value['title']."</a></em></li>\n";
         }
         $output .= "</ul>\n";
         return $output;
@@ -488,7 +489,7 @@ function inter_navigation_build( $items ,$options = array()) {
  */
 function import_sql() {
     $data = file_get_contents(ROOT.'data.sql');
-    $l = interCoreDatabase::getInstance();
+    $l = internCoreDatabase::getInstance();
     if( !$l->query($data) ) {
         echo '===data.sql error!';
     }else{
@@ -505,7 +506,7 @@ function init_user($session = array()) {
     //session_destroy();
     $user = new stdClass();
     $user->uid = 1;
-    $user->hostname = inter_get_ip();
+    $user->hostname = intern_get_ip();
     $user->roles =array();
     $user->data = $session; // the sessions data
     $user->cache = 0;

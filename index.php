@@ -18,7 +18,7 @@ $start = memory_get_usage();
 
 require_once 'master/bootstrap.php';
 
-interBootstrap::getInstance( INTER_INIT_PATH_AND_CACHE );
+internBootstrap::getInstance( INTER_INIT_PATH_AND_CACHE );
 
 $handle = Router::getInstance()->execute()->render();
 
@@ -37,4 +37,4 @@ echo Router::arg(2);
 $end = memory_get_usage();
 
 echo "\nmem:",$end - $start,"\n";
-echo "\ntime:",inter_timer('dev'),"\n";
+echo "\ntime:",intern_timer('dev'),"\n";
