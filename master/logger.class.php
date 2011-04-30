@@ -10,12 +10,6 @@
 // +----------------------------------------------------------------------
 // $Id$
 
-/**
-    function open_debug_info() {
-        ini_set('display_errors','on');
-        error_reporting( E_ALL );
-    }
-*/
 class logger {
     // logger file handle
     private static $_logger_fp;

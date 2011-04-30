@@ -10,16 +10,12 @@
 // +----------------------------------------------------------------------
 // $Id$
 
-// loading debug class if DEBUG is true
-if ( DEBUG ) {
-    require_once MASTER . 'logger.class.php';
-}
 
 /**
- * Def Group boot Type for INTERN_GLOBAL_FILTER
- *  @todo INTERN_GLOBAL_FILTER content by
+ * Def Group boot Type for INTERN_GLOBAL_FUNCTIONS
+ *  @todo INTERN_GLOBAL_FUNCTIONS content by
  */
-if (internBootstrap::$boot_type >= INTERN_GLOBAL_FILTER) :
+if (internBootstrap::bootType() >= INTERN_GLOBAL_FUNCTIONS):
     /**
      * Develop tool, collect time begin ,stop, end time statistics
      *   @param string $name
@@ -100,8 +96,8 @@ if (internBootstrap::$boot_type >= INTERN_GLOBAL_FILTER) :
 
     /**
      * To building path with params
-     * 	@param string or array
-     * 	@return path string
+     *   @param string or array
+     *   @return path string
      */
     function intern_join_path( $args ) {
         if ( !is_array( $args ) ) {
@@ -140,10 +136,20 @@ if (internBootstrap::$boot_type >= INTERN_GLOBAL_FILTER) :
     }
 endif;
 
+
+/**
+ * Def Group boot Type for INTERN_GLOBAL_LOGGER
+ * Include logger class
+ */
+if (internBootstrap::bootType() >= INTERN_GLOBAL_LOGGER):
+    require MASTER . 'logger.class.php';
+endif;
+
+
 /**
  * Def Group boot Type for INTERN_INITIALIZE_CONFIG
  */
-if (internBootstrap::$boot_type >= INTERN_INITIALIZE_CONFIG):
+if (internBootstrap::bootType() >= INTERN_INITIALIZE_CONFIG):
 
     /**
      * to parse the databases config, use array to define new db link
@@ -167,7 +173,7 @@ endif;
 /**
  * Def Group boot Type for INTERN_INITIALIZE_DATABASE
  */
-if (internBootstrap::$boot_type >= INTERN_INITIALIZE_DATABASE):
+if (internBootstrap::bootType() >= INTERN_INITIALIZE_DATABASE):
     /**
      * Create a Anonymous user data here.
      */

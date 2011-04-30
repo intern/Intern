@@ -32,41 +32,48 @@ define('SITES', ROOT . 'sites' . DS );
  * global Group define end
  */
 
+
 /**
- * To filter the global data, so unset unused global variable
+ * To load globals methods
  * @var CONSTANT int
  */
-define('INTERN_GLOBAL_FILTER', 1);
+define('INTERN_GLOBAL_FUNCTIONS', 1);
+
+/**
+ * To load some logger tools
+ * @var CONSTANT int
+ */
+define('INTERN_GLOBAL_LOGGER', 2);
 
 /**
  * Include the site config
  * @var CONSTANT int
  */
-define('INTERN_INITIALIZE_CONFIG', 2);
+define('INTERN_INITIALIZE_CONFIG', 3);
 
 /**
  * Initialize database layout
  * @var CONSTANT int
  */
-define('INTERN_INITIALIZE_DATABASE', 3);
+define('INTERN_INITIALIZE_DATABASE', 4);
 
 /**
  * Initialize session for database;
  * @author lan-chi
  */
-define('INTERN_INITIALIZE_SESSION', 4);
+define('INTERN_INITIALIZE_SESSION', 5);
 
 /**
  * Initialize module hooks layout.
  *
  */
-define('INTERN_INIT_HOOK_LAYOUT', 5);
+define('INTERN_INIT_HOOK_LAYOUT', 6);
 
 /**
  * Initialize get url for router;
  * @author lan-chi
  */
-define('INTERN_INIT_PATH_AND_CACHE', 6);
+define('INTERN_INIT_PATH_AND_CACHE', 7);
 
 
 
@@ -101,13 +108,6 @@ class internBootstrap {
     private static $_boot_type;
 
     /**
-     * The public access boot type
-     *  @static true
-     *  @var string
-     */
-    public static $boot_type;
-
-    /**
      * To bootstarp the inter
      * @param contant $boot_type see the top CONTANT
      */
@@ -121,7 +121,7 @@ class internBootstrap {
      * @param the boot $type
      */
     private function bootstrap( $type ) {
-        $types = array(INTERN_GLOBAL_FILTER, INTERN_INITIALIZE_CONFIG, INTERN_INITIALIZE_DATABASE, INTERN_INITIALIZE_SESSION, INTERN_INIT_HOOK_LAYOUT, INTERN_INIT_PATH_AND_CACHE);
+        $types = array(INTERN_GLOBAL_FUNCTIONS, INTERN_INITIALIZE_CONFIG, INTERN_INITIALIZE_DATABASE, INTERN_INITIALIZE_SESSION, INTERN_INIT_HOOK_LAYOUT, INTERN_INIT_PATH_AND_CACHE);
         foreach( $types as $key => $value ) {
             if( $value > $type ) {
                 return ;
@@ -137,7 +137,7 @@ class internBootstrap {
     private function _bootstrap( $type ) {
         global $db_config, $base_url, $cache_type;
         switch( $type ) {
-            case INTERN_GLOBAL_FILTER:
+            case INTERN_GLOBAL_FUNCTIONS:
                 require_once MASTER . 'global.func.php';
                 // To unset unused var
                 unset_global_variable();
@@ -198,5 +198,13 @@ class internBootstrap {
      */
     private function internBootstrap() {
         $this->__construct();
+    }
+
+    /**
+     * Check current boot type
+     * @return TYPE LIST
+     */
+    public static function bootType() {
+        return self::$_boot_type;
     }
 }
