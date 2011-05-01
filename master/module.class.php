@@ -11,14 +11,14 @@
 // $Id$
 
 // include the core hook system
-require_once inter_join_path( MASTER, 'hook.class.php' );
+require_once intern_join_path( MASTER, 'hook.class.php' );
 
 /**
  +----------------------------------------------------------------------------------
- * This class is important for the inter. Module handle and invok hook.
+ * This class is important for the intern. Module handle and invok hook.
  * enable and disabled them. This module is a static class.
  +----------------------------------------------------------------------------------
- * @package   inter.module
+ * @package   intern.module
  * @version   $Id$
  * @access    static
  +----------------------------------------------------------------------------------
@@ -186,7 +186,7 @@ class Module {
      * @version   $Id$
      +------------------------------------------------------------------------------
      * @param  $mosule module name
-     * @param  $hook   
+     * @param  $hook
      * @access public
      * @return boole true if $hook is exists
      */
@@ -196,7 +196,7 @@ class Module {
 
     /**
      +------------------------------------------------------------------------------
-     * get the named module Reflection instance 
+     * get the named module Reflection instance
      +------------------------------------------------------------------------------
      * @version   $Id$
      +------------------------------------------------------------------------------

@@ -17,7 +17,8 @@
 define('DS', DIRECTORY_SEPARATOR);
 
 // Define ROOT as this files root directory
-define('ROOT', '');//dirname(dirname(__FILE__)) . DS );
+// need with abs path
+define('ROOT', dirname(dirname(__FILE__)) . DS );
 
 // Define MASTER as this files master directory
 define('MASTER', ROOT . 'master' . DS );
@@ -143,45 +144,25 @@ class internBootstrap {
         switch( $type ) {
             case INTERN_GLOBAL_FUNCTIONS:
                 require_once MASTER . 'global.func.php';
-
                 global_func_init();
                 break;
             case INTERN_GLOBAL_LOGGER:
                 require_once MASTER . 'logger.class.php';
-
                 logger_init();
             case INTERN_INITIALIZE_CONFIG:
                 require_once SITES . 'site.config.php';
                 break;
             case INTERN_INITIALIZE_DATABASE:
                 require_once MASTER . 'db.factory.class.php';
-
                 database_layout_init();
                 break;
             case INTERN_INITIALIZE_SESSION:
-                require_once MASTER . 'session.class.php';
-                $session_handle = internSessionDataHandle::getInstance();
-                session_set_save_handler(array($session_handle, 'session_open'),
-                                         array($session_handle, 'session_close'),
-                                         array($session_handle, 'session_read'),
-                                         array($session_handle, 'session_write'),
-                                         array($session_handle, 'session_destroy'),
-                                         array($session_handle, 'session_gc')
-                                         );
-                // session start
-                session_start();
-                intern_send_page_header();
-                //session_destroy();
-                //init the global $config options
-                options_init();
+                require_once options_get('session_class_path', MASTER . 'session.class.php');
+                session_init();
                 break;
             case INTERN_INIT_HOOK_LAYOUT:
-                init_user(); //To dev
                 require_once MASTER . 'module.class.php';
-                Module::init();
-                Module::invokeAll('boot');
-                //print_r(Module::instance('menu'));
-                //echo Module::hookExists('menu','apis');
+                hooks_init();
                 break;
             case INTERN_INIT_PATH_AND_CACHE:
                 require_once MASTER . 'router.class.php';

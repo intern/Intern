@@ -186,19 +186,9 @@ if (internBootstrap::bootType() >= INTERN_INITIALIZE_DATABASE):
     //INTERN_INITIALIZE_DATABASE initialization
     function database_layout_init() {
         internCoreDatabase::getInstance();
-    }
 
-    /**
-     * Create a Anonymous user data here.
-     */
-    function intern_init_anonymous_user( $session = '' ) {
-        $user = new stdClass();
-        $user->uid = 0;
-        $user->hostname = inter_get_ip();
-        $user->roles =array();
-        $user->data = $session; // the sessions data
-        $user->cache = 0;
-        return $user;
+        //init the global $config options
+        options_init();
     }
 
     /**
@@ -250,6 +240,68 @@ if (internBootstrap::bootType() >= INTERN_INITIALIZE_DATABASE):
         }
     }
 endif;
+
+/**
+ * Def Group boot Type for INTERN_INITIALIZE_SESSION
+ */
+if (internBootstrap::bootType() >= INTERN_INITIALIZE_SESSION):
+    // session layout init
+    function session_init() {
+        $session_handle = internSessionDataHandle::getInstance();
+        session_set_save_handler(
+            array($session_handle, 'session_open'),
+            array($session_handle, 'session_close'),
+            array($session_handle, 'session_read'),
+            array($session_handle, 'session_write'),
+            array($session_handle, 'session_destroy'),
+            array($session_handle, 'session_gc')
+        );
+        // session beging
+        session_start();
+
+        // @todo
+        intern_send_page_header();
+        //session_destroy();
+    }
+
+    /**
+     * Create a anonymous user data here.
+     */
+    function intern_init_anonymous_user( $session = '' ) {
+        $user = new stdClass();
+        $user->uid = 0;
+        $user->hostname = intern_get_ip();
+        $user->roles = array();
+        $user->data = $session; // the sessions data
+        $user->cache = 0;
+        return $user;
+    }
+
+    /**
+     * Send page header for all request
+     */
+    function intern_send_page_header() {
+        header("Expires: Sun, 19 Nov 1978 05:00:00 GMT");
+        header("Last-Modified: ". gmdate("D, d M Y H:i:s") ." GMT");
+        header("Cache-Control: store, no-cache, must-revalidate");
+        header("Cache-Control: post-check=0, pre-check=0", FALSE);
+    }
+endif;
+
+/**
+ * Def Group boot Type for INTERN_INITIALIZE_SESSION
+ */
+if (internBootstrap::bootType() >= INTERN_INIT_HOOK_LAYOUT):
+    // session layout init
+    function hooks_init() {
+        Module::init();
+
+        // invoke boot hook
+        Module::invokeAll('boot');
+    }
+endif;
+
+
 
 /**
  * Check the request is ajax request
@@ -452,15 +504,6 @@ function intern_html_get_charset() {
     return intern_html_set_charset();
 }
 
-/**
- * To send page header
- */
-function intern_send_page_header() {
-    header("Expires: Sun, 19 Nov 1978 05:00:00 GMT");
-    header("Last-Modified: ". gmdate("D, d M Y H:i:s") ." GMT");
-    header("Cache-Control: store, no-cache, must-revalidate");
-    header("Cache-Control: post-check=0, pre-check=0", FALSE);
-}
 
 /**
  * Load the theme helper file

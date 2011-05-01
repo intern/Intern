@@ -13,36 +13,36 @@
 /**
  * Define the core module directory path
  */
-define('CORE_NODULE_PATH', MASTER . 'modules' . DS );
+define('CORE_MODULE_PATH', MASTER . 'modules' . DS );
 
 /**
  * Define expand directory path
  */
-define('EXPAND_NODULE_PATH', ROOT . 'modules' . DS );
+define('EXPAND_MODULE_PATH', ROOT . 'modules' . DS );
 
 /**
  * Define module class prefix
  */
-define('MODULE_PREFIX', 'inter_' );
+define('MODULE_PREFIX', 'intern_' );
 
 /**
  +----------------------------------------------------------------------------------
- * This is inter hooks system.
+ * This is intern hooks system.
  * the all funcs or variables are static.
  +----------------------------------------------------------------------------------
- * @package   inter.hook
+ * @package   intern.hook
  * @version   $Id$
  * @access    Singleton
  +----------------------------------------------------------------------------------
  */
 class hook {
     /**
-     * @var $_core_modules inter core module the list need enable
+     * @var $_core_modules intern core module the list need enable
      */
     private static $_core_modules = array();
 
     /**
-     * @var $_load_modules inter plugin module the list name file
+     * @var $_load_modules intern plugin module the list name file
      */
     private $_load_modules = array();
 
@@ -106,7 +106,7 @@ class hook {
      */
     private function init() {
         // init the db layout
-        $this->_db = interCoreDatabase::getInstance();
+        $this->_db = internCoreDatabase::getInstance();
         //load with the enabled module
         $this->listModule();
     }
@@ -184,7 +184,7 @@ class hook {
                 $_collect[] = $_hook->invokeArgs($hook_instance, $args);
                 //return ;
             }
-            
+
         }
         return $_collect;
     }
@@ -206,7 +206,7 @@ class hook {
         array_shift($args); //remove $module variable
         array_shift($args); //remove $hook variable
         //ReflectionMethod
-        
+
         if ( $this->moduleHookExists( $module , $hook ) ) {
             $_hook = $this->_getModuleInstance( $module )->getMethod( $hook );
             if ( $_hook->isStatic() ) {
@@ -240,10 +240,10 @@ class hook {
      */
     public function loadModule( $type, $module ) {
         if ( !isset( $this->_load_files[$type][$module] ) ) {
-            foreach( array( CORE_NODULE_PATH, EXPAND_NODULE_PATH ) as $path) {
+            foreach( array( CORE_MODULE_PATH, EXPAND_MODULE_PATH ) as $path) {
                 //print_r(array(CORE_NODULE_PATH, EXPAND_NODULE_PATH));
                 //$file = $path . $module . DS . $module . '.' . $type;
-                $file = inter_join_path($path, $module, $module . '.' . $type);
+                $file = intern_join_path($path, $module, $module . '.' . $type);
                 if( file_exists( $file ) ) {
                     @include_once $file;
                     $this->_load_files[$type][$type] = true;
@@ -267,7 +267,7 @@ class hook {
      */
     public function getPathBy( $module ) {
         foreach( array( CORE_NODULE_PATH, EXPAND_NODULE_PATH ) as $path) {
-            $module_dir = inter_join_path($path, $module);
+            $module_dir = intern_join_path($path, $module);
             if( is_dir( $module_dir ) ) {
                 return $module_dir;
             }
@@ -289,7 +289,6 @@ class hook {
         $this->_db->query("SELECT * FROM {core} WHERE status = 1 ORDER BY weight ASC");
         while( $module = $this->_db->fetchObject() ) {
             // to setting the self var $_load_modules
-            //print_r($module);
             $this->loadModule( 'module', $module->module );
             // load the module instance
             $this->_setModuleInstance( $module->module );

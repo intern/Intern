@@ -14,7 +14,7 @@
  * config the site Salt, global this.
  *  session_name();
  */
-define('SALT', 'INTERN');
+define('SALT', 'INTERN_');
 
 /**
  +------------------------------------------------------------------------------
@@ -23,7 +23,7 @@ define('SALT', 'INTERN');
  * @version   $Id$
  +------------------------------------------------------------------------------
  */
-class interSessionDataHandle{
+class internSessionDataHandle{
     /**
      * @var db handle
      */
@@ -47,7 +47,7 @@ class interSessionDataHandle{
      *
      */
     private function _init() {
-        $this->_db = interCoreDatabase::getInstance();
+        $this->_db = internCoreDatabase::getInstance();
         $this->_setSessionName();
 
     }
@@ -84,9 +84,8 @@ class interSessionDataHandle{
         //当php自身调用session_write_close()时,对象已经不存在, fix $this->session_write();
         // error: Call to a member function query() on a non-object
         register_shutdown_function('session_write_close');
-
         if ( !isset($_COOKIE[session_name()]) ) {
-            $user = inter_init_anonymous_user();
+            $user = intern_init_anonymous_user();
             return '';
         }
         $handle = $this->_db->query("SELECT u.*,s.* FROM {users} u INNER JOIN {sessions} s ON u.uid = s.uid WHERE s.sid = '%s'", $key);
@@ -95,7 +94,7 @@ class interSessionDataHandle{
         if ($user && $user->uid > 0 && $user->status ==  1 ) {
             //print($res);
         } else {
-            $user = inter_init_anonymous_user();
+            $user = intern_init_anonymous_user();
         }
         return $user->data; // data is session table data, not is users table data
     }
@@ -105,13 +104,15 @@ class interSessionDataHandle{
      */
     public function session_write($key, $value) {
         global $user;
+
         if ( $user->uid == 0 && isset($_COOKIE[session_name()]) && empty($value) ) {
             return true;
         }
-        $this->_db->query("UPDATE {sessions} SET hostname = '%s', timestamp = %d, data = '%s' WHERE sid = '%s'", inter_get_ip(), time(), $value, $key);
+
+        $this->_db->query("UPDATE {sessions} SET hostname = '%s', timestamp = %d, data = '%s' WHERE sid = '%s'", intern_get_ip(), time(), $value, $key);
 
         if ( !$this->_db->affectedRows() ) {
-            $this->_db->query("INSERT INTO {sessions}(uid, sid, hostname, timestamp, data) VALUES( %d, '%s', '%s', %d, '%s')", $user->uid, $key, inter_get_ip(), time(), $value);
+            $this->_db->query("INSERT INTO {sessions}(uid, sid, hostname, timestamp, data) VALUES( %d, '%s', '%s', %d, '%s')", $user->uid, $key, intern_get_ip(), time(), $value);
         }
         return true;
     }

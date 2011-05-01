@@ -20,4 +20,4 @@ require_once 'master/bootstrap.php';
  *  @param constants list: INTERN_GLOBAL_FILTER || INTERN_INITIALIZE_CONFIG ||
  *  INTERN_INITIALIZE_DATABASE || INTERN_INITIALIZE_SESSION || INTERN_INIT_HOOK_LAYOUT
  */
-internBootstrap::getInstance( INTERN_INITIALIZE_DATABASE );
+internBootstrap::getInstance( INTERN_INIT_HOOK_LAYOUT );
