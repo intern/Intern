@@ -14,20 +14,89 @@
   *  feild: router | parent_router | count_part | callback_func | func_args | callback_title | title_args | description | weight | template_path
   */
 
-// include the core cache class
-require_once inter_join_path( MASTER, 'cache.class.php' );
-
 // include theme boot
-require_once inter_join_path( MASTER, 'request.class.php' );
+//require_once intern_join_path( MASTER, 'request.class.php' );
 
 // include template boot
-require_once inter_join_path( MASTER, 'template.class.php' );
+//require_once intern_join_path( MASTER, 'template.class.php' );
+
+
+/**
+ * router the web def group start.
+ * To handle any http request
+ * init with Singleton for path
+ */
+class Router {
+    /**
+     * @var private handle self Singleton
+     */
+    private static $_instance;
+
+    /**
+     * @var private To save the db handle instance
+     */
+    private $_db;
+
+    /**
+     * @var private To save the path standard request path, Can't change this value
+     */
+    private $_origin_path;
+
+    /**
+     * @var private To save the internal path with current request the alias path
+     */
+    private $_normal_path;
+
+    /**
+     +------------------------------------------------------------------------------
+     * Singleton class is prvate construct
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+     * @access private
+     */
+    private function __construct() {}
+    private function Router() {}
+
+    /**
+     +------------------------------------------------------------------------------
+     * To initialize the request path for router with this instance, parse the url
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+     * @access private
+     */
+    public function init() {
+        //this handle db
+        $this->_db = internCoreDatabase::getInstance();
+        //set path
+        $this->_origin_path = $_GET['q'];
+    }
+
+    /**
+     +------------------------------------------------------------------------------
+     * get the router instance to the static,
+     *  Singleton for the path
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+     * @param NULL
+     * @access public static
+     */
+    public static function getInstance() {
+        if( !self::$_instance ) {
+            self::$_instance = new self;
+        }
+        return self::$_instance;
+    }
+}
+
 /**
  * To router the web def group start.
  * All routes to handle
  * init with Singleton for path
  */
-class Router {
+class _Router {
     /**
      * @var private handle self Singleton
      */

@@ -10,9 +10,9 @@
 // +--------------------------------------------------------------------------------
 // $Id$
 
-class inter_system {
+class intern_system {
     public function init() {
-        inter_set_head('script','module',module::getPath('system').DS.'system.js');
+        //inter_set_head('script','module',module::getPath('system').DS.'system.js');
     }
     public function pageDescription($path) {
         $output = '';
@@ -129,6 +129,6 @@ EOF;
         print_r(func_get_args());
     }
     public function boot() {
-        //echo '123456';
+        echo '123456';
     }
 }

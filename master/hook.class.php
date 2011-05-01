@@ -241,7 +241,7 @@ class hook {
     public function loadModule( $type, $module ) {
         if ( !isset( $this->_load_files[$type][$module] ) ) {
             foreach( array( CORE_MODULE_PATH, EXPAND_MODULE_PATH ) as $path) {
-                //print_r(array(CORE_NODULE_PATH, EXPAND_NODULE_PATH));
+                //print_r(array(CORE_MODULE_PATH, EXPAND_MODULE_PATH));
                 //$file = $path . $module . DS . $module . '.' . $type;
                 $file = intern_join_path($path, $module, $module . '.' . $type);
                 if( file_exists( $file ) ) {
@@ -266,7 +266,7 @@ class hook {
      * @access public
      */
     public function getPathBy( $module ) {
-        foreach( array( CORE_NODULE_PATH, EXPAND_NODULE_PATH ) as $path) {
+        foreach( array( CORE_MODULE_PATH, EXPAND_MODULE_PATH ) as $path) {
             $module_dir = intern_join_path($path, $module);
             if( is_dir( $module_dir ) ) {
                 return $module_dir;

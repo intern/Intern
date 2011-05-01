@@ -19,12 +19,12 @@ class databaseCache {
      * @var the db handle
      */
     private $_db;
-    
+
     /**
      * Construct init db handle
      */
     public function __construct() {
-        $this->_db = interCoreDatabase::getInstance();
+        $this->_db = internCoreDatabase::getInstance();
     }
 
     /**
@@ -44,7 +44,7 @@ class databaseCache {
                 if( $obj->expired >= time() ) {
                     if( $obj->serialized ) {
                         // TODO postgres need decode_blob
-                        return unserialize($obj->data); 
+                        return unserialize($obj->data);
                     }
                     return $obj->data;
                 }

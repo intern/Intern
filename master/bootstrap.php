@@ -13,6 +13,9 @@
 /**
  * global Group define
  */
+// Define the intern cms release version
+define('INTERN_VSERSION', '1.0.0');
+
 // Define DIRECTORY_SEPARATOR to DS
 define('DS', DIRECTORY_SEPARATOR);
 
@@ -32,7 +35,6 @@ define('SITES', ROOT . 'sites' . DS );
 // Define LOGS directory
 // @see logger.class.php
 define('LOGS', SITES . 'logs' . DS );
-
 
 /**
  * global Group define end
@@ -73,13 +75,18 @@ define('INTERN_INITIALIZE_SESSION', 5);
  * Initialize module hooks layout.
  *
  */
-define('INTERN_INIT_HOOK_LAYOUT', 6);
+define('INTERN_INITIALIZE_HOOKS_LAYOUT', 6);
+
+/**
+ * Initialize cache layout for intern
+ */
+define('INTERN_INITIALIZE_CACHES_LAYOUT', 7);
 
 /**
  * Initialize get url for router;
  * @author lan-chi
  */
-define('INTERN_INIT_PATH_AND_CACHE', 7);
+define('INTERN_INITIALIZE_PATH', 8);
 
 
 
@@ -126,7 +133,7 @@ class internBootstrap {
      * @param the boot $type
      */
     private function bootstrap( $type ) {
-        $types = array(INTERN_GLOBAL_FUNCTIONS, INTERN_GLOBAL_LOGGER, INTERN_INITIALIZE_CONFIG, INTERN_INITIALIZE_DATABASE, INTERN_INITIALIZE_SESSION, INTERN_INIT_HOOK_LAYOUT, INTERN_INIT_PATH_AND_CACHE);
+        $types = array(INTERN_GLOBAL_FUNCTIONS, INTERN_GLOBAL_LOGGER, INTERN_INITIALIZE_CONFIG, INTERN_INITIALIZE_DATABASE, INTERN_INITIALIZE_SESSION, INTERN_INITIALIZE_HOOKS_LAYOUT, INTERN_INITIALIZE_CACHES_LAYOUT, INTERN_INITIALIZE_PATH);
         foreach( $types as $key => $value ) {
             if( $value > $type ) {
                 return ;
@@ -160,23 +167,27 @@ class internBootstrap {
                 require_once options_get('session_class_path', MASTER . 'session.class.php');
                 session_init();
                 break;
-            case INTERN_INIT_HOOK_LAYOUT:
+            case INTERN_INITIALIZE_HOOKS_LAYOUT:
                 require_once MASTER . 'module.class.php';
                 hooks_init();
                 break;
-            case INTERN_INIT_PATH_AND_CACHE:
+            case INTERN_INITIALIZE_CACHES_LAYOUT:
+                // include the core cache class
+                require_once MASTER . 'cache.class.php';
+                caches_init();
+                break;
+            case INTERN_INITIALIZE_PATH:
                 require_once MASTER . 'router.class.php';
                 Router::getInstance()->init();
-                Cache::runClear(); // cron cache
-                intern_template_helper_load();
+                //intern_template_helper_load();
                 break;
             default :
-                exit( 'ERROR:' );
+                exit( 'ERROR: Undefined boot type!' );
         }
     }
 
     /**
-     * init the web start
+     * init the system start
      */
     private function __construct() {
         $this->bootstrap( self::$_boot_type );

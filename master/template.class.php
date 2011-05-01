@@ -13,7 +13,7 @@
 /**
  *
  */
-define('ADMIN_THEME_PATH', inter_join_path(MASTER,'themes'));
+define('ADMIN_THEME_PATH', intern_join_path(MASTER,'themes'));
 
 class Template {
     /**

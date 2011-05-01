@@ -139,6 +139,8 @@ if (internBootstrap::bootType() >= INTERN_GLOBAL_FUNCTIONS):
             $ip = $_SERVER['REMOTE_ADDR'];
         return $ip;
     }
+    // add other methods here
+
 endif;
 
 
@@ -152,6 +154,7 @@ if (internBootstrap::bootType() >= INTERN_GLOBAL_LOGGER):
     function logger_init() {
         logger::init();
     }
+    // add other methods here
 
 endif;
 
@@ -176,6 +179,7 @@ if (internBootstrap::bootType() >= INTERN_INITIALIZE_CONFIG):
         }
         return $_db_config;
     }
+    // add other methods here
 
 endif;
 
@@ -239,6 +243,9 @@ if (internBootstrap::bootType() >= INTERN_INITIALIZE_DATABASE):
             $config[$obj->name] = unserialize( $obj->value );
         }
     }
+
+    // add other methods here
+
 endif;
 
 /**
@@ -286,20 +293,41 @@ if (internBootstrap::bootType() >= INTERN_INITIALIZE_SESSION):
         header("Cache-Control: store, no-cache, must-revalidate");
         header("Cache-Control: post-check=0, pre-check=0", FALSE);
     }
+
+    // add other methods here
+
 endif;
 
 /**
- * Def Group boot Type for INTERN_INITIALIZE_SESSION
+ * Def Group boot Type for INTERN_INITIALIZE_HOOKS_LAYOUT
  */
-if (internBootstrap::bootType() >= INTERN_INIT_HOOK_LAYOUT):
-    // session layout init
+if (internBootstrap::bootType() >= INTERN_INITIALIZE_HOOKS_LAYOUT):
+    // hooks layout init
     function hooks_init() {
         Module::init();
-
         // invoke boot hook
         Module::invokeAll('boot');
     }
+
+    // add other methods here
+
 endif;
+
+/**
+ * Def Group boot Type for INTERN_INITIALIZE_CACHES_LAYOUT
+ */
+if (internBootstrap::bootType() >= INTERN_INITIALIZE_CACHES_LAYOUT):
+    // session layout init
+    function caches_init() {
+        Cache::runClear();
+    }
+
+    // add other methods here
+
+
+endif;
+
+
 
 
 

@@ -27,7 +27,7 @@ define('CACHE_F', 'file');
 define('CACHE_M', 'memory');
 
 /*
- * caching inter
+ * caching intern
  * static class
  */
 class Cache {
@@ -35,7 +35,7 @@ class Cache {
      *  collect the cache instance here
      */
     private static $instance = array();
-    
+
     /**
      * load the 3 cache plan
      */
@@ -44,10 +44,10 @@ class Cache {
             self::_getInstance($cache);
         }
     }
-    
+
     /**
      +------------------------------------------------------------------------------
-     * Read a key from the cache.  Will automatically use the currently active 
+     * Read a key from the cache.  Will automatically use the currently active
      * cache configuration.
      *      the currently active configuration see: site.config.php
      +------------------------------------------------------------------------------
@@ -63,7 +63,7 @@ class Cache {
     /**
      +------------------------------------------------------------------------------
      * Temporarily change settings to current config options.
-     * 
+     *
      * the currently active configuration see: site.config.php
      +------------------------------------------------------------------------------
      * @version   $Id$
@@ -81,7 +81,7 @@ class Cache {
     /**
      +------------------------------------------------------------------------------
      * Delete a cache data information.
-     * 
+     *
      * the currently active configuration see: site.config.php
      +------------------------------------------------------------------------------
      * @version   $Id$
@@ -93,7 +93,7 @@ class Cache {
     public static function delete( $key, $type ) {
         return self::_getInstance($type)->_delete( $key );
     }
- 
+
     /**
      *  TODO a task
      +------------------------------------------------------------------------------
@@ -102,7 +102,7 @@ class Cache {
      * @version   $Id$
      +------------------------------------------------------------------------------
      * @param $key Identifier for the data
-     * @return 
+     * @return
      */
     public static function gc() {
         foreach( self::$instance as $instance ) {
@@ -149,7 +149,7 @@ class Cache {
      +------------------------------------------------------------------------------
      * @version   $Id$
      +------------------------------------------------------------------------------
-     * @param $type cache type 
+     * @param $type cache type
      *      options: memory | file | database
      *      (defalut @see site.config.php)
      *
@@ -160,7 +160,7 @@ class Cache {
             $type = CACHE_DEFAULT;
         }
         if( !isset( self::$instance[$type] ) ) {
-            require_once inter_join_path( MASTER, "cache.{$type}.php" );
+            require_once intern_join_path( MASTER, "cache.{$type}.php" );
             $instance = $type . 'Cache';
             self::$instance[$type] = new $instance;
         }

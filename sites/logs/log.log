@@ -1124,3 +1124,279 @@ Array
 
 [SQL]|2011-05-01 08:54:31|(0.00060)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
 
+[SQL]|2011-05-01 09:23:08|(0.00030)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 09:23:08|(0.00290)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 09:23:08|(0.00320)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 09:23:08|(0.00240)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 09:27:18|(0.00030)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 09:27:18|(0.00060)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 09:27:18|(0.00070)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = 'pir6oqb5n3437eccnpo7192aq1']
+
+[SQL]|2011-05-01 09:27:18|(0.00050)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 09:28:57|(0.00030)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 09:28:57|(0.00040)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 09:28:57|(0.00060)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = 'pir6oqb5n3437eccnpo7192aq1']
+
+[SQL]|2011-05-01 09:28:57|(0.00440)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 09:29:14|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 09:29:14|(0.00140)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 09:29:14|(0.00070)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = 'pir6oqb5n3437eccnpo7192aq1']
+
+[SQL]|2011-05-01 09:29:14|(0.00040)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 09:30:02|(0.00030)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 09:30:02|(0.00040)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 09:30:02|(0.00060)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = 'pir6oqb5n3437eccnpo7192aq1']
+
+[SQL]|2011-05-01 09:30:02|(0.00050)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 09:42:27|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 09:42:27|(0.00190)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 09:42:27|(0.00260)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 09:42:27|(0.00240)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 09:54:22|(0.00030)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 09:54:22|(0.00110)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 09:54:22|(0.00080)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 09:54:22|(0.00060)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 09:54:53|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 09:54:53|(0.00050)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 09:54:53|(0.00060)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 09:54:53|(0.00050)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 09:54:53|(0.00190)|[DELETE FROM inter_cache WHERE expired < 1304243693]
+
+[SQL]|2011-05-01 09:54:53|(0.00060)|[UPDATE inter_options SET value = 'i:1304243693;' WHERE name = 'cache_clear_corn']
+
+[SQL]|2011-05-01 09:55:49|(0.00030)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 09:55:49|(0.00040)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 09:55:49|(0.00060)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 09:55:49|(0.00050)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 10:11:40|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 10:11:40|(0.00160)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 10:11:40|(0.00260)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 10:11:40|(0.00170)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 10:11:40|(0.00150)|[DELETE FROM inter_cache WHERE expired < 1304244700]
+
+[SQL]|2011-05-01 10:11:40|(0.00060)|[UPDATE inter_options SET value = 'i:1304244700;' WHERE name = 'cache_clear_corn']
+
+[SQL]|2011-05-01 10:13:01|(0.00030)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 10:13:01|(0.00050)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 10:13:01|(0.00050)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 10:13:01|(0.00080)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 10:13:16|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 10:13:16|(0.00050)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 10:13:16|(0.00060)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 10:13:16|(0.00050)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 10:13:38|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 10:13:38|(0.00040)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 10:13:38|(0.00060)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 10:13:38|(0.00050)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 10:13:52|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 10:13:52|(0.00040)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 10:13:52|(0.00270)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 10:13:52|(0.00050)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 10:16:48|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 10:16:48|(0.00050)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 10:16:48|(0.00060)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 10:16:48|(0.00050)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 10:16:48|(0.00050)|[DELETE FROM inter_cache WHERE expired < 1304245008]
+
+[SQL]|2011-05-01 10:16:48|(0.00050)|[UPDATE inter_options SET value = 'i:1304245008;' WHERE name = 'cache_clear_corn']
+
+[SQL]|2011-05-01 10:17:01|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 10:17:01|(0.00110)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 10:17:01|(0.00070)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 10:17:01|(0.00060)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 10:17:07|(0.00070)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 10:17:07|(0.00100)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 10:17:07|(0.00080)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 10:17:07|(0.00040)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 10:17:07|(0.00060)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 10:17:07|(0.00060)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 10:17:07|(0.00090)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 10:17:07|(0.00060)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 10:17:07|(0.00040)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 10:17:07|(0.00090)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 10:17:07|(0.00070)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 10:17:07|(0.00030)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 10:17:07|(0.00050)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 10:17:07|(0.00100)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 10:17:07|(0.00110)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 10:17:07|(0.00060)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 10:17:08|(0.00030)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 10:17:08|(0.00090)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 10:17:08|(0.00070)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 10:17:08|(0.00070)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 10:23:25|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 10:23:25|(0.00090)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 10:23:25|(0.00090)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 10:23:25|(0.00160)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 10:23:25|(0.00100)|[DELETE FROM inter_cache WHERE expired < 1304245405]
+
+[SQL]|2011-05-01 10:23:25|(0.00060)|[UPDATE inter_options SET value = 'i:1304245405;' WHERE name = 'cache_clear_corn']
+
+[SQL]|2011-05-01 10:23:51|(0.00030)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 10:23:51|(0.00040)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 10:23:51|(0.00050)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 10:23:51|(0.00100)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 10:25:09|(0.00050)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 10:25:09|(0.00050)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 10:25:09|(0.00060)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 10:25:09|(0.00050)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 10:25:22|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 10:25:22|(0.00040)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 10:25:22|(0.00060)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 10:25:22|(0.00060)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 10:28:28|(0.00050)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 10:28:28|(0.00050)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 10:28:28|(0.00060)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 10:28:28|(0.00050)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 10:28:28|(0.00050)|[DELETE FROM inter_cache WHERE expired < 1304245708]
+
+[SQL]|2011-05-01 10:28:28|(0.00280)|[UPDATE inter_options SET value = 'i:1304245708;' WHERE name = 'cache_clear_corn']
+
+[SQL]|2011-05-01 10:29:08|(0.00230)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 10:29:08|(0.00090)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 10:29:08|(0.00060)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = 'pir6oqb5n3437eccnpo7192aq1']
+
+[SQL]|2011-05-01 10:29:08|(0.00050)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 10:29:09|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 10:29:09|(0.00040)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 10:29:09|(0.00060)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = 'pir6oqb5n3437eccnpo7192aq1']
+
+[SQL]|2011-05-01 10:29:09|(0.00050)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 11:54:55|(0.00880)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 11:54:55|(0.00700)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 11:54:55|(0.00540)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '8l6tqjndm08lslktqtpr2qm4v4']
+
+[SQL]|2011-05-01 11:54:55|(0.00330)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 11:54:56|(0.03920)|[DELETE FROM inter_cache WHERE expired < 1304250895]
+
+[SQL]|2011-05-01 11:54:56|(0.00060)|[UPDATE inter_options SET value = 'i:1304250896;' WHERE name = 'cache_clear_corn']
+
+[SQL]|2011-05-01 12:45:14|(0.00030)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 12:45:14|(0.01010)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 12:45:14|(0.00520)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = 'pir6oqb5n3437eccnpo7192aq1']
+
+[SQL]|2011-05-01 12:45:14|(0.00260)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-01 12:45:14|(0.04580)|[DELETE FROM inter_cache WHERE expired < 1304253914]
+
+[SQL]|2011-05-01 12:45:14|(0.00880)|[UPDATE inter_options SET value = 'i:1304253914;' WHERE name = 'cache_clear_corn']
+
+[SQL]|2011-05-01 12:45:17|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-01 12:45:17|(0.00070)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-01 12:45:17|(0.00060)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = 'pir6oqb5n3437eccnpo7192aq1']
+
+[SQL]|2011-05-01 12:45:17|(0.00080)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+

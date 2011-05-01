@@ -10,7 +10,7 @@
 // +--------------------------------------------------------------------------------
 // $Id$
 
-class inter_user {
+class intern_user {
     // menu hook
     public function menu() {
         $items['admin/user/login'] = array(
