@@ -10,7 +10,7 @@
 // +----------------------------------------------------------------------
 // $Id$
 
-require_once inter_join_path(MASTER, 'database', 'db.abstract.php');
+require_once intern_join_path(MASTER, 'database', 'db.abstract.php');
 
 /**
  +------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ require_once inter_join_path(MASTER, 'database', 'db.abstract.php');
  * @version   $Id$
  +------------------------------------------------------------------------------
  */
-class interCoreDatabase {
+class internCoreDatabase {
 
     /**
      * Private db instance
@@ -44,12 +44,12 @@ class interCoreDatabase {
 
         if( is_object( $db_handle ) ) return $db_handle;
 
-        $_db_config = inter_parse_db_config( $conf );
+        $_db_config = intern_parse_db_config( $conf );
 
-        $_require = inter_join_path(MASTER, 'database', 'db.'.$_db_config['scheme'].'.php');
+        $_require = intern_join_path(MASTER, 'database', 'db.'.$_db_config['scheme'].'.php');
 
-        if( !isset( $_db_config['scheme'] ) || !file_exists( $_require )) {
-            die( 'Error: Db layout file "'.MASTER.'db.'.$_db_config['scheme'].'.php" not found!' );
+        if( !file_exists( $_require )) {
+            logger::error( 'Error: Database layout file "'.MASTER.'db.'.$_db_config['scheme'].'.php" not found!' );
         }else{
             require_once $_require;
         }

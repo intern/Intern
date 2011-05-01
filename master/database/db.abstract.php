@@ -79,7 +79,7 @@ abstract class databaseAbstract {
         $this->connect();
         $this->selectDatabase();
         $this->setDatabaseEncode();
-        if( method_exists(&$this,'__destruct') ) {
+        if( method_exists($this,'__destruct') ) {
             // TODO remove this, becase session_write
             //register_shutdown_function( array(&$this,'__destruct') );
         }
@@ -225,8 +225,11 @@ abstract class databaseAbstract {
         $this->_queryCallback($args,true);
         $query = preg_replace_callback('/(%d|%s|%%|%f|%b|%n)/', array($this, '_queryCallback'), $query, E_USER_WARNING);
         if( $this->_debug ) {
-            // TODO debug
-            $this->_debug_info['sql'][] = $query;
+            intern_timer('SQL', 'set');
+            $_ = $this->_query( $query );
+            logger::SQL( '('. intern_timer('SQL', 'get') .')|[' . $query . ']');
+            intern_timer('SQL', 'stop');
+            return $_;
         }
         return $this->_query( $query );
     }

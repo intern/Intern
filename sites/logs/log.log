@@ -1,0 +1,388 @@
+test
+test
+test
+test
+test
+test
+test
+Sun, 01 May 2011 03:35:42
+Sun, 01 May 2011 03:35:49
+Sun, 01 May 2011 03:35:50
+Sun, 01 May 2011 03:35:51
+Sun, 01 May 2011 03:40:57 [log] testSun, 01 May 2011 03:43:09 [NOTICE] test[NOTICE] Sun, 01 May 2011 03:43:51 test\n[NOTICE] Sun, 01 May 2011 03:44:22 test
+[NOTICE] Sun, 01 May 2011 03:44:27 test
+[NOTICE] Sun, 01 May 2011 03:44:29 test
+[NOTICE] Sun, 01 May 2011 03:45:52 Array
+(
+    [0] => 2
+    [1] => 2
+    [2] => 3
+    [3] => 4
+    [4] => 5
+    [5] => 6
+    [6] => Array
+        (
+            [0] => 4
+            [1] => 56
+            [2] => 7
+            [3] => asdf
+            [4] => 8
+        )
+
+)
+
+[NOTICE] Sun, 01 May 2011 03:52:35 stdClass Object
+(
+    [a] => s
+    [b] => Array
+        (
+            [0] => 4
+            [1] => 56
+            [2] => 7
+            [3] => asdf
+            [4] => 8
+        )
+
+)
+
+[NOTICE] Sun, 01 May 2011 03:53:08 
+stdClass Object
+(
+    [a] => s
+    [b] => Array
+        (
+            [0] => 4
+            [1] => 56
+            [2] => 7
+            [3] => asdf
+            [4] => 8
+        )
+
+)
+
+[NOTICE] Sun, 01 May 2011 03:53:39 
+stdClass Object
+(
+    [a] => s
+    [b] => Array
+        (
+            [0] => 4
+            [1] => 56
+            [2] => 7
+            [3] => asdf
+            [4] => 8
+        )
+
+)
+
+
+[NOTICE] Sun, 01 May 2011 03:55:43 
+stdClass Object
+(
+    [a] => s
+    [b] => Array
+        (
+            [0] => 4
+            [1] => 56
+            [2] => 7
+            [3] => asdf
+            [4] => 8
+        )
+
+)
+
+
+[NOTICE] Sun, 01 May 2011 04:03:03 
+stdClass Object
+(
+    [a] => s
+    [b] => Array
+        (
+            [0] => 4
+            [1] => 56
+            [2] => 7
+            [3] => asdf
+            [4] => 8
+        )
+
+)
+
+
+[NOTICE] Sun, 01 May 2011 04:03:06 
+stdClass Object
+(
+    [a] => s
+    [b] => Array
+        (
+            [0] => 4
+            [1] => 56
+            [2] => 7
+            [3] => asdf
+            [4] => 8
+        )
+
+)
+
+
+[NOTICE] Sun, 01 May 2011 04:04:52 
+stdClass Object
+(
+    [a] => s
+    [b] => Array
+        (
+            [0] => 4
+            [1] => 56
+            [2] => 7
+            [3] => asdf
+            [4] => 8
+        )
+
+)
+
+
+[NOTICE] Sun, 01 May 2011 04:20:21 
+stdClass Object
+(
+    [a] => s
+    [b] => Array
+        (
+            [0] => 4
+            [1] => 56
+            [2] => 7
+            [3] => asdf
+            [4] => 8
+        )
+
+)
+
+
+[NOTICE] Sun, 01 May 2011 04:23:54 
+stdClass Object
+(
+    [a] => s
+    [b] => Array
+        (
+            [0] => 4
+            [1] => 56
+            [2] => 7
+            [3] => asdf
+            [4] => 8
+        )
+
+)
+
+
+[NOTICE] Sun, 01 May 2011 04:25:16 
+stdClass Object
+(
+    [a] => s
+    [b] => Array
+        (
+            [0] => 4
+            [1] => 56
+            [2] => 7
+            [3] => asdf
+            [4] => 8
+        )
+
+)
+
+
+[NOTICE] Sun, 01 May 2011 04:25:52 
+stdClass Object
+(
+    [a] => s
+    [b] => Array
+        (
+            [0] => 4
+            [1] => 56
+            [2] => 7
+            [3] => asdf
+            [4] => 8
+        )
+
+)
+
+
+[NOTICE] Sun, 01 May 2011 04:27:38 
+stdClass Object
+(
+    [a] => s
+    [b] => Array
+        (
+            [0] => 4
+            [1] => 56
+            [2] => 7
+            [3] => asdf
+            [4] => 8
+        )
+
+)
+
+
+[NOTICE] Sun, 01 May 2011 04:28:54 
+stdClass Object
+(
+    [a] => s
+    [b] => Array
+        (
+            [0] => 4
+            [1] => 56
+            [2] => 7
+            [3] => asdf
+            [4] => 8
+        )
+
+)
+
+
+[ERROR] Sun, 01 May 2011 04:28:54 Error: Database layout file "master\db.myssql.php" not found!
+
+[NOTICE] Sun, 01 May 2011 04:29:18 
+stdClass Object
+(
+    [a] => s
+    [b] => Array
+        (
+            [0] => 4
+            [1] => 56
+            [2] => 7
+            [3] => asdf
+            [4] => 8
+        )
+
+)
+
+
+[NOTICE] Sun, 01 May 2011 04:29:38 
+stdClass Object
+(
+    [a] => s
+    [b] => Array
+        (
+            [0] => 4
+            [1] => 56
+            [2] => 7
+            [3] => asdf
+            [4] => 8
+        )
+
+)
+
+
+[NOTICE] Sun, 01 May 2011 04:29:45 
+stdClass Object
+(
+    [a] => s
+    [b] => Array
+        (
+            [0] => 4
+            [1] => 56
+            [2] => 7
+            [3] => asdf
+            [4] => 8
+        )
+
+)
+
+
+[NOTICE] Sun, 01 May 2011 04:29:47 
+stdClass Object
+(
+    [a] => s
+    [b] => Array
+        (
+            [0] => 4
+            [1] => 56
+            [2] => 7
+            [3] => asdf
+            [4] => 8
+        )
+
+)
+
+
+[NOTICE] Sun, 01 May 2011 04:39:10 
+Array
+(
+)
+
+
+[NOTICE] Sun, 01 May 2011 04:40:29 
+Array
+(
+    [0] => iii
+)
+
+
+[NOTICE] Sun, 01 May 2011 04:43:02 
+Array
+(
+    [0] => iii
+)
+
+
+[SQL] Sun, 01 May 2011 04:44:12 SET NAMES "utf8"
+
+[SQL] Sun, 01 May 2011 04:44:12 SHOW TABLES 
+
+[NOTICE] Sun, 01 May 2011 04:44:12 
+Array
+(
+    [0] => iii
+)
+
+
+[SQL] Sun, 01 May 2011 04:46:36 "SET NAMES "utf8""
+
+[SQL] Sun, 01 May 2011 04:46:36 "SHOW TABLES "
+
+[NOTICE] Sun, 01 May 2011 04:46:36 
+Array
+(
+    [0] => iii
+)
+
+
+[SQL] Sun, 01 May 2011 04:47:03 [SET NAMES "utf8"}
+
+[SQL] Sun, 01 May 2011 04:47:03 [SHOW TABLES }
+
+[NOTICE] Sun, 01 May 2011 04:47:03 
+Array
+(
+    [0] => iii
+)
+
+
+[SQL] Sun, 01 May 2011 04:47:13 [SET NAMES "utf8"]
+
+[SQL] Sun, 01 May 2011 04:47:13 [SHOW TABLES ]
+
+[NOTICE] Sun, 01 May 2011 04:47:13 
+Array
+(
+    [0] => iii
+)
+
+
+[SQL] Sun, 01 May 2011 04:59:33 [SET NAMES "utf8"] (0.00020)
+
+[SQL] Sun, 01 May 2011 04:59:36 [SET NAMES "utf8"] (0.00030)
+
+[SQL] Sun, 01 May 2011 05:00:07  (0.00030) [SET NAMES "utf8"]
+
+[SQL] Sun, 01 May 2011 05:00:18 (0.00020) [SET NAMES "utf8"]
+
+[SQL]|Sun, 01 May 2011 05:01:38|(0.00040) [SET NAMES "utf8"]
+
+[SQL]|2011-May-01 05:02:23|(0.00020) [SET NAMES "utf8"]
+
+[SQL]|2011-05-01 05:02:39|(0.00030) [SET NAMES "utf8"]
+
+[SQL] 2011-05-01 05:02:55|(0.00020) [SET NAMES "utf8"]
+
+[SQL]|2011-05-01 05:03:19|(0.00030) [SET NAMES "utf8"]
+
+[SQL]|2011-05-01 05:03:39|(0.00030)|[SET NAMES "utf8"]
+

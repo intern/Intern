@@ -28,6 +28,11 @@ define('MISC', ROOT . 'misc' . DS );
 // Define SITES as this files master directory
 define('SITES', ROOT . 'sites' . DS );
 
+// Define LOGS directory
+// @see logger.class.php
+define('LOGS', SITES . 'logs' . DS );
+
+
 /**
  * global Group define end
  */
@@ -113,7 +118,6 @@ class internBootstrap {
      */
     public static function getInstance( $boot_type ) {
         self::$_boot_type = $boot_type;
-        self::$boot_type = $boot_type;
         return new self;
     }
 
@@ -121,7 +125,7 @@ class internBootstrap {
      * @param the boot $type
      */
     private function bootstrap( $type ) {
-        $types = array(INTERN_GLOBAL_FUNCTIONS, INTERN_INITIALIZE_CONFIG, INTERN_INITIALIZE_DATABASE, INTERN_INITIALIZE_SESSION, INTERN_INIT_HOOK_LAYOUT, INTERN_INIT_PATH_AND_CACHE);
+        $types = array(INTERN_GLOBAL_FUNCTIONS, INTERN_GLOBAL_LOGGER, INTERN_INITIALIZE_CONFIG, INTERN_INITIALIZE_DATABASE, INTERN_INITIALIZE_SESSION, INTERN_INIT_HOOK_LAYOUT, INTERN_INIT_PATH_AND_CACHE);
         foreach( $types as $key => $value ) {
             if( $value > $type ) {
                 return ;
@@ -139,15 +143,20 @@ class internBootstrap {
         switch( $type ) {
             case INTERN_GLOBAL_FUNCTIONS:
                 require_once MASTER . 'global.func.php';
-                // To unset unused var
-                unset_global_variable();
+
+                global_func_init();
                 break;
+            case INTERN_GLOBAL_LOGGER:
+                require_once MASTER . 'logger.class.php';
+
+                logger_init();
             case INTERN_INITIALIZE_CONFIG:
                 require_once SITES . 'site.config.php';
                 break;
             case INTERN_INITIALIZE_DATABASE:
-                require_once MASTER . 'db.factory.php';
-                interCoreDatabase::getInstance();
+                require_once MASTER . 'db.factory.class.php';
+
+                database_layout_init();
                 break;
             case INTERN_INITIALIZE_SESSION:
                 require_once MASTER . 'session.class.php';

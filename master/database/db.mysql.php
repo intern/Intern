@@ -46,7 +46,7 @@ class mysql extends databaseAbstract{
      */
     protected function prepare_connect( $db_config ) {
         //
-        !extension_loaded('mysql') && exit("Please Open the mysql,DLL");
+        !extension_loaded('mysql') && exit("Please Open the mysql.dll or mysql.so");
 
         $this->_config = array_merge($this->_config, $db_config);
     }
@@ -198,7 +198,6 @@ class mysql extends databaseAbstract{
     public function __destruct() {
        if( $this->_debug ) {
             // TODO debug
-            print_r($this->_debug_info);
         }
         $this->free();
         isset($this->_link) && (mysql_close($this->_link) && ($this->_link = NULL));

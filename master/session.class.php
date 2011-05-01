@@ -14,7 +14,7 @@
  * config the site Salt, global this.
  *  session_name();
  */
-define('SALT', 'INTER');
+define('SALT', 'INTERN');
 
 /**
  +------------------------------------------------------------------------------

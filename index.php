@@ -17,7 +17,7 @@ require_once 'master/bootstrap.php';
 
 /**
  * Init the intern Environment
- *	@param constants list: INTERN_GLOBAL_FILTER || INTERN_INITIALIZE_CONFIG ||
- *	INTERN_INITIALIZE_DATABASE || INTERN_INITIALIZE_SESSION || INTERN_INIT_HOOK_LAYOUT
+ *  @param constants list: INTERN_GLOBAL_FILTER || INTERN_INITIALIZE_CONFIG ||
+ *  INTERN_INITIALIZE_DATABASE || INTERN_INITIALIZE_SESSION || INTERN_INIT_HOOK_LAYOUT
  */
-internBootstrap::getInstance( INTERN_INIT_PATH_AND_CACHE );
+internBootstrap::getInstance( INTERN_INITIALIZE_DATABASE );

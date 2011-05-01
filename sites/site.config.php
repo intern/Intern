@@ -26,7 +26,7 @@
  *       'encoding' => utf-8
  *   );
  */
-$db_config = 'mysql://root:123456@localhost/inter/inter_/utf8';
+$db_config = 'mysql://root:123456@localhost/intern/inter_/utf8';
 
 /**
  * Inter web setting:

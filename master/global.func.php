@@ -16,6 +16,11 @@
  *  @todo INTERN_GLOBAL_FUNCTIONS content by
  */
 if (internBootstrap::bootType() >= INTERN_GLOBAL_FUNCTIONS):
+    // INTERN_GLOBAL_FUNCTIONS initialization.
+    function global_func_init() {
+        unset_global_variable();
+    }
+
     /**
      * Develop tool, collect time begin ,stop, end time statistics
      *   @param string $name
@@ -142,9 +147,13 @@ endif;
  * Include logger class
  */
 if (internBootstrap::bootType() >= INTERN_GLOBAL_LOGGER):
-    require MASTER . 'logger.class.php';
-endif;
+    //require MASTER . 'logger.class.php';
+    //INTERN_GLOBAL_LOGGER initialization
+    function logger_init() {
+        logger::init();
+    }
 
+endif;
 
 /**
  * Def Group boot Type for INTERN_INITIALIZE_CONFIG
@@ -174,6 +183,11 @@ endif;
  * Def Group boot Type for INTERN_INITIALIZE_DATABASE
  */
 if (internBootstrap::bootType() >= INTERN_INITIALIZE_DATABASE):
+    //INTERN_INITIALIZE_DATABASE initialization
+    function database_layout_init() {
+        internCoreDatabase::getInstance();
+    }
+
     /**
      * Create a Anonymous user data here.
      */
@@ -236,7 +250,6 @@ if (internBootstrap::bootType() >= INTERN_INITIALIZE_DATABASE):
         }
     }
 endif;
-
 
 /**
  * Check the request is ajax request
