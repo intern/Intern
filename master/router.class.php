@@ -48,6 +48,11 @@ class Router {
     private $_normal_path;
 
     /**
+     * @var private To save the internal routers map with current request the normal path
+     */
+    private $_normal_path_routers;
+
+    /**
      +------------------------------------------------------------------------------
      * Singleton class is prvate construct
      +------------------------------------------------------------------------------
@@ -70,9 +75,39 @@ class Router {
         //this handle db
         $this->_db = internCoreDatabase::getInstance();
         //set path
-        $this->_origin_path = $_GET['q'];
+        $this->_origin_path = isset($_GET['q']) ? $_GET['q'] : '';
+        $this->_setInternalPath();
+        $this->_lookupRouterByPath($this->_normal_path);
     }
 
+    private function _setInternalPath($internal_path = null) {
+        if (!$internal_path && !empty($this->_origin_path)) {
+            $path = $this->_db->getResult(
+                $this->_db->query("SELECT path FROM {url_alias} WHERE path_alias='%s'", $this->_origin_path)
+            );
+            $internal_path = $path ? $path : $this->_origin_path;
+        }
+        $this->_normal_path = $internal_path;
+    }
+
+    private function _lookupRouterByPath($path) {
+        $_vars = array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h');
+        $parts = explode('/', $this->_normal_path);
+        $parts_count = count( $parts );
+        if ($parts_count > MENU_MAX_PARTS) {
+            $parts_count = MENU_MAX_PARTS;
+            $parts = array_slice($parts, 0, MENU_MAX_PARTS);
+        }
+        if( !$parts_count ) {
+            $routes =  array();
+        } else {
+            $routes = array_combine( array_slice($_vars,0, $parts_count), $parts);
+            extract($routes , EXTR_OVERWRITE );
+            require_once intern_join_path( MASTER, 'routes', "path.routes.{$parts_count}.inc" );
+        }
+        $this->_normal_path_routers = $routes;
+        return $routes;
+    }
     /**
      +------------------------------------------------------------------------------
      * get the router instance to the static,
@@ -247,7 +282,7 @@ class _Router {
         foreach( $routes as $router => $item ) {
             // title callback check
             if ( isset($item['title callback']) ) {
-                $item ['title_callback'] = $item['title callback'];
+                $item['title_callback'] = $item['title callback'];
                 unset($item['title callback']);
             }
 

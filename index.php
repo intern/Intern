@@ -26,4 +26,6 @@ require_once 'master/bootstrap.php';
  *  INTERN_INITIALIZE_HOOKS_LAYOUT
  *  INTERN_INITIALIZE_CACHES_LAYOUT
  */
-internBootstrap::getInstance( INTERN_INITIALIZE_PATH );
+$request = internBootstrap::getInstance( INTERN_INITIALIZE_PATH );
+
+

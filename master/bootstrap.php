@@ -156,6 +156,7 @@ class internBootstrap {
             case INTERN_GLOBAL_LOGGER:
                 require_once MASTER . 'logger.class.php';
                 logger_init();
+                break;
             case INTERN_INITIALIZE_CONFIG:
                 require_once SITES . 'site.config.php';
                 break;

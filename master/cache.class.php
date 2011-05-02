@@ -16,6 +16,8 @@
  */
 define('CACHE_DEFAULT', $cache_type);
 
+//define cache class path
+define('CACHE_DIR', MASTER . 'caches' . DS);
 
 /**
  * @var cache db | memory | file constants
@@ -160,7 +162,7 @@ class Cache {
             $type = CACHE_DEFAULT;
         }
         if( !isset( self::$instance[$type] ) ) {
-            require_once intern_join_path( MASTER, "cache.{$type}.php" );
+            require_once intern_join_path( CACHE_DIR, "cache.{$type}.php" );
             $instance = $type . 'Cache';
             self::$instance[$type] = new $instance;
         }
