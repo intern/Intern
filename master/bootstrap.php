@@ -86,7 +86,7 @@ define('INTERN_INITIALIZE_CACHES_LAYOUT', 7);
  * Initialize get url for router;
  * @author lan-chi
  */
-define('INTERN_INITIALIZE_PATH', 8);
+define('INTERN_INITIALIZE_FULL_PATH', 8);
 
 
 
@@ -133,7 +133,7 @@ class internBootstrap {
      * @param the boot $type
      */
     private function bootstrap( $type ) {
-        $types = array(INTERN_GLOBAL_FUNCTIONS, INTERN_GLOBAL_LOGGER, INTERN_INITIALIZE_CONFIG, INTERN_INITIALIZE_DATABASE, INTERN_INITIALIZE_SESSION, INTERN_INITIALIZE_HOOKS_LAYOUT, INTERN_INITIALIZE_CACHES_LAYOUT, INTERN_INITIALIZE_PATH);
+        $types = array(INTERN_GLOBAL_FUNCTIONS, INTERN_GLOBAL_LOGGER, INTERN_INITIALIZE_CONFIG, INTERN_INITIALIZE_DATABASE, INTERN_INITIALIZE_SESSION, INTERN_INITIALIZE_HOOKS_LAYOUT, INTERN_INITIALIZE_CACHES_LAYOUT, INTERN_INITIALIZE_FULL_PATH);
         foreach( $types as $key => $value ) {
             if( $value > $type ) {
                 return ;
@@ -177,10 +177,9 @@ class internBootstrap {
                 require_once MASTER . 'cache.class.php';
                 caches_init();
                 break;
-            case INTERN_INITIALIZE_PATH:
+            case INTERN_INITIALIZE_FULL_PATH:
                 require_once MASTER . 'router.class.php';
-                Router::getInstance()->init();
-                //intern_template_helper_load();
+                router_init();
                 break;
             default :
                 exit( 'ERROR: Undefined boot type!' );

@@ -10,8 +10,7 @@
 // +--------------------------------------------------------------------------------
 // $Id$
 
-class intern_menu {
-    public static function menu(){
+function menu_menu() {
         $items['admin/router'] = array(
             'title' => 'Router',
             'type' => ADMIN_MAIN_MENU,
@@ -22,11 +21,3 @@ class intern_menu {
         );
         return $items;
     }
-
-    public function api() {
-        return 'inter_menu api test';
-    }
-    public function boot() {
-        //echo '888888';
-    }
-}

@@ -327,7 +327,16 @@ if (internBootstrap::bootType() >= INTERN_INITIALIZE_CACHES_LAYOUT):
 
 endif;
 
-
+/**
+ *
+ */
+if (internBootstrap::bootType() >= INTERN_INITIALIZE_CACHES_LAYOUT) {
+    // session layout init
+    function router_init() {
+        print_r($_SERVER);
+        Router::getInstance()->init();
+    }
+}
 
 
 

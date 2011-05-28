@@ -10,58 +10,6 @@
 // +--------------------------------------------------------------------------------
 // $Id$
 
-class intern_user {
-    // menu hook
-    public function menu() {
-        $items['admin/user/login'] = array(
-            'type'        => ADMIN_SUB_MENU,
-            'title'       => 'Logout',
-            'description' => 'Description here now!',
-            'callback'    => array(
-                    //'template' => 'user.login.inc'
-                    'function' => 'callback_function'
-            ),
-            'parent router' => 'admin/user'
-        );
-        $items['logout'] = array(
-            'type'        => CALLBACK,
-            'title'       => 'Site theme',
-            'description' => 'Mange theme description here now!',
-            'callback'    => array(
-                    'function' => 'user_logout'
-            )
-        );
-        $items['admin/user/register'] = array(
-            'type'        => ADMIN_SUB_MENU,
-            'title'       => 'Site theme',
-            'description' => 'Mange theme description here now!',
-            'callback'    => array(
-                    //'template' => 'user.register.inc'
-                    'function' => 'callback_function'
-            ),
-            'parent router' => 'admin/user'
-        );
-        $items['admin/user'] = array(
-            'type'        => ADMIN_MAIN_MENU,
-            'title'       => 'Users',
-            'description' => 'Mange theme description here now!',
-            'callback'    => array(
-                    //'function' => 'user.register.inc'
-                    'function' => 'callback_function'
-            )
-        );
-        return $items;
-    }
-
-    public static function api() {
-        echo "system api: \n";
-        print_r(func_get_args());
-    }
-
-    public function boot() {
-        //echo '123456';
-    }
-}
 function callback_function() {
     return 'single function ';
 }

@@ -7,6 +7,7 @@
 -- Server version: 5.1.37
 -- PHP Version: 5.2.10-2ubuntu6.4
 -- lan_chi@foxmail.com
+use intern;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 --

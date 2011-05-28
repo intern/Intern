@@ -108,7 +108,7 @@ class hook {
         // init the db layout
         $this->_db = internCoreDatabase::getInstance();
         //load with the enabled module
-        $this->listModule();
+        $this->loadModules();
     }
 
     /**
@@ -128,7 +128,7 @@ class hook {
 
     /**
      +------------------------------------------------------------------------------
-     * check the named module exists in _load_modules
+     * check the named module exists in _load_modules and loaded
      +------------------------------------------------------------------------------
      * @version   $Id$
      +------------------------------------------------------------------------------
@@ -140,7 +140,7 @@ class hook {
      *          true if the module is exists
      */
     public function moduleExists( $module ) {
-        return isset($this->_load_modules[$module]);
+        return isset($this->_load_files[$module]) && !isset($this->_not_exists_moudles[$_module]);
     }
 
     /**
@@ -156,8 +156,89 @@ class hook {
      * @return boole
      *          true if the module is exists
      */
-    public function notExistsModule() {
-        return $this->_not_exists_moudles;
+    public function notExistsModule($module) {
+        return !$this->moduleExists($module);
+    }
+
+
+    /**
+     +------------------------------------------------------------------------------
+     * load the named file.
+     *  @code format
+     *    array(
+     *          'module' => array(
+     *              'module_name' => true | false
+     *          )
+     *      );
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+     * @param  $module string
+     *              the will load module object form database
+     * @access private
+     */
+    private function _loadModule( $module ) {
+        $_module = $module->module;
+        if ( !isset($this->_load_files[$_module]) || !isset($this->_load_files[$_module]['module']) || $this->_load_files[$_module]['module']) {
+            $module_path = ROOT . $module->filepath;
+            if (file_exists($module_path)) {
+                @include_once $module_path;
+                if (isset($this->_not_exists_moudles[$_module])) {
+                    unset($this->_not_exists_moudles[$_module]);
+                }
+                $this->_load_files[$_module]['module'] = true;
+                return true;
+            }
+            $this->_load_files[$_module]['module'] = false;
+            $this->_not_exists_moudles[$_module] = array(
+                'type'     => isset($module->type) ?  $module->type : 'user',
+                'filepath' => $module->filepath
+                );
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     +------------------------------------------------------------------------------
+     * load all enabled module form database.
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+     * @param $reload boole
+     *                reload the module list if the value is true
+     * @access public
+     */
+    public function loadModules( $reload = false ) {
+        $this->_db->query("SELECT * FROM {core} WHERE status = 1 ORDER BY weight ASC");
+        while( $module = $this->_db->fetchObject() ) {
+            // to setting the self var $_load_files
+            $this->_loadModule($module, $reload);
+        }
+    }
+
+    /**
+     +------------------------------------------------------------------------------
+     * collect hook implementer with enabled module.
+     +------------------------------------------------------------------------------
+     * @version   $Id$
+     +------------------------------------------------------------------------------
+     * @param  $reload bool
+     *              the reload module list of enabled
+     * @param  $module string
+     *              the will load module name
+     * @access public
+     * @return the all implement hook's modules
+     */
+    public function implementer( $hook , $reload = false ) {
+        if ( !isset( $this->_module_implementer[$hook] ) || $reload == true ) {
+            foreach( $this->_load_files as $module => $value ) {
+                if ($this->moduleHookExists($module, $hook)) {
+                    $this->_module_implementer[$hook][] = $module;
+                }
+            }
+        }
+        return isset($this->_module_implementer[$hook]) ? $this->_module_implementer[$hook] : array();
     }
 
     /**
@@ -175,16 +256,8 @@ class hook {
         $args = func_get_args();
         array_shift($args); //remove $hook variable with the $args
         foreach( $this->implementer( $hook ) as $module ) {
-            $_hook = $this->_getModuleInstance( $module )->getMethod( $hook );
-            if ( $_hook->isStatic() ) {
-                $_collect[] = $_hook->invokeArgs(null, $args);
-            } else {
-                // generation a class instance
-                $hook_instance = $this->_getModuleInstance( $module )->newInstance();
-                $_collect[] = $_hook->invokeArgs($hook_instance, $args);
-                //return ;
-            }
-
+            $function = $module . '_' . $hook;
+            $_collect[] = call_user_func_array($function, $args);
         }
         return $_collect;
     }
@@ -205,121 +278,11 @@ class hook {
         $args = func_get_args();
         array_shift($args); //remove $module variable
         array_shift($args); //remove $hook variable
-        //ReflectionMethod
 
         if ( $this->moduleHookExists( $module , $hook ) ) {
-            $_hook = $this->_getModuleInstance( $module )->getMethod( $hook );
-            if ( $_hook->isStatic() ) {
-                return $_hook->invokeArgs(null, $args);
-            } else {
-                // generation a class instance
-                $hook_instance = $this->_getModuleInstance( $module )->newInstance();
-                return $_hook->invokeArgs($hook_instance, $args);
-            }
+            return call_user_func_array($module . '_' . $hook, $args);
         }
         return false;
-    }
-
-    /**
-     +------------------------------------------------------------------------------
-     * load the named file.
-     *  @code format
-     *    array(
-     *          'module' => array(
-     *              'module_name' => true | false
-     *          )
-     *      );
-     +------------------------------------------------------------------------------
-     * @version   $Id$
-     +------------------------------------------------------------------------------
-     * @param  $type string
-     *              the load module file type eg: 'module.module,module.info'
-     * @param  $module string
-     *              the will load module name
-     * @access public
-     */
-    public function loadModule( $type, $module ) {
-        if ( !isset( $this->_load_files[$type][$module] ) ) {
-            foreach( array( CORE_MODULE_PATH, EXPAND_MODULE_PATH ) as $path) {
-                //print_r(array(CORE_MODULE_PATH, EXPAND_MODULE_PATH));
-                //$file = $path . $module . DS . $module . '.' . $type;
-                $file = intern_join_path($path, $module, $module . '.' . $type);
-                if( file_exists( $file ) ) {
-                    @include_once $file;
-                    $this->_load_files[$type][$type] = true;
-                    return true;
-                }
-            }
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     +------------------------------------------------------------------------------
-     *  get the named module path
-     +------------------------------------------------------------------------------
-     * @version   $Id$
-     +------------------------------------------------------------------------------
-     * @param  $module string
-     *              the load module path
-     * @access public
-     */
-    public function getPathBy( $module ) {
-        foreach( array( CORE_MODULE_PATH, EXPAND_MODULE_PATH ) as $path) {
-            $module_dir = intern_join_path($path, $module);
-            if( is_dir( $module_dir ) ) {
-                return $module_dir;
-            }
-            return false;
-        }
-    }
-
-    /**
-     +------------------------------------------------------------------------------
-     * list the enabled module.
-     +------------------------------------------------------------------------------
-     * @version   $Id$
-     +------------------------------------------------------------------------------
-     * @param $reload boole
-     *                reload the module list if the value is true
-     * @access public
-     */
-    public function listModule( $reload = false ) {
-        $this->_db->query("SELECT * FROM {core} WHERE status = 1 ORDER BY weight ASC");
-        while( $module = $this->_db->fetchObject() ) {
-            // to setting the self var $_load_modules
-            $this->loadModule( 'module', $module->module );
-            // load the module instance
-            $this->_setModuleInstance( $module->module );
-        }
-    }
-
-    /**
-     +------------------------------------------------------------------------------
-     * collect hook implementer with enabled module.
-     +------------------------------------------------------------------------------
-     * @version   $Id$
-     +------------------------------------------------------------------------------
-     * @param  $reload bool
-     *              the reload module list of enabled
-     * @param  $module string
-     *              the will load module name
-     * @access public
-     * @return the all implement hook's modules
-     */
-    public function implementer( $hook , $reload = false ) {
-        if ( !isset( $this->_module_implementer[$hook] ) || $reload == true ) {
-            foreach( $this->_load_modules as $module => $value ) {
-                if ( $this->_load_modules[$module]['instance'] != false ) {
-                    if ( $this->moduleHookExists($module, $hook) ) {
-                        $this->_module_implementer[$hook][] =  $module;
-                        //array_push($this->_module_implementer[$hook], $module);
-                    }
-                }
-            }
-        }
-        return isset( $this->_module_implementer[$hook] ) ? $this->_module_implementer[$hook] : array();
     }
 
     /**
@@ -338,104 +301,7 @@ class hook {
      *              true if the hook exists in the named module
      */
     public function moduleHookExists( $module, $hook ) {
-        if ( isset( $this->_load_modules[$module] ) && false != $this->_load_modules[$module]['instance'] ) {
-            return $this->_load_modules[$module]['instance']->hasMethod( $hook );
-        }
-        return false;
+        return !isset($this->_not_exists_moudles[$module]) && function_exists($module . '_' .$hook);
     }
 
-    /**
-     +------------------------------------------------------------------------------
-     * collect all module class with loaded modules.
-     +------------------------------------------------------------------------------
-     * @version   $Id$
-     +------------------------------------------------------------------------------
-     * @param  $reload boole
-     *              the reload module list of enabled
-     * @param  $module string
-     *              the will load module name
-     * @access public
-     */
-    private function _setAllModuleInstance( $refresh = false ) {
-        static $loaded = false;
-        if( $refresh == true || $loaded == false ) {
-            foreach( $this->_load_modules as $module => $value ) {
-                $this->_setModuleInstance($module, $refresh);
-            }
-        }
-    }
-
-    /**
-     +------------------------------------------------------------------------------
-     * collect all module class with loaded modules.
-     +------------------------------------------------------------------------------
-     * @version   $Id$
-     +------------------------------------------------------------------------------
-     * @param  $reload boole
-     *              the reload module list of enabled
-     * @param  $module string
-     *              the will load module name
-     * @access public
-     * @TODO finish this
-     */
-    private function _getAllModuleInstance() {
-        $this->_setAllModuleInstance( false );
-    }
-
-    /**
-     +------------------------------------------------------------------------------
-     * setting the collected all module class instance.
-     * Reflection instance with the named module class.
-     * will remove and add it to $this->_not_exists_moudles if the named module
-     * class not exists
-     +------------------------------------------------------------------------------
-     * @version   $Id$
-     +------------------------------------------------------------------------------
-     * @param  $module string
-     *              setting named module
-     * @param  $refresh boole
-     *              refresh the module instance if true
-     * @access private
-     */
-    private function _setModuleInstance( $module, $refresh = false ) {
-        if ( !isset( $this->_load_modules[$module]['instance'] ) || true == $refresh ) {
-            if( class_exists( MODULE_PREFIX . $module ) ) {
-                $this->_load_modules[$module]['instance'] = new ReflectionClass( MODULE_PREFIX . $module );
-            } else {
-                array_push($this->_not_exists_moudles, $module);
-                return false;
-            }
-        }
-        return $this->_load_modules[$module]['instance'];
-    }
-
-    /**
-     +------------------------------------------------------------------------------
-     * get the named module instance.
-     * Reflection instance with the named module class
-     +------------------------------------------------------------------------------
-     * @version   $Id$
-     +------------------------------------------------------------------------------
-     * @param  $module string
-     *              get named module
-     * @access private
-     */
-    private function _getModuleInstance( $module ) {
-        return $this->_setModuleInstance($module);
-    }
-
-    /**
-     +------------------------------------------------------------------------------
-     * get the named module instance.
-     * Reflection instance with the named module class
-     +------------------------------------------------------------------------------
-     * @version   $Id$
-     +------------------------------------------------------------------------------
-     * @param  $module string
-     *              module name
-     * @access public
-     */
-    public function getModuleInstance( $module ) {
-        return $this->_getModuleInstance( $module );
-    }
 }// end hooks system

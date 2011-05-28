@@ -2135,3 +2135,303 @@ Array
 
 [SQL]|2011-05-02 02:10:51|(0.00040)|[SELECT path FROM inter_url_alias WHERE path_alias='asdf/asdf/asdf/rty/rty/ui/hjhk/gfj/345/sdf']
 
+[SQL]|2011-05-28 12:52:32|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 12:52:32|(0.00050)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 12:52:32|(0.00050)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 12:52:32|(0.01610)|[DELETE FROM inter_cache WHERE expired < 1306558352]
+
+[SQL]|2011-05-28 12:52:33|(0.02810)|[UPDATE inter_options SET value = 'i:1306558352;' WHERE name = 'cache_clear_corn']
+
+[SQL]|2011-05-28 12:52:33|(0.00050)|[UPDATE inter_sessions SET hostname = '127.0.0.1', timestamp = 1306558353, data = '' WHERE sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 12:52:33|(0.00030)|[INSERT INTO inter_sessions(uid, sid, hostname, timestamp, data) VALUES( 0, '5csqlb9ibh5q9etns2l4hqcfg7', '127.0.0.1', 1306558353, '')]
+
+[SQL]|2011-05-28 12:52:43|(0.00010)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 12:52:43|(0.00020)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 12:52:43|(0.01920)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 12:52:43|(0.00010)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 14:30:29|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 14:30:29|(0.00020)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 14:30:29|(0.00020)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 14:30:29|(0.00020)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 14:30:29|(0.00030)|[DELETE FROM inter_cache WHERE expired < 1306564229]
+
+[SQL]|2011-05-28 14:30:29|(0.01300)|[UPDATE inter_options SET value = 'i:1306564229;' WHERE name = 'cache_clear_corn']
+
+[SQL]|2011-05-28 14:31:58|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 14:31:58|(0.00030)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 14:31:58|(0.00010)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 14:31:58|(0.00020)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 14:35:41|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 14:35:41|(0.00020)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 14:35:41|(0.00020)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 14:35:41|(0.00020)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 14:35:58|(0.00010)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 14:35:58|(0.00020)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 14:35:58|(0.00010)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 14:35:58|(0.00010)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[DEBUG]|2011-05-28 14:35:58|
+
+
+[DEBUG]|2011-05-28 14:35:58|
+
+
+[DEBUG]|2011-05-28 14:35:58|
+
+
+[SQL]|2011-05-28 14:36:03|(0.00010)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 14:36:03|(0.00010)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 14:36:03|(0.00010)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 14:36:03|(0.00010)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[DEBUG]|2011-05-28 14:36:03|
+
+
+[DEBUG]|2011-05-28 14:36:03|
+
+
+[DEBUG]|2011-05-28 14:36:03|
+
+
+[SQL]|2011-05-28 14:36:39|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 14:36:39|(0.00020)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 14:36:39|(0.00520)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 14:36:39|(0.00010)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 14:36:42|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 14:36:42|(0.00000)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 14:36:42|(0.00010)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 14:36:42|(0.00010)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 14:42:01|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 14:42:01|(0.00000)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 14:42:01|(0.00010)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 14:42:01|(0.00050)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 14:42:16|(0.00030)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 14:42:16|(0.00190)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 14:42:16|(0.00130)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 14:42:16|(0.00010)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 14:44:19|(0.00010)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 14:44:19|(0.00010)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 14:44:19|(0.00020)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 14:44:19|(0.00040)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 14:50:27|(0.00010)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 14:50:27|(0.00010)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 14:50:27|(0.00020)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 14:50:27|(0.00020)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 15:54:20|(0.00090)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 15:54:20|(0.00260)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 15:54:20|(0.00020)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 15:54:29|(0.00010)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 15:54:29|(0.00020)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 15:54:29|(0.00020)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 15:54:31|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 15:54:31|(0.00010)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 15:54:31|(0.00020)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 15:55:24|(0.00010)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 15:55:24|(0.00000)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 15:55:24|(0.00010)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 15:55:24|(0.00000)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 15:56:25|(0.00010)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 15:56:25|(0.00010)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 15:56:25|(0.00010)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 15:56:25|(0.00010)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 15:56:40|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 15:56:40|(0.00010)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 15:56:40|(0.00010)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 15:56:40|(0.00010)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 15:58:51|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 15:58:51|(0.00010)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 15:58:51|(0.00010)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 15:58:51|(0.00010)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 15:59:26|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 15:59:26|(0.00010)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 15:59:26|(0.00020)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 15:59:26|(0.00010)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 15:59:45|(0.00010)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 15:59:45|(0.00010)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 15:59:45|(0.00010)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 15:59:45|(0.00010)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 16:01:31|(0.00010)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 16:01:31|(0.00010)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 16:01:31|(0.00030)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 16:01:31|(0.00030)|[UPDATE inter_sessions SET hostname = '127.0.0.1', timestamp = 1306569691, data = '' WHERE sid = '5nrl325k5fnbpb6qs0vbkjpo82']
+
+[SQL]|2011-05-28 16:01:31|(0.03180)|[INSERT INTO inter_sessions(uid, sid, hostname, timestamp, data) VALUES( 0, '5nrl325k5fnbpb6qs0vbkjpo82', '127.0.0.1', 1306569691, '')]
+
+[SQL]|2011-05-28 16:01:48|(0.00010)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 16:01:48|(0.00250)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 16:01:48|(0.00070)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5nrl325k5fnbpb6qs0vbkjpo82']
+
+[SQL]|2011-05-28 16:01:48|(0.00020)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 16:02:47|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 16:02:47|(0.00010)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 16:02:47|(0.00520)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 16:02:47|(0.00030)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 16:02:47|(0.00020)|[DELETE FROM inter_cache WHERE expired < 1306569767]
+
+[SQL]|2011-05-28 16:02:47|(0.00150)|[UPDATE inter_options SET value = 'i:1306569767;' WHERE name = 'cache_clear_corn']
+
+[SQL]|2011-05-28 16:03:00|(0.00140)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 16:03:00|(0.00030)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 16:03:00|(0.00000)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 16:03:00|(0.00010)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 16:12:24|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 16:12:24|(0.00020)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 16:12:24|(0.00020)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 16:12:24|(0.00010)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 16:12:24|(0.00030)|[DELETE FROM inter_cache WHERE expired < 1306570344]
+
+[SQL]|2011-05-28 16:12:24|(0.00050)|[UPDATE inter_options SET value = 'i:1306570344;' WHERE name = 'cache_clear_corn']
+
+[SQL]|2011-05-28 16:12:26|(0.00070)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 16:12:26|(0.00030)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 16:12:26|(0.00200)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 16:12:26|(0.00010)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 16:12:37|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 16:12:37|(0.00020)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 16:12:37|(0.00010)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 16:12:37|(0.00020)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 16:13:04|(0.00010)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 16:13:04|(0.00010)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 16:13:04|(0.00010)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 16:13:04|(0.00080)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 16:13:09|(0.00090)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 16:13:09|(0.00010)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 16:13:09|(0.00010)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 16:13:09|(0.00210)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 16:13:22|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 16:13:22|(0.00010)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 16:13:22|(0.00010)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 16:13:22|(0.00010)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 16:13:22|(0.00110)|[SELECT path FROM inter_url_alias WHERE path_alias='zxcvzxcv/asdf']
+
+[SQL]|2011-05-28 16:13:30|(0.00020)|[SET NAMES "utf8"]
+
+[SQL]|2011-05-28 16:13:30|(0.00010)|[SELECT * FROM inter_options]
+
+[SQL]|2011-05-28 16:13:30|(0.00020)|[SELECT u.*,s.* FROM inter_users u INNER JOIN inter_sessions s ON u.uid = s.uid WHERE s.sid = '5csqlb9ibh5q9etns2l4hqcfg7']
+
+[SQL]|2011-05-28 16:13:30|(0.00020)|[SELECT * FROM inter_core WHERE status = 1 ORDER BY weight ASC]
+
+[SQL]|2011-05-28 16:13:30|(0.00020)|[SELECT path FROM inter_url_alias WHERE path_alias='zxcvzxcv/asdf']
+
